@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<script>
+			function init() {
+				var i=0;
+				while(i<8)
+					id_body.innerHTML+="<img src='_images/pic"+(++i)+".jpg' width='200'>";
+				i=0;
+				id_body.innerHTML+="<br><hr><br>";
+				do {
+					id_body.innerHTML+="<img src='_images/pic"+(++i)+".jpg' width='200'>";
+				}
+				while (i<8)
+			}
+		</script>
+	</head>
+	<body onload="init()" id="id_body">
+		
+	</body>
+</html>

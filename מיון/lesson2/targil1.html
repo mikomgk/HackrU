@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<script>
+			/*function init()
+			{
+			
+			}
+			
+			function red()
+			{
+				id_h1.style.color="red";
+			}
+			
+			function blue()
+			{
+				id_h1.style.color="blue";
+			}
+			
+			function orange()
+			{
+				id_h1.style.color="orange";
+			}*/
+			
+			function cngClr(x)
+			{
+				if (x=="red")
+					id_h1.style.color="red";
+				else if (x=="blue")
+					id_h1.style.color="blue";
+				else
+					id_h1.style.color="orange";
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<h1 id="id_h1">Choose your favourite color:</h1>
+		<!--<button onclick="red()" value="red">red</button>
+		<button onclick="blue()" value="blue">blue</button>
+		<button onclick="orange()" value="orange">orange</button><br>
+		!-->
+		<button onclick="cngClr(value)" value="red">red</button>
+		<button onclick="cngClr(value)" value="blue">blue</button>
+		<button onclick="cngClr(value)" value="orange">orange</button>
+	</body>
+</html>

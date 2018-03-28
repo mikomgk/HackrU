@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<script>
+			function init() {
+				var i=0;
+				while (i<5)
+					id_h2.innerHTML+=(++i)+" hello<br>";
+				id_h2.innerHTML+="<hr>";
+				for(i=0;i<5;i++)
+					id_h2.innerHTML+=(i+1)+" hi<br>";
+				id_h2.innerHTML+="<hr>";
+				for(i=0;i<6;i++)
+				{
+					id_h3.innerHTML+=i+",";
+					id_h3a.innerHTML+=(i+1)+",";
+					id_h3b.innerHTML+=(i*2+2)+",";
+				}
+				id_body.innerHTML+="<hr>";
+				i=0;
+				while(i<3)
+				{
+					id_body.innerHTML+="<img src='_images/"+(++i)+".jpg'><hr>";
+				}
+			}
+		</script>
+	</head>
+	<body onload="init()" id="id_body">
+		<h2 id="id_h2"></h2>
+		<h3 id="id_h3"></h3>
+		<h3 id="id_h3a"></h3>
+		<h3 id="id_h3b"></h3>
+	</body>
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<script>
+			var width=300;
+			
+			function init() {
+				id_img.width=width;
+			}
+			
+			function small()
+			{
+				cng(-10);
+			}
+			
+			function big()
+			{
+				cng(10);
+			}
+			
+			function cng(add)
+			{
+				width+=add;
+				id_img.width=width;
+				if(width==400)
+					id_buttonP.disabled=true;
+				else
+					id_buttonP.disabled=false;
+				if(width==200)
+					id_buttonM.disabled=true;
+				else
+					id_buttonM.disabled=false;
+			}
+		</script>
+	</head>
+	<body onload="init()" align="center">
+		<button onclick="small()" id="id_buttonM">Smaller</button>
+		<button onclick="big()" id="id_buttonP">Bigger</button><hr>
+		<img src="_images/1.jpg" id="id_img">
+	</body>
+</html>

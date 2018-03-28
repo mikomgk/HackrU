@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>JS!</title>
+		<script>
+			//alert("JS WORK!");
+			function init()
+			{
+				id_h2.innerHTML="JS WORK!";
+				id_h2.style.color="red";
+				id_img.width=400;
+			}
+			
+			function cngImg()
+			{
+				if (id_img.src="_images/ice1.jpg")
+					cngImg1();
+				else
+					cngImg2();
+			}
+			
+			function cngImg1()
+			{
+				id_img.src="_images/ice2.jpg";
+			}
+			
+			function cngImg2()
+			{
+				id_img.src="_images/ice1.jpg";
+			}
+			
+		</script>
+	</head>
+	<body onload="init()">
+		<h1>Welcome to JS</h1>
+		<h2 id="id_h2">Hi</h2>
+		<img src="_images/ice1.jpg" id="id_img"><br>
+		<button onclick="cngImg()">change</button>
+		<button onclick="cngImg2()">change</button>
+	</body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<script>
+			var nikod;
+			var haim;
+			var shem;
+		
+			function init() {
+				nikod=100;
+				haim=5;
+				shem="mario";
+				
+				id_score.innerHTML=nikod;
+				id_lives.innerHTML=haim;
+				id_name.innerHTML=shem;
+			}
+			
+			function livesP() {
+				nikod++;
+				id_score.innerHTML=nikod;
+			}
+			
+			function livesM() {
+				nikod--;
+				id_score.innerHTML=nikod;
+			}
+			
+			function livesP5() {
+				for(i=0;i<id_input.value;i++) {
+					livesP();
+				}
+			}
+			
+			function livesM5() {
+				for(i=0;i<id_input.value;i++) {
+					livesM();
+				}
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<h1>Welcome to vars world</h1>
+		<h2>Score: <span id="id_score"></span></h2>
+		<h2>Lives: <span id="id_lives"></span></h2>
+		<h2>Name: <span id="id_name"></span></h2>
+		<button onclick="livesM()">-1</button>
+		<button onclick="livesP()">+1</button><br><br>
+		<input id="id_input" type="text"><br><br>
+		<button onclick="livesM5()">-</button>
+		<button onclick="livesP5()">+</button>
+	</body>
+</html>

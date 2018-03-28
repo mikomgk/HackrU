@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>exchange calc</title>
+		<script>
+			function init() {
+				
+			}
+			
+			function excng() {
+				var amount=id_input.value;
+				var coin=id_coin2.value;
+				var ex=1;
+				var x=0;
+				if (coin=="$")
+					ex=3.46;
+				if (coin=="E")
+					ex=4.3;
+				if (coin=="BC")
+					ex=36725;
+				x=amount/ex*id_coin1.value;
+				id_span.innerHTML=x.toFixed(2) + " " +id_coin2.value;
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<h1>Exchange Calc</h1>
+		<br>
+		<label>Enter amount: </label>
+		<input oninput="excng()" id="id_input" type="number"><br><br>
+		<label>Your currencey: </label>
+		<select onchange="excng()" id="id_coin1">
+			<option value="1">NIS</option>
+			<option value="3.46">USD</option>
+			<option value="4.3">EU</option>
+			<option value="36725">BitCoin</option>
+		</select><br><br>
+		<label>Exchange currencey: </label>
+		<select onchange="excng()" id="id_coin2">
+			<option value="NIS">NIS</option>
+			<option value="$">USD</option>
+			<option value="E">EU</option>
+			<option value="BC">BitCoin</option>
+		</select>
+		<h2>You will get <span id="id_span"></span></h2>
+	</body>
+</html>

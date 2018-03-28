@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<script>
+			function init() {
+				
+			}
+			
+			function checkTemp() {
+			var temp = id_input.value;
+			if (temp>=28 && temp<40)
+			{
+				id_span.innerHTML="HOT";
+				id_span.style.color="orange";
+			}
+			else if (temp>=40)
+			{
+				id_span.innerHTML="very HOT";
+				id_span.style.color="red";
+			}
+			else if (temp<21 && temp>=0)
+			{
+				id_span.innerHTML="cold";
+				id_span.style.color="aqua";
+			}
+			else if (temp<0)
+			{
+				id_span.innerHTML="very cold";
+				id_span.style.color="blue";
+			}
+			else
+			{
+				id_span.innerHTML="OK";
+				id_span.style.color="green";
+			}
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<h1>Enter the temp</h1>
+		<input oninput="checkTemp()" id="id_input" type="number">
+		<h2>The condition is: <span id="id_span"></span></h2>
+	</body>
+</html>

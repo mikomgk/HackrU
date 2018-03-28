@@ -1,0 +1,67 @@
+#id_body {
+	background:darkgrey;
+}
+
+.but{
+	position:absolute;
+	left:50%;
+	top:25%;
+	border:none;
+	width:60px;
+	height:40px;
+	transition:width 2s,height 2s, linear 1s;
+	background-color:#4CAF50;
+	border-radius:11px;
+}
+
+.but:hover {
+	background:aqua;
+	width:120px;
+	height:80px;
+	font-size:150%;
+	color:red;
+}
+
+.but:hover  + p{
+	background:aqua;
+	transition:linear 1s;
+	color:green;
+}
+
+h1 {
+	position:absolute;
+	left:250px;
+}
+
+p {
+	color:aqua;
+	font-family:verdana;
+	font-size:150%;
+	border:10px solid lightgreen;
+	padding:40px;
+	margin-top:50px;
+	background:brown;
+	border-radius:70px;
+}
+
+.p1 {
+	position:absolute;
+	top:300px;
+	right:200px;
+	
+}
+
+.p2 {
+	position:absolute;
+	top:300px;
+	left:200px;
+	color:red;
+	border:5px solid lightgreen;
+}
+
+#id_us {
+	position:absolute;
+	bottom:10px;
+	left:50%;
+	border:10px solid lightgreen;
+}

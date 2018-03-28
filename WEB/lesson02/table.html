@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" http-equiv="refresh" content="3"/>
+		<title>123</title>
+		<link rel="stylesheet"/>
+		<style>
+			.odd {
+				background:red;
+			}
+			
+			.even {
+				background:yellow;
+			}
+			
+			.head {
+				background:darkblue;
+				color:white;
+			}
+			
+			table {
+				
+			}
+		</style>
+		<script>
+			function init() {
+				var i,max=100,s;
+				var div1=document.getElementById("div1");
+				var x=[1,5,4,3,10,8,5,2,20,4,1,5,2,3,6,5,2,6,3,6];
+				s="<table border='2'><tr class='head'><th>num</th></tr>";
+				for(i=0;i<x.length;i++)
+				{
+					/*if(i%2==0)
+						s+="<tr class='even'><td>"+(i+1)+"</td></tr>";
+					else
+						s+="<tr class='odd'><td>"+(i+1)+"</td></tr>";*/
+					s+="<tr class='"+(i%2==0?"even":"odd")+"'><td>"+x[i]+"</td></tr>";
+					
+				}
+				s+="</table>";
+				div1.innerHTML=s;
+			}
+			
+			
+		</script>
+	</head>
+	
+	<body onload="init()" id="id_body">
+		<div id="div1">
+			
+		</div>
+	</body>
+</html>

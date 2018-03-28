@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<script>
+			var letters_ar=["A","B","C","D","E","F","G"];
+			var counter=0;
+			
+			function init() {
+				id_h1.innerHTML=letters_ar[counter];
+				if(counter==0)
+					id_buttonM.disabled=true;
+				if(counter==letters_ar.length-1)
+					id_buttonP.disabled=true;
+			}
+			
+			function minus()
+			{
+				counter--;
+				id_h1.innerHTML=letters_ar[counter];
+				if(counter==0)
+					id_buttonM.disabled=true;
+				else
+					id_buttonP.disabled=false;
+			}
+			
+			function plus()
+			{
+				counter++;
+				id_h1.innerHTML=letters_ar[counter];
+				if(counter==letters_ar.length-1)
+					id_buttonP.disabled=true;
+				else
+					id_buttonM.disabled=false;
+			}
+		</script>
+	</head>
+	<body onload="init()" id="id_body">
+		<h1 id="id_h1"></h1>
+		<button onclick="minus()" id="id_buttonM">Back</button>
+		<button onclick="plus()" id="id_buttonP">Next</button>
+	</body>
+</html>

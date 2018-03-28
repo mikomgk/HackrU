@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<script>
+			function init() {
+				
+			}
+			
+			function choc() {
+				ice(" Chocolate",150,10);
+			}
+			
+			function straw() {
+				ice(" Strawbery",120,5);
+			}
+			
+			function cooc() {
+				ice(" Coockies",100,15);
+			}
+			
+			function ice(_name,_cal,_price) {
+				id_name.innerHTML=_name+" Ice Cream";
+				id_cal.innerHTML=""+_cal + " cal";
+				id_price.innerHTML=" $"+_price;
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<img id="id_img" src="">
+		<div style="font-size:30px">Name:<span id="id_name"></span></div>
+		<div style="font-size:30px">Cal:<span id="id_cal"></span></div>
+		<div style="font-size:30px">Price:<span id="id_price"></span></div><br>
+		<button onclick="choc()" value="1">Chocolate<br>IceCream</button>
+		<button onclick="straw()" value="2">Strawbery<br>IceCream</button>
+		<button onclick="cooc()" value="3">Coockies<br>IceCream</button>
+	</body>
+</html>

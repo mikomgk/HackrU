@@ -1,0 +1,480 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<style type="text/css" id="id_css">
+			.container {
+				position: relative;
+		    text-align: center;
+				/*transform: rotate(38deg);
+				animation: rotation 1s linear;
+
+			}
+
+			@keyframes rotation {
+				from {transform: rotate(300deg);}
+				to {transform: rotate(30deg);}*/
+
+
+			}
+
+			#cbox:checked + .container{
+			  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+			  transform: translate3d(0, 0, 0);
+			  backface-visibility: hidden;
+			  perspective: 1000px;
+			}
+
+			@keyframes shake {
+				10%, 90% {
+					transform: translate3d(-1px, 0, 0);
+		  	}
+
+			  20%, 80% {
+			    transform: translate3d(2px, 0, 0);
+			  }
+
+			  30%, 50%, 70% {
+			    transform: translate3d(-4px, 0, 0);
+			  }
+
+			  40%, 60% {
+			    transform: translate3d(4px, 0, 0);
+			  }
+			}
+
+			.num {
+		    color: black;
+				font-size: 21px;
+				position: absolute;
+		    top: 20.8%;
+		    right: 41.45%;
+				height: 100px;
+				width: 40px;
+			}
+
+			.num1 {
+				position: absolute;
+		    top: 2%;
+		    right: 35%;
+				/*animation: ltr 0.4s;
+				animation-timing-function: linear;
+				animation-play-state: paused;
+				animation-iteration-count: 1;*/
+			}
+
+			/*@keyframes ltr {
+				from {right: 30px;}
+				to {left: 10px}
+			}*/
+
+			.num2 {
+				position: absolute;
+		    top: 39%;
+		    right: 35%;
+			}
+
+			.num3 {
+				position: absolute;
+		    bottom: 0.5%;
+		    right: 35%;
+			}
+
+			.loNum {
+		    color: black;
+				font-size: 21px;
+				position: absolute;
+		    top: 20.8%;
+		    right: 44.1%;
+				height: 100px;
+				width: 40px;
+			}
+
+			.loNum1 {
+				position: absolute;
+		    top: 2%;
+		    right: 35%;
+			}
+
+			.loNum2 {
+				position: absolute;
+		    top: 39%;
+		    right: 35%;
+			}
+
+			.loNum3 {
+				position: absolute;
+		    bottom: 0.5%;
+		    right: 35%;
+			}
+
+			.hiNum {
+		    color: black;
+				font-size: 21px;
+				position: absolute;
+		    top: 20.8%;
+		    right: 39%;
+				height: 100px;
+				width: 40px;
+			}
+
+			.hiNum1 {
+				position: absolute;
+		    top: 2%;
+		    right: 35%;
+			}
+
+			.hiNum2 {
+				position: absolute;
+		    top: 39%;
+		    right: 35%;
+			}
+
+			.hiNum3 {
+				position: absolute;
+		    bottom: 0.5%;
+		    right: 35%;
+			}
+
+			.down {
+				position: absolute;
+		    top: 20.8%;
+		    right: 45.7%;
+				height: 100px;
+				width: 40px;
+			}
+
+			.down1 {
+				position: absolute;
+		    top: 0.1%;
+		    right: 35%;
+				color: lightgreen;
+				font-size: 20px;
+				background-color: black;
+				border: none;
+				cursor: pointer;
+				outline: 0;
+			}
+
+			.down2 {
+				position: absolute;
+		    top: 34%;
+		    right: 35%;
+				color: lightgreen;
+				font-size: 20px;
+				background-color: black;
+				border: none;
+				cursor: pointer;
+				outline: 0;
+			}
+
+			.down3 {
+				position: absolute;
+		    bottom: 3%;
+		    right: 35%;
+				color: lightgreen;
+				font-size: 20px;
+				background-color: black;
+				border: none;
+				cursor: pointer;
+				outline: 0;
+			}
+
+			.up {
+				position: absolute;
+		    top: 20.8%;
+		    right: 35.6%;
+				height: 100px;
+				width: 40px;
+			}
+
+			.up1 {
+				position: absolute;
+		    top: 0.1%;
+		    right: 35%;
+				color: lightgreen;
+				font-size: 20px;
+				background-color: black;
+				border: none;
+				cursor: pointer;
+				outline: 0;
+			}
+
+			.up2 {
+				position: absolute;
+		    top: 34%;
+		    right: 35%;
+				color: lightgreen;
+				font-size: 20px;
+				background-color: black;
+				border: none;
+				cursor: pointer;
+				outline: 0;
+			}
+
+			.up3 {
+				position: absolute;
+		    bottom: 3%;
+		    right: 35%;
+				color: lightgreen;
+				font-size: 20px;
+				background-color: black;
+				border: none;
+				cursor: pointer;
+				outline: 0;
+			}
+
+			.check {
+			  position: absolute;
+			  top: 65.3%;
+			  left: 43.2%;
+			  transform: translate(-50%, -50%);
+			  -ms-transform: translate(-50%, -50%);
+			  opacity: 1;
+			  padding: 26px 31px;
+			  border: none;
+			  cursor: pointer;
+			  border-radius: 5px;
+			}
+		</style>
+		<script>
+			var combination_arr=[1,1,1];
+			var code_arr=[1,2,3];
+			var hiLim=9;
+			var loLim=0;
+			var status;
+			var id;
+			var elem1;
+			var elem2;
+			var elem3;
+			var pos;
+			var divIt=document.querySelector('.container');
+
+			function init() {
+				id_num1.innerHTML=code_arr[0];
+				id_num2.innerHTML=code_arr[1];
+				id_num3.innerHTML=code_arr[2];
+				id_loNum1.innerHTML=code_arr[0]-1;
+				id_loNum2.innerHTML=code_arr[1]-1;
+				id_loNum3.innerHTML=code_arr[2]-1;
+				id_hiNum1.innerHTML=code_arr[0]+1;
+				id_hiNum2.innerHTML=code_arr[1]+1;
+				id_hiNum3.innerHTML=code_arr[2]+1;
+				status=0;
+			}
+
+			function up1()
+			{
+				var x=change(1,1,code_arr[0]);
+				id_num1.innerHTML=x;
+				id_loNum1.innerHTML=numCheck(x-1);
+				id_hiNum1.innerHTML=numCheck(x+1);
+				elem1=id_num1;
+				elem2=id_loNum1;
+				elem3=id_hiNum1;
+				pos=0;
+				id=setInterval(left,10);
+			}
+
+			function up2()
+			{
+				var x=change(1,2,code_arr[1]);
+				id_num2.innerHTML=x;
+				id_loNum2.innerHTML=numCheck(x-1);
+				id_hiNum2.innerHTML=numCheck(x+1);
+				elem1=id_num2;
+				elem2=id_loNum2;
+				elem3=id_hiNum2;
+				pos=0;
+				id=setInterval(left,10);
+			}
+
+			function up3()
+			{
+				var x=change(1,3,code_arr[2]);
+				id_num3.innerHTML=x;
+				id_loNum3.innerHTML=numCheck(x-1);
+				id_hiNum3.innerHTML=numCheck(x+1);
+				elem1=id_num3;
+				elem2=id_loNum3;
+				elem3=id_hiNum3;
+				pos=0;
+				id=setInterval(left,10);
+			}
+
+			function down1()
+			{
+				var x=change(-1,1,code_arr[0]);
+				id_num1.innerHTML=x;
+				id_loNum1.innerHTML=numCheck(x-1);
+				id_hiNum1.innerHTML=numCheck(x+1);
+				elem1=id_num1;
+				elem2=id_loNum1;
+				elem3=id_hiNum1;
+				pos=0;
+				id=setInterval(right,10);
+			}
+
+			function down2()
+			{
+				var x=change(-1,2,code_arr[1]);
+				id_num2.innerHTML=x;
+				id_loNum2.innerHTML=numCheck(x-1);
+				id_hiNum2.innerHTML=numCheck(x+1);
+				elem1=id_num2;
+				elem2=id_loNum2;
+				elem3=id_hiNum2;
+				pos=0;
+				id=setInterval(right,10);
+			}
+
+			function down3()
+			{
+				var x=change(-1,3,code_arr[2]);
+				id_num3.innerHTML=x;
+				id_loNum3.innerHTML=numCheck(x-1);
+				id_hiNum3.innerHTML=numCheck(x+1);
+				elem1=id_num3;
+				elem2=id_loNum3;
+				elem3=id_hiNum3;
+				pos=0;
+				id=setInterval(right,10);
+			}
+
+			function change (add,num,val)
+			{
+				id_num.style.color="black";
+				var cng;
+				cng=val+add;
+				cng=numCheck(cng);
+				code_arr[num-1]=cng;
+				return cng;
+			}
+
+			function check()
+			{
+				if (status==0)
+				{
+					var i;
+					var count=0;
+					for(i=0;i<code_arr.length;i++)
+						if(code_arr[i]==combination_arr[i])
+							count++;
+					if(count==code_arr.length)
+					{
+						id_img.src="_images/open.jpg";
+						status=1;
+						disable();
+					}
+					else {
+						id_num.style.color="red";
+						cbox.checked = true;
+						/*function e {
+							e.preventDefault;
+							elem1.classList.remove("div");
+							void elem1.offsetWidth;
+							element.classList.add("div");
+						};*/
+					}
+				}
+				else {
+					enable();
+					status=0;
+					id_img.src="_images/lock.jpg";
+				}
+			}
+
+			function disable()
+			{
+				id_up1.disabled=true;
+				id_up2.disabled=true;
+				id_up3.disabled=true;
+				id_down1.disabled=true;
+				id_down2.disabled=true;
+				id_down3.disabled=true;
+			}
+
+			function enable()
+			{
+				id_up1.disabled=false;
+				id_up2.disabled=false;
+				id_up3.disabled=false;
+				id_down1.disabled=false;
+				id_down2.disabled=false;
+				id_down3.disabled=false;
+			}
+
+			function numCheck(cng)
+			{
+				if(cng>hiLim)
+					cng=loLim;
+				if(cng<loLim)
+					cng=hiLim;
+				return cng;
+			}
+
+			function left ()
+			{
+				elem1.style.left=15;
+				elem2.style.left=15;
+				elem3.style.left=15;
+				if(pos==15)
+					clearInterval(id);
+				else {
+					pos++;
+					elem1.style.right=pos+'px';
+					elem2.style.right=pos+'px';
+					elem3.style.right=pos+'px';
+				}
+			}
+
+			function right ()
+			{
+				elem1.style.right=15;
+				elem2.style.right=15;
+				elem3.style.right=15;
+				if(pos==15)
+					clearInterval(id);
+				else {
+					pos++;
+					elem1.style.left=pos+'px';
+					elem2.style.left=pos+'px';
+					elem3.style.left=pos+'px';
+				}
+			}
+		</script>
+	</head>
+	<body onload="init()" align="center">
+		<div class="container">
+		  <img src="_images/lock.jpg" id="id_img">
+			<button onclick="check()" class="check" id="id_check"></div>
+			<div class="num" id="id_num">
+			  <div class="num1" id="id_num1" type="Number"></div>
+			  <div class="num2" id="id_num2" type="Number"></div>
+			  <div class="num3" id="id_num3" type="Number"></div>
+			</div>
+			<div class="loNum" id="id_loNum">
+			  <div class="loNum1" id="id_loNum1" type="Number"></div>
+			  <div class="loNum2" id="id_loNum2" type="Number"></div>
+			  <div class="loNum3" id="id_loNum3" type="Number"></div>
+			</div>
+			<div class="hiNum" id="id_hiNum">
+			  <div class="hiNum1" id="id_hiNum1" type="Number"></div>
+			  <div class="hiNum2" id="id_hiNum2" type="Number"></div>
+			  <div class="hiNum3" id="id_hiNum3" type="Number"></div>
+			</div>
+			<div class="up" id="id_up">
+				<button onclick="up1()" id="id_up1" class="up1">></button>
+				<button onclick="up2()" id="id_up2" class="up2">></button>
+				<button onclick="up3()" id="id_up3" class="up3">></button>
+			</div>
+			<div class="down" id="id_down">
+				<button onclick="down1()" id="id_down1" class="down1"><</button>
+				<button onclick="down2()" id="id_down2" class="down2"><</button>
+				<button onclick="down3()" id="id_down3" class="down3"><</button>
+		  </div>
+		</div>
+		<input type="radio" id="cbox">
+	</body>
+</html>

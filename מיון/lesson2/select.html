@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<script>
+			function init() {
+				
+			}
+			
+			function cngClr() {
+				id_h2.innerHTML=id_select.value;
+				id_h2.style.color=id_select.value;
+				id_h2.innerHTML=id_h2.innerHTML.toUpperCase();
+			}
+			
+			function rev() {
+				var text=id_h2.innerHTML;
+				var y="";
+				var i;
+				for(i=text.length-1;i>-1;i--) {
+					y+=text[i];
+					}
+				id_h2.innerHTML=y;
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<h1>Enter your favourite color:</h1>
+		<select id="id_select" onchange="cngClr()">
+			<option value="">select</option>
+			<option value="red">red</option>
+			<option value="blue">blue</option>
+			<option value="green">green</option>
+		</select>
+		<br>
+		<br>
+		<br>
+		<br>
+		<button onclick="rev()">rev</button>
+		<h2 id="id_h2"></h2>
+	</body>
+</html>

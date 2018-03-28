@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<script>
+			function init() {
+				car("BMW",2017,"50,000");
+				car("Ferari",2018,"80,000");
+				car("Porsche",2015,"100,000");
+			}
+			
+			function car(_name,_year,_price)
+			{
+				id_body.innerHTML+="<h2>"+_name+"</h2>";
+				id_body.innerHTML+="<img id='id_img' src='_images/"+_name+".jpg' width='200'>";
+				id_body.innerHTML+="<div>Year: "+_year+"</div>";
+				id_body.innerHTML+="<div>Price: $"+_price+"</div>";
+				
+				id_body.innerHTML+="<hr>";
+			}
+		</script>
+	</head>
+	<body onload="init()" id="id_body" align="center">
+		<h1>Cars Deals</h1><hr>
+	</body>
+</html>

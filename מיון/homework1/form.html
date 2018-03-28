@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hamburger Order</title>
+	</head>
+	<body>
+		<h1>My Hamburger Order</h1>
+		<table border="5" cellspacing="0" width="400">
+			<tr>
+				<td align="center"><strong>Product</strong></td>
+				<td align="center"><strong>Price</strong></td>
+				<td align="center" width="150"><strong>Image</strong></td>
+			</tr>
+			<tr>
+				<td>Hamburger Meal</td>
+				<td>40₪</td>
+				<td><img src="_gallery\meal1.jpg" width="150"></td>
+			</tr>
+			<tr>
+				<td>Hamburger</td>
+				<td>35₪</td>
+				<td><img src="_gallery\meal2.jpg" width="150"></td>
+			</tr>
+			<tr>
+				<td>3 Small Hamburgers</td>
+				<td>35₪</td>
+				<td><img src="_gallery\meal3.jpg" width="150"></td>
+			</tr>
+			<tr>
+				<td>Fries</td>
+				<td>10₪</td>
+				<td><img src="_gallery\meal4.jpg" width="150"></td>
+			</tr>
+		</table>
+		<br>
+		<br>
+		<br>
+		<br>
+		<h2>Order Form:</h2>
+		<form action="thankU.html" method="post">
+		<table>
+			<tr>
+				<td><label>Name:</label></td>
+				<td><input type="text" name="name" required></td>
+			</tr>
+			<tr>
+				<td><label>Phone:</label></td>
+				<td><input type="tel" name="phone" required></td>
+			</tr>
+			<tr>
+				<td><label>Product:</label></td>
+				<td>
+					<select name="prod" required>
+						<option value="">Select Meal</option>
+						<option value="meal1">Hamburger Meal</option>
+						<option value="meal2">Hamburger</option>
+						<option value="meal3">3 Small Hamburgers</option>
+						<option value="meal4">Fries</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><button type="submit">Order</button></td>
+			</tr>
+		</table>
+		</form>
+		<br>
+		<br>
+		<a href="index.html">Back Home</a>
+	</body>
+</html>

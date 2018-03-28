@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<script>
+			function init() {
+				id_money.innerHTML=20;
+			}
+			
+			function buyI()
+			{
+				buy(5);
+			}
+			
+			function buyC()
+			{
+				buy(10);
+			}
+			
+			function buy(cost)
+			{
+				money=id_money.innerHTML;
+				cake=id_cake.innerHTML;
+				ice=id_ice.innerHTML;
+				if(money>=cost)
+				{
+					id_money.innerHTML=money-cost;
+					if(cost==5)
+						id_ice.innerHTML=Number(ice)+1;
+					else
+						id_cake.innerHTML=Number(cake)+1;
+				}
+				else
+					alert("You Don't have enough money");
+			}
+			
+			function loan()
+			{
+				money=id_money.innerHTML;
+				id_money.innerHTML=Number(money)+20;
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<h1>Money: <span  id="id_money"></span></h1>
+		<button onclick="buyC()">Buy Cake<br>10 NIS</button>
+		<button onclick="buyI()">Buy IceCream<br>5 NIS</button>
+		<button onclick="loan()">Get a loan<br>20 NIS</button><br>
+		<h1>Cakes: <span  id="id_cake"></span></h1>
+		<h1>IceCreams: <span  id="id_ice"></span></h1>
+	</body>
+</html>

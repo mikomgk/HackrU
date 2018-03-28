@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<script>
+			function init()
+			{
+        id_lives.innerHTML=3;
+        id_score.innerHTML=100;
+			}
+
+      function score()
+      {
+        var lives=Number(id_lives.innerHTML);
+        var score=Number(id_score.innerHTML);
+        if (score==20)
+          if (lives>1)
+          {
+            id_lives.innerHTML=lives-1;
+            id_score.innerHTML=100;
+          }
+          else {
+            id_over.innerHTML="<img src='_images/over.jpg'>";
+            id_button.disabled=true;
+            id_lives.innerHTML=0;
+            id_score.innerHTML=0;
+          }
+        else {
+          id_score.innerHTML=score-20;
+        }
+      }
+		</script>
+	</head>
+	<body onload="init()">
+		<h1>Lives: <span  id="id_lives"></span></h1>
+    <h1>Score: <span  id="id_score"></span></h1>
+    <button onclick="score()" id="id_button">PLAY</button><br>
+    <span id="id_over"><br><br><br><br><br></span>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<script>
+			function init() {
+				meal("Hamburger",600,12);
+				meal("Pizza",1000,10);
+				meal("Pasta",400,8);
+				meal("Salad",200,5);
+			}
+			
+			function meal(_name,_cal,_price) {
+				id_body.innerHTML+="<h2>"+_name+"</h2>";
+				id_body.innerHTML+=_cal+" cal<br>";
+				id_body.innerHTML+="$"+_price+"<br>";
+				id_body.innerHTML+="<img src='_images/"+_name+".jpg' width='200'<br><br><br>";
+			}
+		</script>
+	</head>
+	<body onload="init()" id="id_body">
+		<h1>The Menu</h1>
+		
+	</body>
+</html>

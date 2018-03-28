@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<script>
+			function init() {
+				
+			}
+			
+			function check() {
+				if (id_country.value==id_capital.value)
+				{
+					id_span.innerHTML="RIGHT";
+					id_h2.style.background="lightgreen";
+				}
+				else
+				{
+					id_span.innerHTML="WRONG";
+					id_h2.style.background="red";
+				}
+			}
+		</script>
+	</head>
+	<body onload="init()"><br>
+		<label>Choose country: </label>
+		<select onchange="excng()" id="id_country">
+			<option value="1">ISRAEL</option>
+			<option value="2">FRANCE</option>
+			<option value="3">UK</option>
+			<option value="4">IRAN</option>
+		</select><br><br>
+		
+		<label>Choose capital: </label>
+		<select onchange="excng()" id="id_capital">
+			<option value="1">JERUSALEM</option>
+			<option value="2">PARIS</option>
+			<option value="3">LONDON</option>
+			<option value="4">TEHERAN</option>
+		</select><br><br>
+		<button onclick="check()" id="id_check">Check</button>
+		<h2 id="id_h2">You are <span id="id_span"></span></h2>
+	</body>
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<script>
+			function init() {
+				
+			}
+			
+			function cngClr()
+			{
+				//alert();
+				var x=id_input.value;
+				id_h2.innerHTML=x;
+				id_h2.style.color=x;
+				id_h2.innerHTML=id_h2.innerHTML.toUpperCase();
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<h1>Enter your favourite color:</h1>
+		<input id="id_input" type="text" oninput="cngClr()">
+		<br>
+		<button onclick="cngClr()">click here</button>
+		<h2 id="id_h2"></h2>
+	</body>
+</html>

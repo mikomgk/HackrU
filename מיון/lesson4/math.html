@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<script>
+			var rnd;
+			var rnd2;
+			var coins=5;
+			
+			function init() {
+				id_h2.innerHTML=" ";
+				id_coins.innerHTML=coins;
+			}
+			
+			function roll()
+			{
+				rnd=Math.ceil(Math.random()*6);
+				rnd2=Math.ceil(Math.random()*6);
+				
+				/*if(rnd==5 ||rnd==6)
+				{
+					coins+=2;
+					id_h2.innerHTML="YOU WIN!";
+				}
+				else
+					id_h2.innerHTML="YOU LOST!";
+				if(coins==0)
+					window.open("https://www.bankhapoalim.co.il/","_self");
+				else
+					id_coins.innerHTML=coins;*/
+					
+				if(id_select.value!=0)
+				{
+					if(coins<3)
+					{
+						alert("not enough money!");
+					}
+					else if(rnd+rnd2==id_select.value)
+					{
+						coins+=5;
+						id_h2.innerHTML="YOU WIN!";
+						id_img.src="dice_images/"+rnd+".jpg";
+						id_img2.src="dice_images/"+rnd2+".jpg";
+					}
+					else
+					{
+						coins-=3;
+						id_h2.innerHTML="YOU LOST";
+						id_img.src="dice_images/"+rnd+".jpg";
+						id_img2.src="dice_images/"+rnd2+".jpg";
+					}
+				}
+				else if(rnd+rnd2>8)
+				{
+					coins++;
+					id_h2.innerHTML="YOU WIN!";
+					id_img.src="dice_images/"+rnd+".jpg";
+					id_img2.src="dice_images/"+rnd2+".jpg";
+				}
+				else
+				{
+					id_h2.innerHTML="YOU LOST!";
+					coins--;
+					id_img.src="dice_images/"+rnd+".jpg";
+					id_img2.src="dice_images/"+rnd2+".jpg";
+				}
+				if(coins<=0)
+					window.open("https://www.bankhapoalim.co.il/","_self");
+				else
+					id_coins.innerHTML=coins;
+			}
+		</script>
+	</head>
+	<body onload="init()" id="id_body">
+		<h1>Welcome to the Casino!</h1>
+		<h2>Coins: <span id="id_coins"></span></h2>
+		<label>Choose if you want<br>cost: 3 coins<br>win: 8 coins<br></label>
+		<select id="id_select">
+			<option value="0">Choose if you want</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+			<option value="11">11</option>
+			<option value="12">12</option>
+		</select><br><br>
+		<button onclick="roll()">Roll</button>
+		<h2 id="id_h2"></h2>
+		<br><br>
+		<img src="" id="id_img" width="100">
+		<img src="" id="id_img2" width="100">
+		<h2
+	</body>
+</html>

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<!--<meta  http-equiv="refresh" content="1" />-->
+	<meta name="description" content="jhjhhkfgdfgd" />
+	<meta name="keywords" content="fds, fds, fdsf, ds" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>123</title>
+	<!--<link rel="stylesheet" href="style.css"/>-->
+	<style>
+		@media screen and (max-width:800px) {
+			.conf {
+				display: none;
+			}
+
+			.type {
+				display: none;
+			}
+
+			.cl_date {
+				width: 30%;
+				border-left: 2px dashed;
+			}
+
+			.cl_time {
+				width: 18%;
+			}
+			.cl_del {
+				width: 10%;
+			}
+
+			form {
+				position: absolute;
+				top: 57%;
+			}
+
+			#id_table {
+				width: 96.5%;
+			}
+
+			#divAccount {
+				position: absolute;
+				top: 8.2%;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				height: 580px;
+				overflow-y: auto;
+				height: 295px;
+			}
+		}
+
+		@media screen and (min-width:800px) {
+			.cl_date {
+				width: 15%;
+				border-left: 2px dashed;
+			}
+
+			.cl_time {
+				width: 15%;
+			}
+
+			.type {
+				width: 8%;
+			}
+
+			.cl_ammount {
+				width: 15%;
+			}
+
+			.conf {
+				width: 13%;
+			}
+
+			.cl_del {
+				width: 6%;
+			}
+
+			.cl_edit {
+				width: 6%;
+			}
+
+			th {
+				padding-top: 12px;
+				padding-bottom: 12px;
+			}
+
+			form {
+				position: absolute;
+				top: 70%;
+			}
+
+			table {
+				width: 100%;
+			}
+
+			#divAccount {
+				position: absolute;
+				top: 5.8%;
+				right: 50%;
+				height: 611px;
+				overflow-y: auto;
+				width: 810px;
+				transform: translate(405px, 0);
+			}
+
+			/* width */
+			/*
+			::-webkit-scrollbar {
+				width: 10px;
+			}
+
+			/* Track */
+			/*
+			::-webkit-scrollbar-track {
+				background: #f1f1f1;
+			}
+
+			/* Handle */
+			/*
+			::-webkit-scrollbar-thumb {
+				background: #888;
+			}
+
+			/* Handle on hover */
+			/*
+			::-webkit-scrollbar-thumb:hover {
+				background: #555;
+			}*/
+			::-webkit-scrollbar {
+				display: none;
+			}
+
+			table {
+				cursor: default;
+			}
+		}
+
+		@media screen and (min-width:1300px) {
+			form {
+				position: absolute;
+				top: 1%;
+				right: 1%;
+			}
+
+			#divAccount {
+				width: 800;
+				height: 890px;
+			}
+		}
+
+		table {
+			max-width: 800px;
+			border-collapse: collapse;
+			margin: 3px auto;
+		}
+
+		td {
+			border: 2px solid black;
+			text-align: center;
+			padding: 3px;
+		}
+
+		tr {
+			height: 10px;
+		}
+
+		tr:hover td:not(.cl_date) {
+			background-color: #888;
+		}
+
+		.tableInput {
+			width: 60%;
+			text-align: center;
+			background: transparent;
+			border: none;
+			border: 1px solid black;
+		}
+
+		#id_timeTable {
+			height: 19px;
+		}
+
+		.even {
+			background-color: lightyellow;
+		}
+
+		.odd {
+			background-color: lightgrey;
+		}
+
+		/*table tr:nth-child(even) {*/
+
+		th {
+			background-color: lightblue;
+			border-bottom: 2px dashed black;
+		}
+
+		.ammount {
+			direction: ltr;
+		}
+
+		.balance {
+			direction: ltr;
+		}
+
+		.imgBtn {
+			width: 15px;
+			margin: 5px;
+			cursor: pointer;
+		}
+
+		#id_cngType {
+			width: 88%;
+		}
+
+		#id_ammountT {
+			width: 80%;
+		}
+
+		#id_charge,
+		#id_refund {
+			cursor: pointer;
+		}
+	</style>
+	<script>
+		var nowDate;
+		var nowTime;
+		var balance;
+		var confNum = 123456;
+		var transactions = [];
+		var inputDate;
+		var inputTime;
+		var spanTime;
+		var btnTime;
+		var inputCharge;
+		var inputRefund;
+		var inputAmmount;
+		var inputAmmount2;
+		var spanAmmount;
+		var spanAmmount2;
+		var divAccount;
+		var submit;
+		var trash = "";
+		var screenEnum = {
+			Pc: 1,
+			Phone: 2
+		};
+		var screenS;
+		var editMode;
+
+		function init() {
+			inputDate = document.getElementById("id_date");
+			inputTime = document.getElementById("id_time");
+			spanTime = document.getElementById("id_spanTime");
+			btnTime = document.getElementById("id_btnTime");
+			inputCharge = document.getElementById("id_charge");
+			inputRefund = document.getElementById("id_refund");
+			inputAmmount = document.getElementById("id_ammount");
+			inputAmmount2 = document.getElementById("id_ammount2");
+			spanAmmount = document.getElementById("id_spanAmmount");
+			spanAmmount2 = document.getElementById("id_spanAmmount2");
+			divAccount = document.getElementById("divAccount");
+			submit = document.getElementById("id_submit");
+			editMode = 0;
+			checkScreen();
+			setNowTime();
+			transactions.push({
+				date: new Date(2015, 03, 25, 12, 52, 20),
+				ammount: -100,
+				confitmationNum: confNum++
+			});
+			transactions.push({
+				date: new Date(2015, 03, 26, 12, 52, 20),
+				ammount: -50,
+				confitmationNum: confNum++
+			});
+			transactions.push({
+				date: new Date(2015, 03, 26, 12, 55, 20),
+				ammount: 200,
+				confitmationNum: confNum++
+			});
+			transactions.push({
+				date: new Date(2015, 04, 25, 12, 52, 20),
+				ammount: -100,
+				confitmationNum: confNum++
+			});
+			transactions.push({
+				date: new Date(2016, 03, 25, 12, 52, 20),
+				ammount: -120,
+				confitmationNum: confNum++
+			});
+			printTable();
+			hideHour();
+			ammountType();
+		}
+
+		function ammountType() {
+			if (screenS == screenEnum.Pc) {
+				spanAmmount.style.display = 'none';
+				inputAmmount.required = false;
+			} else {
+				spanAmmount2.style.display = 'none';
+				inputAmmount2.required = false;
+			}
+		}
+
+		function checkScreen() {
+			if (document.body.clientWidth >= 800)
+				screenS = screenEnum.Pc;
+			else
+				screenS = screenEnum.Phone;
+		}
+
+		function setNowTime() {
+			var nowTime = new Date();
+			if (nowTime.getMonth() < 10)
+				nowDate = nowTime.getFullYear() + "-0" + (nowTime.getMonth() + 1);
+			else
+				nowDate = nowTime.getFullYear() + "-" + (nowTime.getMonth() + 1);
+			if (nowTime.getDate() < 10)
+				nowDate += "-0" + nowTime.getDate();
+			else
+				nowDate += "-" + nowTime.getDate();
+			nowTime = getsTime(nowTime);
+			inputDate.value = nowDate;
+			inputTime.value = nowTime.slice(0, 5);
+		}
+
+		function getsTime(_d) {
+			if (_d.getHours() < 10)
+				t = "0" + _d.getHours();
+			else
+				t = "" + _d.getHours();
+			if (_d.getMinutes() < 10)
+				t += ":0" + _d.getMinutes();
+			else
+				t += ":" + _d.getMinutes();
+			if (_d.getSeconds() < 10)
+				t += ":0" + _d.getSeconds();
+			else
+				t += ":" + _d.getSeconds();
+			return t;
+		}
+
+		function printTable(_i) {
+			var header = "<table id='id_header'>";
+			var table = "<table id='id_table'>";
+			var numDate = 0,
+				start = 0;
+			var row = 1;
+			balance = 100;
+			header += "<tr><th class='cl_date'>תאריך התנועה</th>";
+			header += "<th class='cl_time'>שעת התנועה</th>";
+			header += "<th class='type'>תיאור</th>";
+			header += "<th class='cl_ammount'>סכום</th>";
+			header += "<th class='conf'>מס' אסמכתא</th>";
+			header += "<th class='cl_balance'>יתרה</th>";
+			header += "<th class='cl_del'>הסרה</th>";
+			header += "<th class='cl_del'>עדכון</th></tr>";
+			if (editMode == 0) {
+				for (var i = 0; i < transactions.length; i++) {
+					var tran = transactions[i];
+					balance += tran.ammount;
+					if (numDate == 0) {
+						numDate = checkDate(i);
+						start = 1;
+					}
+					if (numDate > 0) {
+						if (start == 1) {
+							table += "<tr class=" + ((++row % 2 == 0) ? 'even' : 'odd') + "><td class='cl_date' rowspan='" + numDate + "'>" + tran.date.toLocaleDateString() + "</td>";
+							start = 0;
+						} else
+							table += "<tr class=" + ((row % 2 == 0) ? 'even' : 'odd') + ">";
+						numDate--;
+					} else
+						table += "<tr class='cl_time " + ((++row % 2 == 0) ? 'even' : 'odd') + "'><td class='cl_date'>" + tran.date.toLocaleDateString() + "</td>";
+					table += "<td class='cl_time time trH' style='color:" + (balance < 0 ? "red" : "black") + ";'>" + getsTime(tran.date).slice(0, 5) + "</td>";
+					table += "<td class='type trH' style='color:" + (balance < 0 ? "red" : "black") + ";'>" + (tran.ammount < 0 ? "חיוב" : "זיכוי") + "</td>";
+					table += "<td class='ammount cl_ammount trH' style='color:" + (balance < 0 ? "red" : "black") + ";'>" + (screenS == screenEnum.Pc ? Math.abs(tran.ammount) : tran.ammount) + "</td>";
+					table += "<td class='conf trH' style='color:" + (balance < 0 ? "red" : "black") + ";'>" + tran.confitmationNum + "</td>";
+					table += "<td class='balance cl_balance trH' style='color:" + (balance < 0 ? "red" : "black") + ";'>" + balance + "</td>";
+					table += "<td class='del cl_del trH' ><img class='trash imgBtn' src='_images/trash.png' onclick='btnDelTrans(" + i + ")'></td>";
+					table += "<td class='cl_edit trH' ><img class='update imgBtn' src='_images/update.png' onclick='btnEditTrans(" + i + ")' id='id_btnEdit" + i + "'></td></tr>";
+				}
+			} else {
+				for (var i = 0; i < transactions.length; i++) {
+					var tran = transactions[i];
+					balance += tran.ammount;
+					if (numDate == 0) {
+						numDate = checkDate(i);
+						start = 1;
+					}
+					if (numDate > 0) {
+						if (start == 1) {
+							table += "<tr class=" + ((++row % 2 == 0) ? 'even' : 'odd') + "><td class='cl_date' rowspan='" + numDate + "'>" + tran.date.toLocaleDateString() + "</td>";
+							start = 0;
+						} else
+							table += "<tr class=" + ((row % 2 == 0) ? 'even' : 'odd') + ">";
+						numDate--;
+					} else
+						table += "<tr class='cl_time " + ((++row % 2 == 0) ? 'even' : 'odd') + "'><td class='cl_date'>" + tran.date.toLocaleDateString() + "</td>";
+					if (i == _i) {
+						table += "<td class='cl_time time trH'><input class='tableInput' type='time' name='time' id='id_timeTable' value='" + getsTime(tran.date).slice(0, 5) + "' /></td>";
+						table += "<td class='type trH'><select class='tableInput' id='id_cngType' onchange='cngBalance(" + i + ")'><option value='0' >חיוב</option><option value='1' " + ((tran.ammount > 0) ? 'selected' : '') + ">זיכוי</option></select></td>";
+						table += "<td class='ammount cl_ammount trH'><input class='tableInput' type='number' oninput='cngBalance(" + i + ")' step='any' name='ammount' id='id_ammountT' value='" + Math.abs(tran.ammount) + "' /></td>";
+						table += "<td class='conf trH'>" + tran.confitmationNum + "</td>";
+						table += "<td class='balance cl_balance trH' id='id_cngBalance'>" + balance + "</td>";
+						table += "<td class='del cl_del trH' ><img class='cancel imgBtn' src='_images/cancel.png' onclick='btnCancelEdit(" + i + ")'></td>";
+						table += "<td class='cl_edit trH' ><img class='save imgBtn' src='_images/save.png' onclick='btnSaveEdit(" + i + ")'></td></tr>";
+					} else {
+						table += "<td class='cl_time time trH' style='color:" + (balance < 0 ? "red" : "black") + ";'>" + getsTime(tran.date).slice(0, 5) + "</td>";
+						table += "<td class='type trH' style='color:" + (balance < 0 ? "red" : "black") + ";'>" + (tran.ammount < 0 ? "חיוב" : "זיכוי") + "</td>";
+						table += "<td class='ammount cl_ammount trH' style='color:" + (balance < 0 ? "red" : "black") + ";'>" + (screenS == screenEnum.Pc ? Math.abs(tran.ammount) : tran.ammount) + "</td>";
+						table += "<td class='conf trH' style='color:" + (balance < 0 ? "red" : "black") + ";'>" + tran.confitmationNum + "</td>";
+						table += "<td class='balance cl_balance trH' style='color:" + (balance < 0 ? "red" : "black") + ";'>" + balance + "</td>";
+						table += "<td class='del cl_del trH' ><img class='trash imgBtn' src='_images/trash.png' onclick=''></td>";
+						table += "<td class='cl_edit trH' ><img class='update imgBtn' src='_images/update.png' onclick='' id='id_btnEdit" + i + "'></td></tr>";
+					}
+				}
+			}
+			divHeader.innerHTML = header;
+			divAccount.innerHTML = table;
+		}
+
+		function checkDate(_date) {
+			var count = 0;
+			for (var i = _date + 1; i < transactions.length; i++)
+				if (transactions[_date].date.getDate() == transactions[i].date.getDate() && transactions[_date].date.getMonth() == transactions[i].date.getMonth() && transactions[_date].date.getFullYear() == transactions[i].date.getFullYear())
+					count++;
+				else
+					break;
+			return count > 0 ? count + 1 : count;
+		}
+
+		function dateIndex(_date) {
+			for (var i = 0; i < transactions.length && _date >= transactions[i].date; i++)
+			;
+			return i;
+		}
+
+		function addTrans() {
+			var x = screenS == screenEnum.Pc ? inputAmmount2.value : inputAmmount.value;
+			if (spanTime.style.display == "none")
+				var newDate = new Date();
+			else
+				var newDate = new Date(inputDate.value + " " + inputTime.value);
+			transactions.splice(dateIndex(newDate), 0, {
+				date: newDate,
+				ammount: inputCharge.checked ? Number(0 - x) : Number(x),
+				confitmationNum: confNum++
+			});
+			inputAmmount.value = "";
+			inputAmmount2.value = "";
+			printTable();
+		}
+
+		function btnDelTrans(_i) {
+			delTrans(_i);
+			printTable();
+		}
+
+		function delTrans(_i) {
+			transactions.splice(_i, 1);
+		}
+
+		function cngBalance(_i) {
+			var x = document.getElementById("id_ammountT").value;
+			var sum = 0;
+			for (var i = 0; i < _i - 1; i++)
+				sum += transactions[i].ammount;
+			sum += id_cngType.value == 0 ? Number(0 - x) : Number(x);
+			document.getElementById("id_cngBalance").innerHTML = sum;
+		}
+
+		function btnEditTrans(_i) {
+			editMode = 1;
+			//document.getElementsByClassName("update").style.cursor="default";
+			printTable(_i);
+		}
+
+		function btnSaveEdit(_i) {
+			editMode = 0;
+			editTrans(_i)
+			printTable();
+		}
+
+		function btnCancelEdit() {
+			editMode = 0;
+			printTable();
+		}
+
+		function editTrans(_i) {
+			var tran = transactions[_i];
+			var ammountT = document.getElementById("id_ammountT").value;
+			var timeTable = document.getElementById("id_timeTable").value;
+			var editDate = new Date(tran.date.toDateString() + " " + timeTable);
+			tran.date = timeTable == "" ? tran.date : editDate;
+			tran.ammount = ammountT == "" ? tran.ammount : (id_cngType.value == 0 ? Number(0 - ammountT) : Number(ammountT));
+			tran.confitmationNum = confNum++;
+		}
+
+		function hideHour() {
+			var checkDate = inputDate.value;
+			if (checkDate == nowDate) {
+				spanTime.style.display = "none";
+				btnTime.style.display = "inline";
+				setNowTime();
+			} else
+				showHour();
+		}
+
+		function showHour() {
+			spanTime.style.display = "block";
+			btnTime.style.display = "none";
+		}
+
+		function clkShowHour() {
+			setNowTime();
+			showHour();
+		}
+
+		function refundCheck() {
+			inputRefund.checked = true;
+		}
+
+		function chargeCheck() {
+			inputCharge.checked = true;
+		}
+	</script>
+</head>
+
+<body id="id_body" onload="init()" style="direction:rtl;">
+	<div id="divHeader">
+
+	</div>
+	<div id="divAccount">
+
+	</div><br />
+	<form action="javascript:addTrans()">
+		<label>תאריך:</label><br />
+		<input type="date" name="date" id="id_date" onchange="hideHour()" required />&nbsp&nbsp
+		<input type="button" onclick="clkShowHour()" value="שנה שעה" id="id_btnTime" /><br /><br />
+		<span id="id_spanTime">
+			<label>שעה:</label><br />
+			<input type="time" name="time" id="id_time" required /><br /><br />
+		</span>
+		<input type="radio" name="type" id="id_charge" value="-" checked required />
+		<label id="id_charge" onclick="chargeCheck()">חיוב</label>
+		<input type="radio" name="type" id="id_refund" value="+" />
+		<label id="id_refund" onclick="refundCheck()">זיכוי</label><br /><br />
+		<label>סכום:</label><br />
+		<span id="id_spanAmmount">
+			<input type="tel" name="ammount" id="id_ammount" required /><br /><br />
+		</span>
+		<span id="id_spanAmmount2">
+			<input type="number" step="any" name="ammount" id="id_ammount2" required /><br /><br />
+		</span>
+		<input type="submit" value="הוסף" id="id_submit" />
+	</form>
+</body>
+
+</html>

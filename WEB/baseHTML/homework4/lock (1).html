@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>123</title>
+		<script>
+			var combination_arr=[7,5,2];
+			var code_arr=[0,0,0];
+			var num1;
+			var num2;
+			var num3;
+			var hiLim=9;
+			var loLim=0;
+			var x;
+
+			function init() {
+				id_num1.innerHTML=0;
+				id_num2.innerHTML=0;
+				id_num3.innerHTML=0;
+				id_img.src="_images/lock.jpg";
+			}
+
+			function up1()
+			{
+				id_num1.innerHTML=change(1,1,Number(id_num1.innerHTML));
+			}
+
+			function up2()
+			{
+				id_num2.innerHTML=change(1,2,Number(id_num2.innerHTML));
+			}
+
+			function up3()
+			{
+				id_num3.innerHTML=change(1,3,Number(id_num3.innerHTML));
+			}
+
+			function down1()
+			{
+				id_num1.innerHTML=change(-1,1,Number(id_num1.innerHTML));
+			}
+
+			function down2()
+			{
+				id_num2.innerHTML=change(-1,2,Number(id_num2.innerHTML));
+			}
+
+			function down3()
+			{
+				id_num3.innerHTML=change(-1,3,Number(id_num3.innerHTML));
+			}
+
+			function change (add,num,val)
+			{
+				var cng;
+				cng=val+add;
+				if(cng>hiLim)
+					cng=loLim;
+				if(cng<loLim)
+					cng=hiLim;
+				code_arr[num-1]=cng;
+				return cng;
+			}
+
+			function check()
+			{
+				var i;
+				var count=0;
+				for(i=0;i<code_arr.length;i++)
+					if(code_arr[i]==combination_arr[i])
+						count++;
+				if(count==code_arr.length)
+					id_img.src="_images/open.jpg";
+			}
+		</script>
+	</head>
+	<body onload="init()" align="center">
+		<table align="center">
+			<tr align="center">
+				<td><button onclick="up1()">+</button></td>
+				<td><button onclick="up2()">+</button></td>
+				<td><button onclick="up3()">+</button></td>
+			</tr>
+			<tr align="center">
+				<td style="font-size:40px" id="id_num1"></td>
+				<td style="font-size:40px" id="id_num2"></td>
+				<td style="font-size:40px" id="id_num3"></td>
+			</tr>
+			<tr align="center">
+				<td><button onclick="down1()">-</button></td>
+				<td><button onclick="down2()">-</button></td>
+				<td><button onclick="down3()">-</button></td>
+			</tr>
+		</table><br><br>
+		<button onclick="check()">Check Code</button><br><br>
+		<img id="id_img">
+	</body>
+</html>

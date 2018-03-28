@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<body>
+<style>
+* {font-family:Helvetica,Arial;}
+
+.anim-container{
+  width:300px;
+  height:70px;
+  background-color:#eeeeee;
+  position:relative;
+  border:2px solid #888888;
+}
+
+
+.box-manual{
+  display:inline-block;
+  background-color:blue;
+  width:40px;
+  height:40px;
+  margin:5px;
+}
+
+
+#cbox:checked + div{
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+
+@-webkit-keyframes shake{
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+</style>
+
+<script>
+var x=5;
+function abc() {
+  cbox.checked = false;
+}
+</script>
+
+<input type="radio" id="cbox">
+<div class="anim-container">
+  <div class="box-manual"></div>
+</div>
+<button onclick="abc()" >play anfdsfimation</button>
+<img src="_images/lock.jpg" class="lock">
+
+</body>
+</html>
