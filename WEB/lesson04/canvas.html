@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #pcman{
+            display: none;
+            width: 50px;
+        }
+    </style>
+    <script>
+        var myCanvas;
+        var ctx;
+        var move = 5;
+        var requestAnim;
+        var image;
+
+        function init() {
+            myCanvas = document.getElementById('myCanvas');
+            ctx = myCanvas.getContext('2d');
+            var pacman=document.getElementById('pcman');
+            ctx.drawImage(pacman,230,140)
+            ctx.beginPath();
+            ctx.lineWidth = "10";
+            ctx.fillStyle = "green";
+            ctx.transform(1, 0, 0, 1, 230, 140);
+            ctx.fillRect(0, 0, 50, 50);
+            //ctx.stroke();
+            //ctx.clearRect(0,0,550,350);
+        }
+
+        document.addEventListener('keydown', function() {
+            var x = window.event.keyCode;
+            if (x == 38)
+                up();
+            if (x == 40)
+                down();
+            if (x == 39)
+                right();
+            if (x == 37)
+                left();
+        });
+
+        function up() {
+            ctx.clearRect(0, 0, 550, 350);
+            ctx.transform(1, 0, 0, 1, 0, -move);
+            ctx.fillRect(0, 0, 50, 50);
+            cancelAnimationFrame(requestAnim);
+            requestAnim = requestAnimationFrame(up);
+        }
+
+        function down() {
+            ctx.clearRect(0, 0, 550, 350);
+            ctx.transform(1, 0, 0, 1, 0, move);
+            ctx.fillRect(0, 0, 50, 50);
+            cancelAnimationFrame(requestAnim);
+            requestAnim = requestAnimationFrame(down);
+        }
+
+        function right() {
+            ctx.clearRect(0, 0, 550, 350);
+            ctx.transform(1, 0, 0, 1, move, 0);
+            ctx.fillRect(0, 0, 50, 50);
+            cancelAnimationFrame(requestAnim);
+            requestAnim = requestAnimationFrame(right);
+        }
+
+        function left() {
+            ctx.clearRect(0, 0, 550, 350);
+            ctx.transform(1, 0, 0, 1, -move, 0);
+            ctx.fillRect(0, 0, 50, 50);
+            cancelAnimationFrame(requestAnim);
+            requestAnim = requestAnimationFrame(left);
+        }
+    </script>
+</head>
+
+<body onload="init()">
+    <canvas id="myCanvas" width="900" height="350" style="border:1px solid gray;"></canvas>
+    <img src="_images/pcmn.gif" id="pcman" />
+</body>
+
+</html>
