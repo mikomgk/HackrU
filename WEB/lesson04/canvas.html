@@ -3,7 +3,7 @@
 
 <head>
     <style>
-        #pcman{
+        .img_canvas {
             display: none;
             width: 50px;
         }
@@ -14,17 +14,24 @@
         var move = 5;
         var requestAnim;
         var image;
+        var level;
+        var pacman;
+        var canvasWidth = 928;
+        var canvasHeight = 272;
+        var pacmanWidth = 50;
+        var pacmanHeight = 50;
+        var mode = 90;
+        var posX = 230;
+        var posY = 140;
 
         function init() {
             myCanvas = document.getElementById('myCanvas');
             ctx = myCanvas.getContext('2d');
-            var pacman=document.getElementById('pcman');
-            ctx.drawImage(pacman,230,140)
-            ctx.beginPath();
-            ctx.lineWidth = "10";
-            ctx.fillStyle = "green";
-            ctx.transform(1, 0, 0, 1, 230, 140);
-            ctx.fillRect(0, 0, 50, 50);
+            pacman = document.getElementById('pcman');
+            level = document.getElementById('level');
+            ctx.transform(1, 0, 0, 1, posX, posY);
+            printLevel();
+            printPacman();
             //ctx.stroke();
             //ctx.clearRect(0,0,550,350);
         }
@@ -42,42 +49,79 @@
         });
 
         function up() {
-            ctx.clearRect(0, 0, 550, 350);
-            ctx.transform(1, 0, 0, 1, 0, -move);
-            ctx.fillRect(0, 0, 50, 50);
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            if ((posY -= move) + pacmanHeight > 0)
+                ctx.transform(1, 0, 0, 1, 0, -move);
+            else {
+                ctx.transform(1, 0, 0, 1, 0, canvasHeight - posY - pacmanHeight);
+                posY = canvasHeight - pacmanHeight;
+            }
+            rotate("up");
+            printPacman();
             cancelAnimationFrame(requestAnim);
             requestAnim = requestAnimationFrame(up);
         }
 
         function down() {
-            ctx.clearRect(0, 0, 550, 350);
-            ctx.transform(1, 0, 0, 1, 0, move);
-            ctx.fillRect(0, 0, 50, 50);
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            if ((posY += move) < canvasHeight)
+                ctx.transform(1, 0, 0, 1, 0, move);
+            else {
+                ctx.transform(1, 0, 0, 1, 0, -posY);
+                posY = 0;
+            }
+            rotate("down");
+            printPacman();
             cancelAnimationFrame(requestAnim);
             requestAnim = requestAnimationFrame(down);
         }
 
         function right() {
-            ctx.clearRect(0, 0, 550, 350);
-            ctx.transform(1, 0, 0, 1, move, 0);
-            ctx.fillRect(0, 0, 50, 50);
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            if ((posX += move) < canvasWidth)
+                ctx.transform(1, 0, 0, 1, move, 0);
+            else {
+                ctx.transform(1, 0, 0, 1, -posX, 0);
+                posX = 0;
+            }
+            rotate("right");
+            printPacman();
             cancelAnimationFrame(requestAnim);
             requestAnim = requestAnimationFrame(right);
         }
 
         function left() {
-            ctx.clearRect(0, 0, 550, 350);
-            ctx.transform(1, 0, 0, 1, -move, 0);
-            ctx.fillRect(0, 0, 50, 50);
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            if ((posX -= move) + pacmanWidth > 0)
+                ctx.transform(1, 0, 0, 1, -move, 0);
+            else {
+                ctx.transform(1, 0, 0, 1, canvasWidth - posX - pacmanWidth, 0);
+                posX = canvasWidth - pacmanWidth;
+            }
+            rotate("left");
+            printPacman();
             cancelAnimationFrame(requestAnim);
             requestAnim = requestAnimationFrame(left);
+        }
+
+        function rotate(_dir) {
+            pacman.src = "_images/" + _dir + ".gif";
+        }
+
+        function printLevel() {
+            ctx.drawImage(level, -posX, -posY, canvasWidth, canvasHeight);
+        }
+
+        function printPacman() {
+            ctx.drawImage(pacman, 0, 0, pacmanWidth, pacmanHeight);
         }
     </script>
 </head>
 
 <body onload="init()">
-    <canvas id="myCanvas" width="900" height="350" style="border:1px solid gray;"></canvas>
-    <img src="_images/pcmn.gif" id="pcman" />
+    <canvas id="myCanvas" width="928" height="272" style="border:1px solid gray;"></canvas>
+    <img src="_images/right.gif" id="pcman" class="img_canvas" />
+    <img src="_images/level.png" id="level" class="img_canvas" />
 </body>
 
 </html>
