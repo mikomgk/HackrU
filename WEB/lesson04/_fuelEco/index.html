@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>123</title>
+    <style>
+    </style>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/CHOOSE_A_VERSION/xlsx.core.min.js"></script>
+    <script type="text/javascript" src="excelplus-2.5.min.js"></script>
+    <script>
+        var inputDate;
+        var inputMileage;
+        var inputLiter;
+        var inputPrice;
+        var inputSubmit;
+
+        function init() {
+            inputDate = document.getElementById("id_date");
+            inputMileage = document.getElementById("id_mileage");
+            inputLiter = document.getElementById("id_liter");
+            inputPrice = document.getElementById("id_price");
+            inputSubmit = document.getElementById("id_submit");
+            setNowDate();
+        }
+
+        function doNext(_name) {
+            if (event.keyCode == '13') {
+                if (_name == "mileage")
+                    inputLiter.focus();
+                if (_name == "liter")
+                    inputPrice.focus();
+                if (_name == "price")
+                    inputSubmit.click();
+            }
+        }
+
+        function setNowDate() {
+            var nowTime = new Date();
+            var nowDate;
+            if (nowTime.getMonth() < 10)
+                nowDate = nowTime.getFullYear() + "-0" + (nowTime.getMonth() + 1);
+            else
+                nowDate = nowTime.getFullYear() + "-" + (nowTime.getMonth() + 1);
+            if (nowTime.getDate() < 10)
+                nowDate += "-0" + nowTime.getDate();
+            else
+                nowDate += "-" + nowTime.getDate();
+            inputDate.value = nowDate;
+        }
+    </script>
+</head>
+
+<body id="id_body" onload="init()" align="center" style="direction:rtl;">
+    <h1>ליטר לקילומטר: <span id="lpkm"></span></h1>
+    <h1>קילומטר לדלק: <span id="kmpl"></span></h1>
+    <label>תאריך:</label><br />
+    <input type="date" name="date" id="id_date" required /><br /><br />
+    <label>קילומטראז':</label><br />
+    <input type="tel" name="mileage" id="id_mileage" class="inputNum" onkeyup="doNext(name)" required /><br /><br />
+    <label>ליטר:</label><br />
+    <input type="tel" name="liter" id="id_liter" class="inputNum" onkeyup="doNext(name);" required /><br /><br />
+    <label>מחיר:</label><br />
+    <input type="tel" name="price" id="id_price" class="inputNum" onkeyup="doNext(name);" required /><br /><br />
+    <input type="submit" value="הוסף" id="id_submit" />
+</body>
+
+</html>
