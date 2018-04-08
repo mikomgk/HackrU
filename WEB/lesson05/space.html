@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>123</title>
+    <!--<link rel="stylesheet" href="style.css"/>-->
+    <style>
+        .canvasImage {
+            display: none;
+        }
+
+        body {
+            background-image: url('_images/space.png');
+        }
+    </style>
+    <script>
+        var ctx;
+        var canvasWidth = 928;
+        var canvasHeight = 650;
+        var fireTimeout;
+        var enemyMoveTimeout;
+        var enemyHitInterval;
+        var enemies = [];
+        var fires = [];
+        var spaceship;
+        var space;
+        var fire;
+        var enemy;
+        var spaceshipWidth = 50;
+        var spaceshipHeight = 56;
+        var posX = 450;
+        var posY = 500;
+        var maxDown = 300;
+        var spaceshipSpeed = 7;
+        var fireSpeed = 2;
+        var enemySpeed = 0.5;
+        var fireWidth = 10;
+        var fireHeight = 34;
+        var enemyWidth = 10;
+        var enemyHeight = 34;
+
+        function init() {
+            var myCanvas = document.getElementById('myCanvas');
+            ctx = myCanvas.getContext('2d');
+            spaceship = document.getElementById('id_spaceship');
+            space = document.getElementById('id_space');
+            fire = document.getElementById('id_fire');
+            enemy = document.getElementById('id_enemy');
+            setInterval(addEnemy, 2000);
+            printSpace();
+        }
+
+        document.addEventListener('keydown', function() {
+            var x = window.event.keyCode;
+            if (x == 38)
+                up();
+            if (x == 40)
+                down();
+            if (x == 39)
+                right();
+            if (x == 37)
+                left();
+            if (x == 32)
+                addFire();
+        });
+
+        function addFire() {
+            clearTimeout(fireTimeout);
+            fires.push({
+                x: posX + spaceshipWidth / 2 - fireWidth / 2,
+                y: posY
+            });
+            /*
+            if (enemies.length > 0 && fires.length > 00)
+                enemyHitInterval = setInterval(checkHit, 1);
+            else
+                clearInterval(enemyHitInterval);
+            */
+            moveFire();
+            printSpace();
+        }
+
+        function moveFire() {
+            for (var i = 0; i < fires.length; i++) {
+                var f = fires[i];
+                f.y -= fireSpeed;
+                if (f.y + fireHeight <= 0)
+                    fires.splice(f, 1);
+            }
+            printSpace();
+            fireTimeout = setTimeout(moveFire, 1);
+        }
+        /**/
+        function addEnemy() {
+            clearTimeout(enemyMoveTimeout);
+            if (enemies.length < 6) {
+                var tmp = Math.random();
+                enemies.push({
+                    mode: tmp < 0.5 ? "ltr" : "rtl",
+                    x: tmp < 0.5 ? 0 - enemyWidth : canvasWidth + enemyWidth,
+                    y: Math.floor((Math.random() * (maxDown - enemyHeight)) + 1)
+                });
+            }
+            moveEnemy();
+            printSpace();
+        }
+
+        function moveEnemy() {
+            for (var i = 0; i < enemies.length; i++) {
+                var e = enemies[i];
+                e.x = e.mode == "ltr" ? e.x + enemySpeed : e.x - enemySpeed;
+                if ((e.x + enemyWidth <= 0 && e.mode == "rtl") || (e.x >= canvasWidth && e.mode == "ltr"))
+                    enemies.splice(e, 1);
+            }
+            printSpace();
+            enemyMoveTimeout = setTimeout(moveEnemy, 1);
+        }
+        /**/
+        function up() {
+            clearCanvas();
+            if (posY - spaceshipSpeed > 0)
+                posY -= spaceshipSpeed;
+            else
+                posY = 0;
+            printSpace();
+        }
+
+        function down() {
+            clearCanvas();
+            if (posY + spaceshipSpeed + spaceshipHeight > canvasHeight)
+                posY = canvasHeight - spaceshipHeight;
+            else
+                posY += spaceshipSpeed;
+            printSpace();
+        }
+
+        function right() {
+            clearCanvas();
+            if (posX + spaceshipSpeed + spaceshipWidth > canvasWidth)
+                posX = canvasWidth - spaceshipWidth;
+            else
+                posX += spaceshipSpeed;
+            printSpace();
+        }
+
+        function left() {
+            clearCanvas();
+            if (posX - spaceshipSpeed < 0)
+                posX = 0;
+            else
+                posX -= spaceshipSpeed;
+            printSpace();
+        }
+
+        function printSpace() {
+            ctx.drawImage(space, 0, 0, canvasWidth, canvasHeight);
+            ctx.drawImage(spaceship, posX, posY);
+            if (enemies.length > 0 && fires.length > 00)
+                checkHit();
+            for (var i = 0; i < fires.length; i++) {
+                var f = fires[i];
+                ctx.drawImage(fire, f.x, f.y);
+            }
+            for (var i = 0; i < enemies.length; i++) {
+                var e = enemies[i];
+                ctx.drawImage(enemy, e.x, e.y);
+            }
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        }
+
+        function checkHit() {
+            for (var i = 0; i < fires.length; i++)
+                for (var j = 0; j < enemies.length; j++) {
+                    var e = enemies[j];
+                    var f = fires[i];
+                    if (isCollide(e.x, e.y, f.x, f.y)) {
+                        enemies.splice(e, 1);
+                        fires.splice(f, 1);
+                    }
+                }
+        }
+
+        function isCollide(ex, ey, fx, fy) {
+            if (fx+fireWidth >= ex && fx <= ex + enemyWidth && fy+fireHeight >= ey && fy <= ey + enemyHeight)
+                //return true;
+                {
+                    alert(fx,fx+fireWidth,fy,fy+fireHeight,ex,ex+enemyWidth,ey,ey+enemyHeight);
+                }
+            return false;
+        }
+    </script>
+</head>
+
+<body id="id_body" onload="init()">
+    <canvas id="myCanvas" width="928" height="650" style="border:1px solid gray;"></canvas>
+    <img src="_images/spaceship.png" id="id_spaceship" class="canvasImage" />
+    <img src="_images/space.png" id="id_space" class="canvasImage" />
+    <img src="_images/fire.png" id="id_fire" class="canvasImage" />
+    <img src="_images/enemy.png" id="id_enemy" class="canvasImage" />
+</body>
+
+</html>
