@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        var ctx;
+        var canvasWidth = 700;
+        var canvasHeight = 380;
+        var circles = [];
+        var colors = ["green", "red", "blue", "yellow", "gray", "purple"];
+
+
+        function addCircle() {
+            var r = document.getElementById("id_radius").value;
+            var circle = {
+                x: 100,
+                y: 100,
+                velocityX: Math.random() * 3,
+                velocityY: Math.random() * 3,
+                radius: parseInt(r),
+                color: colors[circles.length % colors.length]
+            };
+            circles.push(circle);
+        }
+
+        function init() {
+            var myCanvas = document.getElementById('myCanvas');
+            ctx = myCanvas.getContext("2d");
+            addCircle();
+            render();
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        }
+
+        function drawCircle(circle) {
+            ctx.beginPath();
+            ctx.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2.0);
+            ctx.fillStyle = circle.color;
+            ctx.fill();
+        }
+
+        function render() {
+            clearCanvas();
+            for (var i = 0; i < circles.length; i++) {
+                var circle = circles[i];
+                circle.x += circle.velocityX;
+                circle.y += circle.velocityY;
+                if (circle.x + circle.radius > canvasWidth) {
+                    circle.x = canvasWidth - circle.radius;
+                    circle.velocityX *= -1;
+                }
+                if (circle.x < circle.radius) {
+                    circle.x = circle.radius;
+                    circle.velocityX *= -1;
+                }
+                if (circle.y + circle.radius > canvasHeight) {
+                    circle.y = canvasHeight - circle.radius;
+                    circle.velocityY *= -1;
+                }
+                if (circle.y < circle.radius) {
+                    circle.y = circle.radius;
+                    circle.velocityY *= -1;
+                }
+                for (var j = 0; j < circles.length; j++) {
+                    if (i != j && Math.sqrt(Math.pow(circle.x - circles[j].x, 2) + Math.pow(circle.y - circles[j].y, 2)) < circle.radius + circles[j].radius) {
+                        circle.velocityX *= -1;
+                        circles[j].velocityY *= -1;
+                    }
+                }
+                drawCircle(circle);
+            }
+            setTimeout(render, 10);
+        }
+    </script>
+</head>
+
+<body onload="init()">
+    <canvas id="myCanvas" width="700" height="380" style="border: 1px solid gray;"></canvas><br>
+    <label>RADIUS: <span id="span_radius"></span></label><br />
+    <input type="range" id="id_radius" onchange="cngRadius()" value="40" max="60" /><br />
+    <br/>
+    <input onclick="addCircle()" type="button" value="add circle" />
+</body>
+
+</html>
