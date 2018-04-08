@@ -11,18 +11,18 @@
     <script>
         var myCanvas;
         var ctx;
-        var move = 5;
+        var speed = 3;
         var requestAnim;
         var image;
         var level;
         var pacman;
         var canvasWidth = 928;
         var canvasHeight = 272;
-        var pacmanWidth = 50;
-        var pacmanHeight = 50;
+        var pacmanWidth = 20;
+        var pacmanHeight = 20;
         var mode = 90;
-        var posX = 230;
-        var posY = 140;
+        var posX = 560;
+        var posY = 237;
 
         function init() {
             myCanvas = document.getElementById('myCanvas');
@@ -50,13 +50,17 @@
 
         function up() {
             ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-            if ((posY -= move) + pacmanHeight > 0)
-                ctx.transform(1, 0, 0, 1, 0, -move);
-            else {
+            //        if (speedOK("up", posX, posY - speed)) {
+            if ((posY - speed) + pacmanHeight > 0) {
+                ctx.transform(1, 0, 0, 1, 0, -speed);
+                posY -= speed;
+            } else {
                 ctx.transform(1, 0, 0, 1, 0, canvasHeight - posY - pacmanHeight);
                 posY = canvasHeight - pacmanHeight;
             }
+            //        }
             rotate("up");
+            printLevel();
             printPacman();
             cancelAnimationFrame(requestAnim);
             requestAnim = requestAnimationFrame(up);
@@ -64,13 +68,17 @@
 
         function down() {
             ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-            if ((posY += move) < canvasHeight)
-                ctx.transform(1, 0, 0, 1, 0, move);
-            else {
+            //        if (speedOK("down", posX, posY + speed)) {
+            if ((posY + speed) < canvasHeight) {
+                ctx.transform(1, 0, 0, 1, 0, speed);
+                posY += speed;
+            } else {
                 ctx.transform(1, 0, 0, 1, 0, -posY);
                 posY = 0;
             }
+            //        }
             rotate("down");
+            printLevel();
             printPacman();
             cancelAnimationFrame(requestAnim);
             requestAnim = requestAnimationFrame(down);
@@ -78,13 +86,17 @@
 
         function right() {
             ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-            if ((posX += move) < canvasWidth)
-                ctx.transform(1, 0, 0, 1, move, 0);
-            else {
+            //if (speedOK("right", posX + speed, posY)) {
+            if ((posX + speed) < canvasWidth) {
+                ctx.transform(1, 0, 0, 1, speed, 0);
+                posX += speed;
+            } else {
                 ctx.transform(1, 0, 0, 1, -posX, 0);
                 posX = 0;
             }
+            //    }
             rotate("right");
+            printLevel();
             printPacman();
             cancelAnimationFrame(requestAnim);
             requestAnim = requestAnimationFrame(right);
@@ -92,13 +104,17 @@
 
         function left() {
             ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-            if ((posX -= move) + pacmanWidth > 0)
-                ctx.transform(1, 0, 0, 1, -move, 0);
-            else {
+            //        if (speedOK("left", posX - speed, posY)) {
+            if ((posX - speed) + pacmanWidth > 0) {
+                ctx.transform(1, 0, 0, 1, -speed, 0);
+                posX -= speed;
+            } else {
                 ctx.transform(1, 0, 0, 1, canvasWidth - posX - pacmanWidth, 0);
                 posX = canvasWidth - pacmanWidth;
             }
+            //        }
             rotate("left");
+            printLevel();
             printPacman();
             cancelAnimationFrame(requestAnim);
             requestAnim = requestAnimationFrame(left);
@@ -115,6 +131,96 @@
         function printPacman() {
             ctx.drawImage(pacman, 0, 0, pacmanWidth, pacmanHeight);
         }
+        /*
+                function speedOK(_dir, x, y) {
+                    x /= 2;
+                    y /= 2;
+                    if (_dir = "up") {
+                        if (y < 6)
+                            return false;
+                        if (x > 5 && x < 37 && y < 97 && y > 97 - speed)
+                            return false;
+                        if (x > 20 && x < 44 && y < 117 && y > 117 - speed)
+                            return false;
+                        if (x > 59 && x < 133 && y < 117 && y > 117 - speed)
+                            return false;
+                        if (x > 171 && x < 246 && y < 117 && y > 117 - speed)
+                            return false;
+                        if (x > 332 && x < 397 && y < 117 && y > 117 - speed)
+                            return false;
+                        if (x > 412 && x < 444 && y < 117 && y > 117 - speed)
+                            return false;
+                        if (x > 460 && x < 427 && y < 92 && y > 92 - speed)
+                            return false;
+                        if (x > 364 && x < 411 && y < 92 && y > 92 - speed)
+                            return false;
+                        if (x > 332 && x < 347 && y < 92 && y > 92 - speed)
+                            return false;
+                        if (x > 260 && x < 316 && y < 76 && y > 76 - speed)
+                            return false;
+                        if (x > 196 && x < 243 && y < 92 && y > 92 - speed)
+                            return false;
+                        if (x > 52 && x < 111 && y < 92 && y > 92 - speed)
+                            return false;
+                        if (x > 134 && x < 177 && y < 92 && y > 92 - speed)
+                            return false;
+                        if (x > 2 && x < 36 && y < 62 && y > 62 - speed)
+                            return false;
+                        if (x > 19 && x < 37 && y < 28 && y > 28 - speed)
+                            return false;
+                        if (x > 68 && x < 116 && y < 36 && y > 36 - speed)
+                            return false;
+                        if (x > 83 && x < 100 && y < 60 && y > 60 - speed)
+                            return false;
+                        if (x > 131 && x < 244 && y < 28 && y > 28 - speed)
+                            return false;
+                        if (x > 259 && x < 318 && y < 28 && y > 28 - speed)
+                            return false;
+                        if (x > 363 && x < 396 && y < 28 && y > 28 - speed)
+                            return false;
+                        if (x > 412 && x < 446 && y < 28 && y > 28 - speed)
+                            return false;
+                        if (x > 427 && x < 463 && y < 60 && y > 60 - speed)
+                            return false;
+                        if (x > 380 && x < 411 && y < 68 && y > 68 - speed)
+                            return false;
+                        if (x > 263 && x < 277 && y < 48 && y > 48 - speed)
+                            return false;
+                        if (x > 300 && x < 312 && y < 49 && y > 49 - speed)
+                            return false;
+                    }
+                    return true;
+                }
+        */
+
+        /*
+                5, 92, 37, 93
+                20, 116, 44, 117
+                59, 116, 133, 117
+                171, 117, 246, 116
+                260, 100, 284, 99, 316, 100
+                332, 116, 397, 117
+                412, 116, 444, 116
+                460, 92, 427, 92
+                411, 91, 364, 91
+                347, 91, 332, 91
+                316, 75, 260, 76
+                243, 91, 196, 91
+                52, 91, 111, 92
+                134, 91, 177, 92
+                36, 60, 2, 61
+                19, 27, 37, 28
+                68, 35, 116, 36
+                83, 60, 100, 59
+                131, 28, 244, 28
+                259, 28, 318, 28
+                363, 28, 396, 28
+                412, 28, 446, 28
+                427, 60, 463, 60
+                380, 67, 411, 68
+                263, 48, 277, 48
+                300, 49, 312, 49
+                */
     </script>
 </head>
 

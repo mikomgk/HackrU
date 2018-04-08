@@ -6,9 +6,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>123</title>
     <style>
+        input[type=date],
+        select {
+            width: 50%;
+            padding: 5px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type=tel],
+        select {
+            width: 60%;
+            padding: 5px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 40%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        div {
+            border-radius: 8px;
+            background-color: #f2f2f2;
+            padding-right: 20px;
+            padding-left: 20px;
+            padding-top: 1px;
+            padding-bottom: 10px;
+        }
+
+        /*
+        h1 {
+            position:relative;
+            top: 1px;
+        }*/
     </style>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/CHOOSE_A_VERSION/xlsx.core.min.js"></script>
-    <script type="text/javascript" src="excelplus-2.5.min.js"></script>
+    <script lang="javascript" src="dist/xlsx.full.min.js"></script>
     <script>
         var inputDate;
         var inputMileage;
@@ -23,17 +73,6 @@
             inputPrice = document.getElementById("id_price");
             inputSubmit = document.getElementById("id_submit");
             setNowDate();
-        }
-
-        function doNext(_name) {
-            if (event.keyCode == '13') {
-                if (_name == "mileage")
-                    inputLiter.focus();
-                if (_name == "liter")
-                    inputPrice.focus();
-                if (_name == "price")
-                    inputSubmit.click();
-            }
         }
 
         function setNowDate() {
@@ -53,17 +92,21 @@
 </head>
 
 <body id="id_body" onload="init()" align="center" style="direction:rtl;">
-    <h1>ליטר לקילומטר: <span id="lpkm"></span></h1>
-    <h1>קילומטר לדלק: <span id="kmpl"></span></h1>
-    <label>תאריך:</label><br />
-    <input type="date" name="date" id="id_date" required /><br /><br />
-    <label>קילומטראז':</label><br />
-    <input type="tel" name="mileage" id="id_mileage" class="inputNum" onkeyup="doNext(name)" required /><br /><br />
-    <label>ליטר:</label><br />
-    <input type="tel" name="liter" id="id_liter" class="inputNum" onkeyup="doNext(name);" required /><br /><br />
-    <label>מחיר:</label><br />
-    <input type="tel" name="price" id="id_price" class="inputNum" onkeyup="doNext(name);" required /><br /><br />
-    <input type="submit" value="הוסף" id="id_submit" />
+    <div>
+        <h1>ליטר לקילומטר: <span id="lpkm"></span></h1>
+        <h1>קילומטר לדלק: <span id="kmpl"></span></h1>
+        <form>
+            <label>תאריך:</label><br />
+            <input type="date" name="date" id="id_date" required /><br /><br />
+            <label>קילומטראז':</label><br />
+            <input type="tel" name="mileage" id="id_mileage" class="inputNum" required /><br /><br />
+            <label>ליטר:</label><br />
+            <input type="tel" name="liter" id="id_liter" class="inputNum" required /><br /><br />
+            <label>מחיר:</label><br />
+            <input type="tel" name="price" id="id_price" class="inputNum" required /><br /><br />
+            <input type="submit" value="הוסף" id="id_submit" />
+        </form>
+    </div>
 </body>
 
 </html>
