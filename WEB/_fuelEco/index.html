@@ -88,6 +88,14 @@
                 nowDate += "-" + nowTime.getDate();
             inputDate.value = nowDate;
         }
+
+        function btnSend() {
+            enterRow();
+        }
+
+        function enterRow(){
+
+        }
     </script>
 </head>
 
@@ -95,7 +103,7 @@
     <div>
         <h1>ליטר לקילומטר: <span id="lpkm"></span></h1>
         <h1>קילומטר לדלק: <span id="kmpl"></span></h1>
-        <form>
+        <form action="javascript:btnSend();">
             <label>תאריך:</label><br />
             <input type="date" name="date" id="id_date" required /><br /><br />
             <label>קילומטראז':</label><br />
