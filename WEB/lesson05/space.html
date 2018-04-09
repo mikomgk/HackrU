@@ -12,13 +12,13 @@
         }
 
         body {
-            background-image: url('_images/space.png');
+            background-color: black;
         }
     </style>
     <script>
         var ctx;
-        var canvasWidth = 928;
-        var canvasHeight = 650;
+        var canvasWidth;
+        var canvasHeight;
         var fireTimeout;
         var enemyMoveTimeout;
         var enemyHitInterval;
@@ -49,7 +49,8 @@
             fire = document.getElementById('id_fire');
             enemy = document.getElementById('id_enemy');
             setInterval(addEnemy, 2000);
-            printSpace();
+            window.addEventListener('resize', resizeCanvas, false);
+            resizeCanvas();
         }
 
         document.addEventListener('keydown', function() {
@@ -65,6 +66,14 @@
             if (x == 32)
                 addFire();
         });
+
+        function resizeCanvas() {
+            canvasWidth = window.innerWidth-20;
+            canvasHeight = window.innerHeight-20;
+            ctx.canvas.width = canvasWidth;
+            ctx.canvas.height = canvasHeight;
+            printSpace();
+        }
 
         function addFire() {
             clearTimeout(fireTimeout);
@@ -186,20 +195,20 @@
         }
 
         function isCollide(ex, ey, fx, fy) {
-            if (fx+fireWidth >= ex && fx <= ex + enemyWidth && fy+fireHeight >= ey && fy <= ey + enemyHeight)
-                //return true;
-                {
-                    alert(fx,fx+fireWidth,fy,fy+fireHeight,ex,ex+enemyWidth,ey,ey+enemyHeight);
-                }
+            if (fx + fireWidth >= ex && fx <= ex + enemyWidth && fy + fireHeight >= ey && fy <= ey + enemyHeight)
+            //return true;
+            {
+                alert(fx, fx + fireWidth, fy, fy + fireHeight, ex, ex + enemyWidth, ey, ey + enemyHeight);
+            }
             return false;
         }
     </script>
 </head>
 
 <body id="id_body" onload="init()">
-    <canvas id="myCanvas" width="928" height="650" style="border:1px solid gray;"></canvas>
+    <canvas id="myCanvas" style="border:none;"></canvas>
     <img src="_images/spaceship.png" id="id_spaceship" class="canvasImage" />
-    <img src="_images/space.png" id="id_space" class="canvasImage" />
+    <img src="_images/space.jpg" id="id_space" class="canvasImage" />
     <img src="_images/fire.png" id="id_fire" class="canvasImage" />
     <img src="_images/enemy.png" id="id_enemy" class="canvasImage" />
 </body>
