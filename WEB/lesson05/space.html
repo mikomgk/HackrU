@@ -84,10 +84,9 @@
         function startGame() {
             lives = 5;
             score = 0;
-            setInterval(scoreUp,100);
+            setInterval(scoreUp, 100);
             printSpace();
             enterSpaceAnim();
-            
 
             window.addEventListener('mousemove', function(e) {
                 posX = e.pageX;
