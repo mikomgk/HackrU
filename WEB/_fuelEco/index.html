@@ -6,8 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>123</title>
     <style>
-        input[type=date],
-        select {
+        .wrong-entry {
+            position: relative;
+            animation: shake 0.3s;
+        }
+
+        @keyframes shake {
+            0%,
+            100% {
+                left: 0px;
+            }
+            20%,
+            60% {
+                left: 15px;
+            }
+            40%,
+            80% {
+                left: -15px;
+            }
+        }
+
+        #id_car {
+            max-width: 200px;
+            width: 35%;
+            padding: 5px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            border-right: 3px solid #0c0;
+            outline: 0;
+        }
+
+        #id_car:focus,
+        input[type=date]:focus,
+        input[type=tel]:focus {
+            border: 1px solid #0c0;
+        }
+
+        input[type=date] {
+            max-width: 200px;
             width: 50%;
             padding: 5px 20px;
             margin: 8px 0;
@@ -15,17 +54,23 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
+            border-right: 3px solid #0c0;
+            outline: 0;
         }
 
-        input[type=tel],
-        select {
+        input[type=tel] {
+            max-width: 400px;
             width: 60%;
             padding: 5px 20px;
             margin: 8px 0;
             display: inline-block;
-            border: 1px solid #ccc;
+            border: 1px solid #eee;
+            border-right: 3px solid salmon;
             border-radius: 5px;
             box-sizing: border-box;
+            outline: 0;
+            animation-name: shake;
+            animation-duration: 0.3s;
         }
 
         input[type=submit] {
@@ -52,19 +97,36 @@
             padding-bottom: 10px;
         }
 
-        /*
-        h1 {
-            position:relative;
-            top: 1px;
-        }*/
+        .checkLabel {
+            cursor: pointer;
+        }
     </style>
-    <script lang="javascript" src="dist/xlsx.full.min.js"></script>
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
     <script>
         var inputDate;
         var inputMileage;
         var inputLiter;
         var inputPrice;
         var inputSubmit;
+        var fullTank;
+        var car;
+        var lastMileagePicanto;
+        var lastMileageDemio;
+        var submitMode = 1;
+        var divMileage;
+        var divLiter;
+        var divPrice;
+        var demioKMPL;
+        var demioLPKM;
+        var picantoKMPL;
+        var picantoLPKM;
+        var lpkm;
+        var kmpl;
+        var fileID = '1wLfKPiNqbgTakkyxWpzEMjG7KHGUtMwdiUQrd4_wk34';
+        var API_KEY = 'AIzaSyD_awRioYTthWk09yjS5D43nAfF0xhxyWg';
+        var CLIENT_ID = '591022824629-jga5u7ocedshk4oe5ob63nlehi02jin9.apps.googleusercontent.com';
+        var SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
 
         function init() {
             inputDate = document.getElementById("id_date");
@@ -72,7 +134,115 @@
             inputLiter = document.getElementById("id_liter");
             inputPrice = document.getElementById("id_price");
             inputSubmit = document.getElementById("id_submit");
+            fullTank = document.getElementById("check_fullTank");
+            car = document.getElementById("id_car");
+            divMileage = document.getElementById("divMileage");
+            divLiter = document.getElementById("divLiter");
+            divPrice = document.getElementById("divPrice");
+            kmpl = document.getElementById("kmpl");
+            lpkm = document.getElementById("lpkm");
             setNowDate();
+            gapi.auth2.getAuthInstance().signIn();
+            document.addEventListener('keydown', function() {
+                if (window.event.keyCode == 13)
+                    btnSend();
+            });
+        }
+
+        function initClient() {
+            gapi.client.init({
+                'apiKey': API_KEY,
+                'clientId': CLIENT_ID,
+                'scope': SCOPE,
+                'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+            }).then(function() {
+                console.log(gapi.auth2.getAuthInstance().isSignedIn.get() ? "Logged In" : "Error");
+                gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
+                updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+            });
+        }
+
+        function updateSignInStatus(isSignedIn) {
+            if (isSignedIn) {
+                setMinMileage();
+                getAvgConsuption();
+            }
+        }
+
+        function handleClientLoad() {
+            gapi.load('client:auth2', initClient);
+        }
+
+        function insertValues(_range, _values) {
+            gapi.client.sheets.spreadsheets.values.append({
+                spreadsheetId: fileID,
+                valueInputOption: 'USER_ENTERED',
+                range: _range,
+                values: _values
+            }).then((response) => {
+                var result = response.result;
+                console.log(`${result.updatedCells} cells updated.`);
+            });
+        }
+
+        function readRange(_range, callback) {
+            gapi.client.sheets.spreadsheets.values.get({
+                spreadsheetId: fileID,
+                range: _range
+            }).then((response) => {
+                var result = response.result;
+                var numRows = result.values ? result.values.length : 0;
+                console.log(`${numRows} rows retrieved.`);
+                callback(numRows == 0 ? 0 : result.values);
+            });
+        }
+
+        function insertRow() {
+            var values = [
+                [inputDate.value, inputMileage.value, , inputLiter.value, inputPrice.value, , fullTank.checked == true ? '1' : '0', , ]
+            ];
+            var range = car.value + '!A1:I1';
+            insertValues(range, values);
+        }
+
+        function setMinMileage() {
+            readRange('Demio!B3:B', function(_value) {
+                lastMileageDemio = (_value == 0 ? 0 : parseInt(_value[_value.length - 1][0]));
+            });
+            readRange('Picanto!B3:B', function(_value) {
+                lastMileagePicanto = (_value == 0 ? 0 : parseInt(_value[_value.length - 1][0]));
+            });
+        }
+
+        function printAvgConsuption() {
+            if (!picantoKMPL || !picantoLPKM || !demioKMPL || !demioLPKM)
+                getAvgConsuption();
+            else if (car.value == 'Picanto') {
+                kmpl.innerHTML = picantoKMPL;
+                lpkm.innerHTML = picantoLPKM;
+            } else {
+                kmpl.innerHTML = demioKMPL;
+                lpkm.innerHTML = demioLPKM;
+            }
+        }
+
+        function getAvgConsuption() {
+            readRange('Demio!H2:I2', function(_value) {
+                demioKMPL = ((_value != 0 && _value[0][0]) ? parseFloat(_value[0][0]) : 0);
+                demioLPKM = ((_value != 0 && _value[0][1]) ? parseFloat(_value[0][1]) : 0);
+            });
+            readRange('Picanto!H2:I2', function(_value) {
+                picantoKMPL = ((_value == 0 && _value[0][0]) ? parseFloat(_value[0][0]) : 0);
+                picantoLPKM = ((_value == 0 && _value[0][1]) ? parseFloat(_value[0][1]) : 0);
+            });
+            readRange('Picanto!A1:A1', printAvgConsuption);
+        }
+
+        function restoreInputs() {
+            inputMileage.value = '';
+            inputLiter.value = '';
+            inputPrice.value = '';
+            fullTank.checked = true;
         }
 
         function setNowDate() {
@@ -90,11 +260,62 @@
         }
 
         function btnSend() {
-            enterRow();
+            handleReInput();
+            if (submitMode == 1) {
+                insertRow();
+                restoreInputs();
+                getAvgConsuption();
+            } else {
+                checkMileage();
+                checkLiter();
+                checkPrice();
+            }
         }
 
-        function enterRow(){
+        function checkFullTank() {
+            fullTank.checked = fullTank.checked ? false : true;
+        }
 
+        function checkMileage() {
+            if (parseInt(inputMileage.value) <= (car.value == "Demio" ? lastMileageDemio : lastMileagePicanto)) {
+                submitMode = 0;
+                wrongInput(inputMileage, divMileage);
+            } else
+                submitMode = 1;
+        }
+
+        function checkLiter() {
+            if (parseFloat(inputLiter.value) <= 0) {
+                submitMode = 0;
+                wrongInput(inputLiter, divLiter);
+            } else
+                submitMode = 1;
+        }
+
+        function checkPrice() {
+            if (parseFloat(inputPrice.value) <= inputLiter.value * 5.0) {
+                submitMode = 0;
+                wrongInput(inputPrice, divPrice);
+            } else
+                submitMode = 1;
+        }
+
+        function wrongInput(element, div) {
+            element.style.border = "1px solid red";
+            element.style.color = "red";
+            div.classList.add('wrong-entry');
+        }
+
+        function handleReInput() {
+            reInput(inputMileage, divMileage);
+            reInput(inputLiter, divLiter);
+            reInput(inputPrice, divPrice);
+        }
+
+        function reInput(element, div) {
+            element.style.border = "1px solid #eee";
+            element.style.color = "black";
+            div.classList.remove('wrong-entry');
         }
     </script>
 </head>
@@ -102,16 +323,24 @@
 <body id="id_body" onload="init()" align="center" style="direction:rtl;">
     <div>
         <h1>ליטר לקילומטר: <span id="lpkm"></span></h1>
-        <h1>קילומטר לדלק: <span id="kmpl"></span></h1>
+        <h1>קילומטר לליטר: <span id="kmpl"></span></h1>
         <form action="javascript:btnSend();">
-            <label>תאריך:</label><br />
-            <input type="date" name="date" id="id_date" required /><br /><br />
-            <label>קילומטראז':</label><br />
-            <input type="tel" name="mileage" id="id_mileage" class="inputNum" required /><br /><br />
-            <label>ליטר:</label><br />
-            <input type="tel" name="liter" id="id_liter" class="inputNum" required /><br /><br />
-            <label>מחיר:</label><br />
-            <input type="tel" name="price" id="id_price" class="inputNum" required /><br /><br />
+            <select id="id_car" onchange="getAvgConsuption()">
+                <option value="Picanto">Picanto</option>
+    			<option value="Demio">Demio</option>
+            </select><br />
+            <input type="date" name="date" id="id_date" required /><br />
+            <div id="divMileage">
+                <input type="tel" name="mileage" id="id_mileage" class="inputNum" placeholder="קילומטראז'" onblur="checkMileage()" oninput="handleReInput()" required /><br />
+            </div>
+            <div id="divLiter">
+                <input type="tel" name="liter" id="id_liter" class="inputNum" placeholder="ליטר" onblur="checkLiter()" oninput="handleReInput()" required /><br />
+            </div>
+            <div id="divPrice">
+                <input type="tel" name="price" id="id_price" class="inputNum" placeholder="מחיר" onblur="checkPrice()" oninput="handleReInput()" required /><br />
+            </div>
+            <input type="checkbox" name="fulltank" id="check_fullTank" checked />
+            <label onclick="checkFullTank()" class="checkLabel">מיכל מלא</label><br /><br />
             <input type="submit" value="הוסף" id="id_submit" />
         </form>
     </div>
