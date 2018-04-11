@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>123</title>
+    <!--<link rel="stylesheet" href="style.css"/>-->
+    <style>
+    </style>
+    <script>
+        function init() {
+            var digit = 3;
+            var maxNum = checkMaxNum(digit);
+
+            alert(isPoli(321123));
+        }
+
+        function checkMaxNum(n) {
+            return Math.pow(10, n) - 1;
+        }
+
+        function isPrime(num) {
+            if (num % 2 == 0) return (num == 2);
+            if (num % 3 == 0) return (num == 3);
+            var m = Math.sqrt(num);
+            for (var i = 5; i <= m; i += 6) {
+                if (num % i == 0) return false;
+                if (num % (i + 2) == 0) return false;
+            }
+            return true;
+        }
+
+        function checkDigit(n) {
+            var i;
+            for (i = 2; n / Math.pow(10, i) >= 1; i++)
+            ;
+            return i;
+        }
+
+        function isPoli(n) {
+            var digit = checkDigit(n);
+            for (var i = digit; i > 0; i-=2) {
+                if (parseInt(n / Math.pow(10, i - 1)) != n % 10)
+                    return false;
+                n = parseInt((n % Math.pow(10, i - 1)) / 10);
+            }
+            return true;
+        }
+    </script>
+</head>
+
+<body id="id_body" onload="init()">
+
+</body>
+
+</html>

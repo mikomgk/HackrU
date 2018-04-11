@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>123</title>
+    <!--<link rel="stylesheet" href="style.css"/>-->
+    <style>
+    </style>
+    <script>
+        var ctx;
+
+        function init() {
+            var myCanvas = document.getElementById('myCanvas');
+            ctx = myCanvas.getContext('2d');
+
+            ctx.font = "30px Comic Sans MS";
+            ctx.fillStyle = "red";
+            ctx.fillText("hello", 200, 300);
+        }
+    </script>
+</head>
+
+<body id="id_body" onload="init()">
+    <canvas id="myCanvas" width="700" height="380" style="border:1px solid gray;"></canvas>
+</body>
+
+</html>

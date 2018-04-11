@@ -6,9 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>123</title>
     <style>
-        .wrong-entry {
+        h1 {
+            visibility: hidden;
+        }
+
+        .wrong-entryFont {
+            border: 1px solid salmon;
+            border-right: 3px solid salmon;
+            color: red;
+        }
+
+        .correct-entryFont {
+            border: 1px solid #eee;
+            border-right: 3px solid #0c0;
+        }
+
+        .begin-entryFont {
+            border: 1px solid #eee;
+            border-right: 3px solid salmon;
+        }
+
+        .wrong-entryBox {
             position: relative;
             animation: shake 0.3s;
+        }
+
+        .floatBtn {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
 
         @keyframes shake {
@@ -64,8 +90,6 @@
             padding: 5px 20px;
             margin: 8px 0;
             display: inline-block;
-            border: 1px solid #eee;
-            border-right: 3px solid salmon;
             border-radius: 5px;
             box-sizing: border-box;
             outline: 0;
@@ -86,6 +110,11 @@
 
         input[type=submit]:hover {
             background-color: #45a049;
+        }
+
+        input[type=submit]:disabled {
+            background-color: #38633a;
+            cursor: default;
         }
 
         div {
@@ -123,6 +152,9 @@
         var picantoLPKM;
         var lpkm;
         var kmpl;
+        var mileageMode = 0;
+        var literMode = 0;
+        var priceMode = 0;
         var fileID = '1wLfKPiNqbgTakkyxWpzEMjG7KHGUtMwdiUQrd4_wk34';
         var API_KEY = 'AIzaSyD_awRioYTthWk09yjS5D43nAfF0xhxyWg';
         var CLIENT_ID = '591022824629-jga5u7ocedshk4oe5ob63nlehi02jin9.apps.googleusercontent.com';
@@ -147,6 +179,17 @@
                 if (window.event.keyCode == 13)
                     btnSend();
             });
+            window.addEventListener('resize', floatBtn, false);
+        }
+
+        function floatBtn() {
+            if (window.innerHeight < 20000) {
+                inputSubmit.classList.remove('normalSize');
+                inputSubmit.classList.add('floatBtn');
+            } else {
+                inputSubmit.classList.remove('floatBtn');
+                inputSubmit.classList.add('normalSize');
+            }
         }
 
         function initClient() {
@@ -277,45 +320,85 @@
         }
 
         function checkMileage() {
-            if (parseInt(inputMileage.value) <= (car.value == "Demio" ? lastMileageDemio : lastMileagePicanto)) {
-                submitMode = 0;
+            if (inputMileage.value == "" || parseInt(inputMileage.value) <= (car.value == "Demio" ? lastMileageDemio : lastMileagePicanto)) {
+                inputSubmit.disabled = true;
+                mileageMode = 0;
+                inputMileage.classList.remove('begin-entryFont');
+                inputMileage.classList.remove('correct-entryFont');
                 wrongInput(inputMileage, divMileage);
-            } else
-                submitMode = 1;
+            } else {
+                mileageMode = 1;
+                restoreSubmit();
+                inputMileage.classList.remove('wrong-entryFont');
+                inputMileage.classList.remove('begin-entryFont');
+                inputMileage.classList.add('correct-entryFont');
+            }
         }
 
         function checkLiter() {
-            if (parseFloat(inputLiter.value) <= 0) {
-                submitMode = 0;
+            if (inputLiter.value == "" || inputLiter.value == "0" || parseFloat(inputLiter.value) <= 0) {
+                inputSubmit.disabled = true;
+                literMode = 0;
+                inputLiter.classList.remove('begin-entryFont');
+                inputLiter.classList.remove('correct-entryFont');
                 wrongInput(inputLiter, divLiter);
-            } else
-                submitMode = 1;
+            } else {
+                literMode = 1;
+                restoreSubmit();
+                inputLiter.classList.remove('wrong-entryFont');
+                inputLiter.classList.remove('begin-entryFont');
+                inputLiter.classList.add('correct-entryFont');
+            }
         }
 
         function checkPrice() {
-            if (parseFloat(inputPrice.value) <= inputLiter.value * 5.0) {
-                submitMode = 0;
+            if (inputPrice == "" || inputPrice == "0" || (parseFloat(inputPrice.value) <= (inputLiter.value * 5.0))) {
+                inputSubmit.disabled = true;
+                priceMode = 0;
+                inputPrice.classList.remove('begin-entryFont');
+                inputPrice.classList.remove('correct-entryFont');
                 wrongInput(inputPrice, divPrice);
-            } else
-                submitMode = 1;
+            } else {
+                priceMode = 1;
+                restoreSubmit();
+                inputPrice.classList.remove('wrong-entryFont');
+                inputPrice.classList.remove('begin-entryFont');
+                inputPrice.classList.add('correct-entryFont');
+            }
+        }
+
+        function restoreSubmit() {
+            if (mileageMode == 1 && literMode == 1 && priceMode == 1)
+                inputSubmit.disabled = false;
         }
 
         function wrongInput(element, div) {
-            element.style.border = "1px solid red";
-            element.style.color = "red";
-            div.classList.add('wrong-entry');
+            element.classList.add('wrong-entryFont');
+            div.classList.add('wrong-entryBox');
         }
 
-        function handleReInput() {
-            reInput(inputMileage, divMileage);
-            reInput(inputLiter, divLiter);
-            reInput(inputPrice, divPrice);
+        function handleReInput(_elemName) {
+            if (_elemName == "mileage")
+                reInput(inputMileage);
+            else if (_elemName == "liter")
+                reInput(inputLiter);
+            else if (_elemName == "price")
+                reInput(inputPrice);
+            divMileage.classList.remove('wrong-entryBox');
+            divLiter.classList.remove('wrong-entryBox');
+            divPrice.classList.remove('wrong-entryBox');
         }
 
-        function reInput(element, div) {
-            element.style.border = "1px solid #eee";
-            element.style.color = "black";
-            div.classList.remove('wrong-entry');
+        function reInput(element) {
+            element.classList.remove('wrong-entryFont');
+        }
+
+        function sh() {
+            divPrice.classList.remove('wrong-entryBox');
+        }
+
+        function shh() {
+            divPrice.classList.add('wrong-entryBox');
         }
     </script>
 </head>
@@ -331,18 +414,20 @@
             </select><br />
             <input type="date" name="date" id="id_date" required /><br />
             <div id="divMileage">
-                <input type="tel" name="mileage" id="id_mileage" class="inputNum" placeholder="קילומטראז'" onblur="checkMileage()" oninput="handleReInput()" required /><br />
+                <input type="tel" name="mileage" id="id_mileage" class="inputNum begin-entryFont" placeholder="קילומטראז'" onblur="checkMileage()" oninput="handleReInput(name)" min="1" required /><br />
             </div>
             <div id="divLiter">
-                <input type="tel" name="liter" id="id_liter" class="inputNum" placeholder="ליטר" onblur="checkLiter()" oninput="handleReInput()" required /><br />
+                <input type="tel" name="liter" id="id_liter" class="inputNum begin-entryFont" placeholder="ליטר" onblur="checkLiter()" oninput="handleReInput(name)" min="1" required /><br />
             </div>
             <div id="divPrice">
-                <input type="tel" name="price" id="id_price" class="inputNum" placeholder="מחיר" onblur="checkPrice()" oninput="handleReInput()" required /><br />
+                <input type="tel" name="price" id="id_price" class="inputNum begin-entryFont" placeholder="מחיר" onblur="checkPrice()" oninput="handleReInput(name)" min="1" required /><br />
             </div>
             <input type="checkbox" name="fulltank" id="check_fullTank" checked />
             <label onclick="checkFullTank()" class="checkLabel">מיכל מלא</label><br /><br />
-            <input type="submit" value="הוסף" id="id_submit" />
+            <input type="submit" value="הוסף" id="id_submit" class="normalSize" />
         </form>
+        <button onclick="shh()">add</button>
+        <button onclick="sh()">remove</button>
     </div>
 </body>
 
