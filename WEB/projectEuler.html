@@ -10,10 +10,21 @@
     </style>
     <script>
         function init() {
-            var digit = 3;
-            var maxNum = checkMaxNum(digit);
-
-            alert(isPoli(321123));
+            var i;
+            var num;
+            var count = 0;
+            var mode = 0;
+            for (i = 2; i < 2000000000, mode == 0; i++) {
+                num = i * (i + 1) / 2;
+                for (var j = 1; j <= num; j++)
+                    if (num % j == 0)
+                        count++;
+                if (count >= 500)
+                    break;
+                else
+                    count = 0;
+            }
+            alert(num);
         }
 
         function checkMaxNum(n) {
@@ -40,7 +51,7 @@
 
         function isPoli(n) {
             var digit = checkDigit(n);
-            for (var i = digit; i > 0; i-=2) {
+            for (var i = digit; i > 0; i -= 2) {
                 if (parseInt(n / Math.pow(10, i - 1)) != n % 10)
                     return false;
                 n = parseInt((n % Math.pow(10, i - 1)) / 10);
@@ -50,8 +61,8 @@
     </script>
 </head>
 
-<body id="id_body" onload="init()">
-
+<body id="id_body">
+<button onclick="init()">ds</button>
 </body>
 
 </html>
