@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>123</title>
+    <style>
+        @media screen and (max-width:1700px) {
+            #preview {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                width: 200px;
+                border: 5px solid black;
+            }
+
+            #id_moves {
+                position: absolute;
+                right: 5%;
+                top: 5%;
+                color: salmon;
+            }
+        }
+
+        @media screen and (min-width:1700px) {
+            #preview {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                width: 380px;
+                border: 5px solid black;
+            }
+
+            #id_moves {
+                position: absolute;
+                right: 8%;
+                top: 5%;
+                color: salmon;
+            }
+        }
+
+        #id_puzzle {
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            width: 918px;
+            height: 684px;
+            background-color: #797979;
+            display: inline-block;
+            border-radius: 20px;
+            padding-right: 30px;
+            padding-left: 30px;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+
+        .place {
+            border: 3px solid #797979;
+        }
+
+        .show {
+            display: inline-block;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        #id_puzzleImage {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 908px;
+            max-height: 684px;
+            padding: 0;
+            margin: 0;
+        }
+
+        button {
+            background-color: white;
+            border: 2px solid #008CBA;
+            color: black;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 2px;
+            -webkit-transition-duration: 0.4s;
+            /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #008CBA;
+            color: white;
+        }
+
+        button:disabled:hover {
+            background-color: grey;
+            color: white;
+        }
+
+        #id_nextBtn {
+            position: relative;
+
+        }
+
+        #divNext {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        #congDiv {
+            position: absolute;
+            top: 30%;
+            left: 41.5%;
+            color: salmon;
+        }
+
+        .enter {
+            animation: enterAnim 1s;
+        }
+
+        @keyframes enterAnim {
+            0% {
+                top: 30%;
+                left: -10%;
+            }
+            60% {
+                left: 45%;
+                transform: skew(-30deg, 0deg);
+            }
+            70% {
+                left: 41.5%;
+                transform: skew(20deg, 0deg);
+            }
+            80% {
+                transform: skew(-10deg, 0deg);
+            }
+            90% {
+                transform: skew(5deg, 0deg);
+            }
+            95% {
+                transform: skew(-2deg, 0deg);
+            }
+            100% {
+                transform: skew(0deg, 0deg);
+            }
+        }
+    </style>
+    <script>
+        var puzzle;
+        var place1;
+        var place2;
+        var place3;
+        var place4;
+        var place5;
+        var place6;
+        var place7;
+        var place8;
+        var place9;
+        var place10;
+        var place11;
+        var place12;
+        var place13;
+        var place14;
+        var place15;
+        var place16;
+        var places = [];
+        var puzzleImage;
+        var preview;
+        var puzzleImageWidth = 908;
+        var puzzleImageHeight = 684;
+        var images = [];
+        var imagesArr = [];
+        var level;
+        var passedLevel;
+        var pics;
+        var picWidth;
+        var moves;
+        var movesSpan;
+        var lev1Btn;
+        var lev2Btn;
+        var nextBtn;
+        var divNext;
+        var congDiv;
+        var congMoves;
+        var sndMove;
+        var sndComplete;
+        var sndReset;
+
+        function init() {
+            puzzle = document.getElementById('id_puzzle');
+            place1 = document.getElementById('place1');
+            place2 = document.getElementById('place2');
+            place3 = document.getElementById('place3');
+            place4 = document.getElementById('place4');
+            place5 = document.getElementById('place5');
+            place6 = document.getElementById('place6');
+            place7 = document.getElementById('place7');
+            place8 = document.getElementById('place8');
+            place9 = document.getElementById('place9');
+            place10 = document.getElementById('place10');
+            place11 = document.getElementById('place11');
+            place12 = document.getElementById('place12');
+            place13 = document.getElementById('place13');
+            place14 = document.getElementById('place14');
+            place15 = document.getElementById('place15');
+            place16 = document.getElementById('place16');
+            preview = document.getElementById('preview');
+            movesSpan = document.getElementById('id_spanMoves');
+            lev1Btn = document.getElementById('id_level1Btn');
+            lev2Btn = document.getElementById('id_level2Btn');
+            nextBtn = document.getElementById('id_nextBtn');
+            divNext = document.getElementById('divNext');
+            congDiv = document.getElementById('congDiv');
+            congMoves = document.getElementById('congMoves');
+            sndMove = new Audio('');
+            sndComplete = new Audio('');
+            sndReset = new Audio('');
+            level = 1;
+            passedLevel = 0;
+            startGame();
+        }
+
+        function startGame() {
+            moves = 0;
+            pics = level == 1 ? 9 : 16;
+            picWidth = level == 1 ? 300 : 215;
+            var s = '';
+            for (var i = 0; i < pics; i++)
+                s += '<div id="place' + (i + 1) + '" class="place show" ondrop="drop(event)" ondragover="allowDrop(event)"></div>';
+            puzzle.innerHTML = s;
+            places = document.getElementsByClassName('place');
+            for (var i = 0; i < places.length; i++)
+                imagesArr[i] = '<img src="_images/' + level + '/' + (i + 1) + '.jpg" class="image show" id="id_' + (i + 1) + '" width="' + picWidth + '" draggable="true" ondragstart="drag(event)" />';
+            for (var i = 0; i < places.length; i++) {
+                var x = Math.floor(Math.random() * imagesArr.length);
+                places[i].innerHTML = imagesArr[x];
+                imagesArr.splice(x, 1);
+            }
+            puzzle.innerHTML += '<img src="_images/' + level + '/puzzle.jpg" id="id_puzzleImage" class="hide" width=' + puzzleImageWidth + ' height=' + puzzleImageHeight + ' />';
+            puzzleImage = document.getElementById('id_puzzleImage');
+            images = document.getElementsByClassName('image');
+            preview.src = '_images/' + level + '/puzzle.jpg';
+            if (passedLevel == 0) {
+                lev1Btn.classList.add('hide');
+                lev2Btn.classList.add('hide');
+            } else {
+                lev1Btn.classList.remove('hide');
+                lev2Btn.classList.remove('hide');
+                lev1Btn.classList.add('show');
+                lev2Btn.classList.add('show');
+            }
+            printMoves();
+        }
+
+        function printMoves() {
+            movesSpan.innerHTML = moves;
+        }
+
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("id_img", event.target.id);
+            event.dataTransfer.setData("id_div", event.target.parentElement.id);
+        }
+
+        function drop(event) {
+            sndMove.play();
+            event.preventDefault();
+            var idImgFrom = event.dataTransfer.getData("id_img");
+            var idDivFrom = event.dataTransfer.getData("id_div");
+            var idImgTo = event.target.id;
+            event.target.parentElement.appendChild(document.getElementById(idImgFrom));
+            document.getElementById(idDivFrom).appendChild(document.getElementById(idImgTo));
+            if (checkPuzzle())
+                puzzleCompleted();
+            moves++;
+            printMoves();
+        }
+
+        function checkPuzzle() {
+            for (var i = 0; i < places.length; i++) {
+                if (getNum(places[i].firstElementChild.id) != i + 1)
+                    return false;
+            }
+            return true;
+        }
+
+        function puzzleCompleted() {
+            sndComplete.play();
+            for (var i = 0; i < places.length; i++) {
+                places[i].classList.remove('show');
+                places[i].classList.add('hide');
+            }
+            puzzleImage.classList.remove('hide');
+            puzzleImage.classList.add('show');
+            if (level == 1) {
+                nextBtn.innerHTML = 'Nexl Level';
+                level = 2;
+            } else {
+                nextBtn.innerHTML = 'Play Again';
+                level = 1;
+            }
+            passedLevel = 1;
+            congMoves.innerHTML = moves;
+            divNext.classList.remove('hide');
+            divNext.classList.add('show');
+            congDiv.classList.add('enter');
+        }
+
+        function nextLevel() {
+            divNext.classList.remove('show');
+            divNext.classList.add('hide');
+            congDiv.classList.remove('enter');
+            disableBtns();
+            startGame();
+        }
+
+        function getNum(s) {
+            var num = 0,
+                x;
+            for (var i = 0; i < s.length; i++)
+                if (!isNaN(x = s.charAt(i)))
+                    num = num * 10 + parseInt(x);
+            return num;
+        }
+
+        function restart() {
+            sndReset.play();
+            startGame();
+        }
+
+        function disableBtns() {
+            if (level == 1) {
+                lev1Btn.disabled = true;
+                lev2Btn.disabled = false;
+            } else {
+                lev1Btn.disabled = false;
+                lev2Btn.disabled = true;
+            }
+        }
+
+        function cngLevel() {
+            disableBtns();
+            if (level == 1) {
+                level = 2;
+                startGame();
+            } else {
+                level = 1;
+                startGame();
+            }
+        }
+    </script>
+</head>
+
+<body id="id_body" onload="init()" align="center">
+    <img id="preview" />
+    <div id="id_puzzle"></div>
+    <div id="id_moves">
+        <h1>Moves: <span id="id_spanMoves"></span></h1>
+        <button onclick="restart()" id="id_resratBtn">Restart</button><br /><br />
+        <button onclick="cngLevel()" id="id_level1Btn">Level 1</button><br /><br />
+        <button onclick="cngLevel()" id="id_level2Btn">Level 2</button>
+    </div>
+    <div id="divNext" class="hide">
+        <div id="congDiv">
+            <h1>Congratulations!!!</h1>
+            <h1>You made it in <span id="congMoves"></span> moves!!!</h1>
+            <button onclick="nextLevel()" id="id_nextBtn"></button>
+        </div>
+    </div>
+</body>
+
+</html>
