@@ -55,6 +55,7 @@
             height: 1100%;
             padding: 20px;
             cursor: pointer;
+			outline: 0;
         }
 
         .price {
@@ -95,7 +96,7 @@
         }
 
         #id_cart {
-            height: 75vh;
+            height: 91vh;
         }
 
         #id_finishShopping {
@@ -207,14 +208,30 @@
                 totalNoTax = totalNoTax.toFixed(2);
                 tax = tax.toFixed(2);
                 total = total.toFixed(2);
+                price=niceNum(price);
+                shippingPrice=niceNum(shippingPrice);
+                totalNoTax=niceNum(totalNoTax);
+                tax=niceNum(tax);
+                total=niceNum(total);
                 checkoutItems.innerHTML = x == 1 ? '1 Item' : x + ' Items';
-                checkoutPrice.innerHTML = '$' + price;
-                checkoutShipping.innerHTML = '$' + shippingPrice;
-                checkoutBeforeTax.innerHTML = '$' + totalNoTax;
-                checkoutTax.innerHTML = '$' + tax;
-                checkoutTotal.innerHTML = '$' + total;
+                checkoutPrice.innerHTML = '$' + price.slice(0,-2) + '<sup>'+price.slice(-2)+'</sup>';
+                checkoutShipping.innerHTML = '$' + shippingPrice.slice(0,-2) + '<sup>'+shippingPrice.slice(-2)+'</sup>';
+                checkoutBeforeTax.innerHTML = '$' + totalNoTax.slice(0,-2) + '<sup>'+totalNoTax.slice(-2)+'</sup>';
+                checkoutTax.innerHTML = '$' + tax.slice(0,-2) + '<sup>'+tax.slice(-2)+'</sup>';
+                checkoutTotal.innerHTML = '$' + total.slice(0,-2) + '<sup>'+total.slice(-2)+'</sup>';
             } else
                 checkoutItems.innerHTML = 'No Items';
+        }
+
+        function niceNum(str) {
+            var n = Number(str);
+            var x = "";
+            if (n < 1000)
+                return str;
+            if (n < 10000)
+                return str.slice(0, 1) + ',' + str.slice(1);
+            else if (n <= 100000)
+                return str.slice(0, 2) + ',' + str.slice(2);
         }
 
         function setShop() {
@@ -268,17 +285,15 @@
             place.innerHTML = "";
             for (i = 0; i < items.length; i++) {
                 var item = items[i];
-                var price = commaNumber(item.price);
-                price=price.slice(0,price.length-3);
-                var deci = (item.price % 1).toFixed(2);
-                deci=deci.slice(2);
+                var price = parseInt(item.price) > 999 ? parseInt(parseInt(item.price) / 1000) + "," + parseInt(item.price) % 1000 : parseInt(item.price);
+                var x = (item.price * 100 % 100) == 0 ? "00" : (item.price * 100 % 100);
                 var s = '<div id="id_item' + (i + 1) + '" draggable="true" ondragstart="drag(event)" class="item">'
                 s += '<img src="_images/' + item.name + '.png" />';
                 s += '<div class="itemProperties">';
                 s += '<h3>' + item.name + '</h3>';
                 s += '<ul><li>' + item.description[0] + '</li><li>' + item.description[1] + '</li><li>' + item.description[2] + '</li><li>' + item.description[3] + '</li></ul>';
                 s += '<div class="price">';
-                s += '<h4>$' + price + '<sup>' + deci + '</sup></h4>';
+                s += '<h4>$' + price + '<sup>' + x + '</sup></h4>';
                 s += '</div>';
                 s += '</div>';
                 s += '</div>';
@@ -288,21 +303,21 @@
             }
             updateCheckout();
         }
-
-        function commaNumber(num) {
-            var intNum = parseInt(num);
-            var deci = (num - intNum).toFixed(2);
-            var digit = numDigit(intNum);
-            var x = "";
-            for (i = 1; i <= digit; i++, intNum=parseInt(intNum /10)) {
-                if (i % 3 == 1 && i != 1)
-                    x = ',' + x;
-                x = (intNum % 10) + x;
-            }
-            return x  + deci.slice(1);
-        }
-
-        function numDigit(n) {
+        /*
+                function commaNumber(num) {
+                    var intNum = parseInt(num);
+                    var deci = (num - intNum).toFixed(2);
+                    var digit = numDigit(intNum);
+                    var x = "";
+                    for (i = 1; i <= digit; i++, intNum = parseInt(intNum / 10)) {
+                        if (i % 3 == 1 && i != 1)
+                            x = ',' + x;
+                        x = (intNum % 10) + x;
+                    }
+                    return x + deci.slice(1);
+                }
+        */
+        function checkDigit(n) {
             var i;
             if (n < 10)
                 return 1;
