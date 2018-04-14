@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>123</title>
+    <style>
+        .chackoutSpan {
+            float: right;
+        }
+
+        #checkout {
+            list-style-type: none;
+            border: 1px solid #eee;
+            margin: 0;
+            padding: 0;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+        }
+
+        #checkout:hover {
+            box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2)
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 25px;
+        }
+
+        #checkout li {
+            border-bottom: 1px solid #eee;
+            text-align: center;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        #checkout li:not(#li_button) {
+            padding: 10px;
+        }
+
+        #checkout li:not(.header) {
+            text-align: left;
+        }
+
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            width: 100%;
+            height: 1100%;
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        .price {
+            position: relative;
+            left: 71%;
+            top: -76px;
+            width: 100px;
+        }
+
+        hr {
+            width: 95%;
+        }
+
+        .itemProperties {
+            position: relative;
+            width: 65%;
+            height: 170px;
+            left: 5%;
+            display: inline-block;
+        }
+
+        .item {
+            position: relative;
+            width: 100%;
+            height: 170px;
+        }
+
+        .shopItems {
+            position: relative;
+            width: 100%;
+            height: 91vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        #id_shop {
+            height: 91vh;
+        }
+
+        #id_cart {
+            height: 75vh;
+        }
+
+        #id_finishShopping {
+            position: relative;
+            width: 23vw;
+            bottom: 40vh;
+            background-color: #c6c4c4;
+            overflow-x: hidden;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .shop {
+            margin-left: auto;
+            margin-right: auto;
+            /*width: 47%;*/
+            width: 35vw;
+            height: 91vh;
+            overflow: hidden;
+            background-color: #c6c4c4;
+            display: inline-block;
+            border-radius: 20px;
+            padding-right: 10px;
+            padding-left: 30px;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+
+        img {
+            position: relative;
+            top: -10px;
+            left: 5px;
+            height: 140px;
+            width: 174px;
+            display: inline;
+        }
+
+        /* width */
+
+        ::-webkit-scrollbar {
+            position: relative;
+            left: 10px;
+            width: 10px;
+        }
+
+        /* Track */
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 20px;
+        }
+
+        /* Handle */
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 20px;
+        }
+
+        /* Handle on hover */
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /*
+            ::-webkit-scrollbar {
+                display: none;
+            }
+        */
+    </style>
+    <script>
+        var shopItems = [];
+        var cartItems = [];
+        var shop;
+        var finishShopping;
+        var checkoutItems;
+        var checkoutPrice;
+        var checkoutShipping;
+        var checkoutBeforeTax;
+        var checkoutTax;
+        var checkoutTotal;
+
+        function init() {
+            shop = document.getElementById('id_shop');
+            cart = document.getElementById('id_cart');
+            finishShopping = document.getElementById('id_finishShopping');
+            checkoutItems = document.getElementById('id_items');
+            checkoutPrice = document.getElementById('id_price');
+            checkoutShipping = document.getElementById('id_shipping');
+            checkoutBeforeTax = document.getElementById('id_totalNoTax');
+            checkoutTax = document.getElementById('id_tax');
+            checkoutTotal = document.getElementById('id_total');
+            setShop();
+        }
+
+        function updateCheckout() {
+            var x = cartItems.length;
+            if (x != 0) {
+                var price = 0;
+                for (var i = 0; i < x; i++)
+                    price += cartItems[i].price;
+                var shippingPrice = x * 10 * (100 - (x * 3)) / 100;
+                var totalNoTax = price + shippingPrice;
+                var tax = totalNoTax * 17 / 100;
+                var total = totalNoTax + tax;
+                price = price.toFixed(2);
+                shippingPrice = shippingPrice.toFixed(2);
+                totalNoTax = totalNoTax.toFixed(2);
+                tax = tax.toFixed(2);
+                total = total.toFixed(2);
+                checkoutItems.innerHTML = x == 1 ? '1 Item' : x + ' Items';
+                checkoutPrice.innerHTML = '$' + price;
+                checkoutShipping.innerHTML = '$' + shippingPrice;
+                checkoutBeforeTax.innerHTML = '$' + totalNoTax;
+                checkoutTax.innerHTML = '$' + tax;
+                checkoutTotal.innerHTML = '$' + total;
+            } else
+                checkoutItems.innerHTML = 'No Items';
+        }
+
+        function setShop() {
+            shopItems.push({
+                name: "Apple iMac 21.5-Inch Desktop",
+                price: 459.99,
+                shipping: 20,
+                description: ["Hard Disk Size: 500.0 GB", "Memory Storage Capacity: 4 GB", "Display Size: 21.5\"", "Operating System: Mac OS X"]
+            });
+            shopItems.push({
+                name: "Apple iMac 27 Inch",
+                price: 1599.99,
+                shipping: 25,
+                description: ["Hard Disk Size: 1.0 TB", "Memory Storage Capacity: 8 GB", "Display Size: 27\"", "Operating System: Mac OS X"]
+            });
+            shopItems.push({
+                name: "Apple MacBook Air 13.3",
+                price: 688.00,
+                shipping: 15,
+                description: ["Hard Disk Size: 128.0 GB", "Memory Storage Capacity: 4 GB", "Display Size: 13.3\"", "Operating System: Mac OS X"]
+            });
+            shopItems.push({
+                name: "ASUS L402WA-EH21 14 HD",
+                price: 189,
+                shipping: 0,
+                description: ["Hard Disk Size: 32 GB", "Memory Storage Capacity: 4 GB", "Display Size: 14\"", "Operating System: Windows 10"]
+            });
+            shopItems.push({
+                name: "ASUS Chromebook C202SA-YS02 11.6",
+                price: 189,
+                shipping: 0,
+                description: ["Hard Disk Size: 16 GB", "Memory Storage Capacity: 4 GB", "Display Size: 11.6\"", "Operating System: Chrome"]
+            });
+            shopItems.push({
+                name: "Dell XPS9560-7001SLV-PUS 15.6",
+                price: 1679.99,
+                shipping: 25,
+                description: ["Hard Disk Size: 512 GB", "Memory Storage Capacity: 16 GB", "Display Size: 15.6\"", "Operating System: Windows 10"]
+            });
+            shopItems.push({
+                name: "Microsoft Surface",
+                price: 859.99,
+                shipping: 20,
+                description: ["Hard Disk Size: 256 GB", "Memory Storage Capacity: 8 GB", "Display Size: 13.5\"", "Operating System: Windows 10 S"]
+            });
+            printShop(shopItems, shop);
+            printShop(cartItems, cart);
+        }
+
+        function printShop(items, place) {
+            place.innerHTML = "";
+            for (i = 0; i < items.length; i++) {
+                var item = items[i];
+                var price = commaNumber(item.price);
+                price=price.slice(0,price.length-3);
+                var deci = (item.price % 1).toFixed(2);
+                deci=deci.slice(2);
+                var s = '<div id="id_item' + (i + 1) + '" draggable="true" ondragstart="drag(event)" class="item">'
+                s += '<img src="_images/' + item.name + '.png" />';
+                s += '<div class="itemProperties">';
+                s += '<h3>' + item.name + '</h3>';
+                s += '<ul><li>' + item.description[0] + '</li><li>' + item.description[1] + '</li><li>' + item.description[2] + '</li><li>' + item.description[3] + '</li></ul>';
+                s += '<div class="price">';
+                s += '<h4>$' + price + '<sup>' + deci + '</sup></h4>';
+                s += '</div>';
+                s += '</div>';
+                s += '</div>';
+                if (i < items.length - 1)
+                    s += '<hr />';
+                place.innerHTML += s;
+            }
+            updateCheckout();
+        }
+
+        function commaNumber(num) {
+            var intNum = parseInt(num);
+            var deci = (num - intNum).toFixed(2);
+            var digit = numDigit(intNum);
+            var x = "";
+            for (i = 1; i <= digit; i++, intNum=parseInt(intNum /10)) {
+                if (i % 3 == 1 && i != 1)
+                    x = ',' + x;
+                x = (intNum % 10) + x;
+            }
+            return x  + deci.slice(1);
+        }
+
+        function numDigit(n) {
+            var i;
+            if (n < 10)
+                return 1;
+            for (i = 2; n / Math.pow(10, i) >= 1; i++)
+            ;
+            return i;
+        }
+
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("id", event.target.parentElement.id);
+            event.dataTransfer.setData("from", event.target.parentElement.parentElement.id);
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            var item = event.dataTransfer.getData("id");
+            var from = event.dataTransfer.getData("from");
+            if (from == 'id_shop') {
+                var itemIndex = getNum(item) - 1;
+                var itemArr = shopItems[itemIndex];
+                shopItems.splice(itemIndex, 1);
+                cartItems.push(itemArr);
+            } else {
+                var itemIndex = getNum(item) - 1;
+                var itemArr = cartItems[itemIndex];
+                cartItems.splice(itemIndex, 1);
+                shopItems.push(itemArr);
+            }
+            printShop(shopItems, shop);
+            printShop(cartItems, cart);
+        }
+
+        function getNum(s) {
+            var num = 0,
+                x;
+            for (var i = 0; i < s.length; i++)
+                if (!isNaN(x = s.charAt(i)))
+                    num = num * 10 + parseInt(x);
+            return num;
+        }
+    </script>
+</head>
+
+<body id="id_body" onload="init()">
+    <div id="id_shopContainer" class="shop">
+        <div id="id_shop" ondrop="drop(event)" ondragover="allowDrop(event)" class="shopItems"></div>
+    </div>
+    <div id="id_cartContainer" class="shop">
+        <div id="id_cart" ondrop="drop(event)" ondragover="allowDrop(event)" class="shopItems"></div>
+    </div>
+    <div id="id_finishShopping">
+        <ul id="checkout">
+            <li class="header">Subtotal</li>
+            <li><span id="id_items" class="itemSpan"></span>:<span id="id_price" class="chackoutSpan"></span></li>
+            <li>Shipping:<span id="id_shipping" class="chackoutSpan"></span></li>
+            <li>Total before TAX:<span id="id_totalNoTax" class="chackoutSpan"></span></li>
+            <li>TAX:<span id="id_tax" class="chackoutSpan"></span></li>
+            <li>Order total:<span id="id_total" class="chackoutSpan"></span></li>
+            <li id="li_button"><button>Buy</button></li>
+        </ul>
+    </div>
+</body>
+
+</html>
