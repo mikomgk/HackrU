@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>123</title>
+    <style>
+        #divList {
+            border-radius: 15px;
+        }
+
+        .list {
+            list-style-type: none;
+            border: 1px solid #eee;
+            margin: 0;
+            padding: 0;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 25px;
+            padding: 5px 50px;
+        }
+
+        .list li {
+            border-bottom: 1px solid #eee;
+            text-align: center;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        .list li:not(#liSubmit) {
+            height: 50px;
+        }
+
+        #liTank {
+        padding-top: 20px;
+        }
+
+        input[type=date] {
+            max-width: 400px;
+            width: 100%;
+            height: 100%;
+            padding: 5px 20px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            border-right: 3px solid #0c0;
+            outline: 0;
+        }
+
+        input[type=tel] {
+            max-width: 400px;
+            width: 100%;
+            height: 100%;
+            padding: 5px 20px;
+            display: inline-block;
+            box-sizing: border-box;
+            outline: 0;
+            animation-name: shake;
+            animation-duration: 0.3s;
+            text-align: right;
+        }
+
+        input[type=submit] {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            width: 100%;
+            height: 1100%;
+            padding: 20px;
+            cursor: pointer;
+            outline: 0;
+            position: sticky;
+            bottom: 0px;
+        }
+
+        #id_car {
+            max-width: 400px;
+            width: 100%;
+            height: 100%;
+            padding: 5px 20px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            border-right: 3px solid #0c0;
+            outline: 0;
+        }
+    </style>
+    <script>
+        function init() {
+
+        }
+    </script>
+</head>
+
+<body id="id_body" onload="init()" style="direction: rtl;">
+    <div id="divList">
+        <form action="javascript:btnSend();">
+            <ul class="list">
+                <li>
+                    <select id="id_car" onchange="getAvgConsuption()" class="header">
+                    <option value="Picanto">Picanto</option>
+                    <option value="Demio">Demio</option>
+                </select>
+                </li>
+                <li>
+                    ליטר לקילומטר: <span id="lpkm"></span>
+                </li>
+                <li>
+                    קילומטר לליטר: <span id="kmpl"></span>
+                </li>
+                <li>
+                    <input type="date" name="date" id="id_date" required />
+                </li>
+                <li>
+                    <input type="tel" name="mileage" id="id_mileage" class="inputNum begin-entryFont" placeholder="קילומטראז'" onblur="checkMileage()" oninput="handleReInput(name)" min="1" required />
+                </li>
+                <li>
+                    <input type="tel" name="liter" id="id_liter" class="inputNum begin-entryFont" placeholder="ליטר" onblur="checkLiter()" oninput="handleReInput(name)" min="1" required />
+                </li>
+                <li>
+                    <input type="tel" name="price" id="id_price" class="inputNum begin-entryFont" placeholder="מחיר" onblur="checkPrice()" oninput="handleReInput(name)" min="1" required />
+                </li>
+                <li id="liTank">
+                    <input type="checkbox" name="fulltank" id="check_fullTank" checked />
+                    <label onclick="checkFullTank()" class="checkLabel">מיכל מלא</label>
+                </li>
+                <li id="liSubmit">
+                    <input type="submit" value="הוסף" id="id_submit" class="normalSize" />
+                </li>
+            </ul>
+        </form>
+    </div>
+</body>
+
+</html>

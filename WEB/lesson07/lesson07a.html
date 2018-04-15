@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>123</title>
+	<style>
+	</style>
+	<script>
+	var x=[];
+		function init() {
+			var arr = [1, 2, 3, 4, 5, 6];
+shuffle(arr);
+			alert(x);
+		}
+
+		function foo(min, max) {
+			var x = Math.floor((Math.random() * (max-min))+min);
+			return x;
+		}
+
+		function shuffle(arr) {
+			var l=arr.length;
+			for (var i = 0; i < l; i++) {
+				var y = foo(1, arr.length);
+				x[i] = arr[y];
+				arr.splice((y),1);
+			}
+			for (var i = 0; i < x.length; i++)
+				arr[i] = x[i];
+		}
+	</script>
+</head>
+
+<body id="id_body" onload="init()">
+
+</body>
+
+</html>

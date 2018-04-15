@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>123</title>
+	<style>
+		button {
+			background-color: white;
+			border: 2px solid #008CBA;
+			color: black;
+			padding: 16px 32px;
+			text-align: center;
+			text-decoration: none;
+			font-size: 16px;
+			margin: 4px 2px;
+			-webkit-transition-duration: 0.4s;
+			/* Safari */
+			transition-duration: 0.4s;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: #008CBA;
+			color: white;
+		}
+
+        button:disabled:hover {
+            background-color: white;
+            color: black;
+			cursor: default;
+        }
+
+		#controlPad {
+			position: relative;
+			width: 200px;
+		}
+
+		#gameBoard {
+			display: inline-block;
+			position: absolute;
+			left: 30vw;
+			width: 910px;
+		}
+
+		.number {
+			margin: auto;
+			width: 25%;
+			height: 25%;
+			font-size: 150px;
+			display: inline-block;
+			cursor: pointer;
+			border: 1px solid black;
+		}
+
+		#id_nextBtn {
+			position: relative;
+
+		}
+
+		#divNext {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.8);
+		}
+
+		.show {
+			display: inline-block;
+		}
+
+		.hide {
+			display: none;
+		}
+
+		#congDiv {
+			position: absolute;
+			top: 30%;
+			left: 41.5%;
+			color: salmon;
+		}
+
+		.enter {
+			animation: enterAnim 1s;
+		}
+
+		@keyframes enterAnim {
+			0% {
+				top: 30%;
+				left: -10%;
+			}
+			60% {
+				left: 45%;
+				transform: skew(-30deg, 0deg);
+			}
+			70% {
+				left: 41.5%;
+				transform: skew(20deg, 0deg);
+			}
+			80% {
+				transform: skew(-10deg, 0deg);
+			}
+			90% {
+				transform: skew(5deg, 0deg);
+			}
+			95% {
+				transform: skew(-2deg, 0deg);
+			}
+			100% {
+				transform: skew(0deg, 0deg);
+			}
+		}
+	</style>
+	<script>
+		var board = [1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,15,0];
+		var emptyPos = 16;
+		var rows=Math.sqrt(board.length);
+		var gameBoard;
+		var moves = 0;
+		var timeSpan;
+		var movesSpan;
+		var start;
+		var timeInterval;
+		var divNext;
+		var congDiv;
+		var level;
+
+		function init() {
+			gameBoard = document.getElementById('gameBoard');
+			timeSpan = document.getElementById('timeSpan');
+			movesSpan = document.getElementById('movesSpan');
+			divNext = document.getElementById('divNext');
+			congDiv = document.getElementById('congDiv');
+			level = 40;
+			startGame();
+		}
+
+		function startGame() {
+			moves = 0;
+			shuffleBoard();
+			render();
+		}
+
+		function calcTime() {
+			var now = new Date().getTime();
+			var time = (now - start);
+			var str = time / 600 > 60 ? twoDigit(parseInt(parseInt(time / 600) / 60)) + ":" + twoDigit(parseInt(time / 600) % 60) + ":" + twoDigit(parseInt(time % 60)) : "00:" + twoDigit(parseInt(time / 600)) + ":" + twoDigit(parseInt(time % 60));
+			timeSpan.innerHTML = str;
+		}
+
+		function twoDigit(n) {
+			var x = '' + n;
+			if (x < 10)
+				x = 0 + x;
+			return x;
+		}
+
+		function render() {
+			if (moves == 1) {
+				start = new Date().getTime();
+				timeInterval = setInterval(calcTime, 100);
+			}
+			var s = '';
+			for (var i = 0; i < board.length; i++)
+				if (i == emptyPos)
+					s += '<button class="number" id="' + i + '" onclick="cellClick(' + i + ')">&nbsp</button>';
+				else
+					s += '<button class="number" id="' + i + '" onclick="cellClick(' + i + ')">' + board[i] + '</button>';
+			gameBoard.innerHTML = s;
+			movesSpan.innerHTML = moves;
+			diasabler();
+		}
+
+		function diasabler() {
+			var emptyRow = row(emptyPos);
+			for (var i = 0; i < board.length; i++) {
+				var iRow = row(i);
+				if (i + rows == emptyPos || i - rows == emptyPos || (iRow == emptyRow && (i + 1 == emptyPos || i - 1 == emptyPos)))
+					document.getElementById(i).disabled = false;
+				else
+					document.getElementById(i).disabled = true;
+			}
+		}
+
+		function cellClick(i) {
+			var iRow = row(i);
+			var emptyRow = row(emptyPos);
+			if (i + rows == emptyPos || i - rows == emptyPos || (iRow == emptyRow && (i + 1 == emptyPos || i - 1 == emptyPos))) {
+				board[emptyPos] = board[i];
+				board[i] = 0;
+				emptyPos = i;
+				moves++;
+			}
+			if (checkWin()) {
+				render();
+				congMoves.innerHTML = moves;
+				divNext.classList.remove('hide');
+				divNext.classList.add('show');
+				congDiv.classList.add('enter');
+			} else
+				render();
+		}
+
+		function nextLevel() {
+			divNext.classList.remove('show');
+			divNext.classList.add('hide');
+			congDiv.classList.remove('enter');
+			level *= 2;
+			startGame();
+		}
+
+		function checkWin() {
+			for (var i = 0; i < board.length - 1; i++)
+				if (board[i] != i + 1)
+					return false;
+			return true;
+		}
+
+		function shuffleBoard() {
+			for (i = 0; i < level; i++) {
+				var c = col(emptyPos);
+				var r = row(emptyPos);
+				if (Math.random() < 0.5) {
+					switch (c) {
+						case 0:
+							c = 1;
+							break;
+						case 3:
+							c = 2;
+							break;
+						case 1:
+							c = Math.random() < 0.5 ? 0 : 2;
+							break;
+						case 2:
+							c = Math.random() < 0.5 ? 1 : 3;
+							break;
+					}
+				} else {
+					switch (r) {
+						case 0:
+							r = 1;
+							break;
+						case 3:
+							r = 2;
+							break;
+						case 1:
+							r = Math.random() < 0.5 ? 0 : 2;
+							break;
+						case 2:
+							r = Math.random() < 0.5 ? 1 : 3;
+							break;
+					}
+				}
+				var index = indexByRowCol(r, c);
+				board[emptyPos] = board[index];
+				board[index] = 0;
+				emptyPos = index;
+			}
+		}
+
+		function checkIndex(x) {
+			if (row(x) - row(emptyPos) == 1 || row(emptyPos) - row(x) == 1 || col(x) - col(emptyPos) == 1 || col(emptyPos) - col(x) == 1)
+				return true;
+			return false;
+		}
+
+		function row(i) {
+			return Math.floor(i / rows)
+		}
+
+		function col(i) {
+			return i % rows;
+		}
+
+		function indexByRowCol(row, col) {
+			return row * rows + col;
+		}
+	</script>
+</head>
+
+<body id="id_body" onload="init()">
+	<div id="gameBoard"></div>
+	<div id="controlPad">
+		<h2>Moves: <span id="movesSpan"></span></h2>
+		<h2><span id="timeSpan"></span></h2>
+	</div>
+	<div id="divNext" class="hide">
+		<div id="congDiv">
+			<h1>Congratulations!!!</h1>
+			<h1>You made it in <span id="congMoves"></span> moves!!!</h1>
+			<button onclick="nextLevel()" id="id_nextBtn">Play Again</button>
+		</div>
+	</div>
+</body>
+
+</html>
