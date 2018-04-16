@@ -1,26 +1,105 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8"/>
-		<meta http-equiv="refresh" content="1"/>
-		<meta name="description" content="jhjhhkfgdfgd"/>
-		<meta name="keywords" content="fds, fds, fdsf, ds"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<title>123</title>
-		<!--<link rel="stylesheet" href="style.css"/>-->
-		<style>
-			
-		</style>
-		<script>
-			function init() {
-				
-			}
-			
-			
-		</script>
-	</head>
-	
-	<body id="id_body" onload="init()">
-		
-	</body>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>123</title>
+	<link rel="stylesheet" href="style.css" />
+	<style>
+		body {
+			direction: rtl;
+			background-color: #1c2128;
+			margin: 0;
+		}
+
+		#headerDiv {
+			background-color: #38A3A0;
+			height: 44px;
+			position: sticky;
+			top: 0px;
+		}
+
+		.menuIcon {
+			float: right;
+			display: inline-block;
+			cursor: pointer;
+			margin-right: 10px;
+			margin-top: 5.5px;
+			margin-bottom: 5.5px;
+		}
+
+		.menuBar1,
+		.menuBar2,
+		.menuBar3 {
+			width: 25px;
+			height: 3px;
+			background-color: #fff;
+			margin: 6px 0;
+			transition: 0.4s;
+		}
+
+		.changeMenu .menuBar1 {
+			-webkit-transform: rotate(-45deg) translate(-6px, 6px);
+			transform: rotate(-45deg) translate(-6px, 6px);
+		}
+
+		.changeMenu .menuBar2 {
+			opacity: 0;
+		}
+
+		.changeMenu .menuBar3 {
+			-webkit-transform: rotate(45deg) translate(-7px, -6px);
+			transform: rotate(45deg) translate(-7px, -6px);
+		}
+
+		#carSelect {
+			padding: 0px;
+			margin: 8px 0;
+			margin-right: 0;
+			margin-left: 0;
+			display: inline-block;
+			border: none;
+			background-color: inherit;
+			outline: 0;
+			-webkit-transform: translate(18px, 0px);
+			transform: translate(18px, 0px);
+			font-size: 26px;
+			color: white;
+		}
+	</style>
+	<script src="googleAPI.js"></script>
+	<script src="insertItemPage.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+	<script>
+		function init() {
+			//gapi.auth2.getAuthInstance().signIn();
+			renderNewItemPage();
+		}
+
+		function menuIconBtn(x) {
+			x.classList.toggle("changeMenu");
+		}
+	</script>
+</head>
+
+<body onload="init()" align="center">
+	<div id="headerDiv">
+		<div class="menuIcon" onclick="menuIconBtn(this)">
+			<div class="menuBar1"></div>
+			<div class="menuBar2"></div>
+			<div class="menuBar3"></div>
+		</div>
+		<select id="carSelect" onchange="getAvgConsuption()">
+			<option value="Picanto">Picanto</option>
+			<option value="Demio">Demio</option>
+	    </select>
+	</div>
+	<div id="pageContainer">
+
+
+	</div>
+</body>
+
 </html>

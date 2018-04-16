@@ -6,35 +6,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>123</title>
     <style>
-        h1 {
-            visibility: hidden;
+        #fullTankDiv {
+            width: 60%;
+            margin-right: 30%;
+            margin-left: 20%;
+            margin-top: 8px;
         }
 
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 53px;
+            height: 25px;
+        }
+
+        #fullTankDiv>p {
+            float: right;
+            color: grey;
+            font-size: 14px;
+            position: relative;
+            bottom: 11px;
+        }
+
+        .switch input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #cCC;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #4CAF50;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #4CAF50;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        /*SLIDER/\*/
+
         .wrong-entryFont {
-            border: 1px solid salmon;
-            border-right: 3px solid salmon;
-            color: red;
+            border: none;
+            border-bottom: 1px solid salmon;
+            color: salmon;
         }
 
         .correct-entryFont {
-            border: 1px solid #eee;
-            border-right: 3px solid #0c0;
-        }
-
-        .begin-entryFont {
-            border: 1px solid #eee;
-            border-right: 3px solid salmon;
+            border: none;
+            border-bottom: 1px solid grey;
+            color: grey;
         }
 
         .wrong-entryBox {
             position: relative;
             animation: shake 0.3s;
-        }
-
-        .floatBtn {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
         }
 
         @keyframes shake {
@@ -68,29 +130,30 @@
         #id_car:focus,
         input[type=date]:focus,
         input[type=tel]:focus {
-            border: 1px solid #0c0;
+            border: none;
+            border-bottom: 1px solid #0c0;
         }
 
         input[type=date] {
             max-width: 200px;
             width: 50%;
-            padding: 5px 20px;
+            padding: 5px;
             margin: 8px 0;
+            border: none;
+            border-bottom: 1px solid grey;
+            background-color: inherit;
             display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 5px;
             box-sizing: border-box;
-            border-right: 3px solid #0c0;
             outline: 0;
         }
 
         input[type=tel] {
             max-width: 400px;
-            width: 60%;
-            padding: 5px 20px;
+            width: 50%;
+            padding: 5px 10px;
             margin: 8px 0;
+            background-color: inherit;
             display: inline-block;
-            border-radius: 5px;
             box-sizing: border-box;
             outline: 0;
             animation-name: shake;
@@ -98,38 +161,39 @@
         }
 
         input[type=submit] {
+            position: relative;
             width: 40%;
             background-color: #4CAF50;
             color: white;
             padding: 14px 20px;
-            margin: 8px 0;
+            margin: 8px 15px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            outline: 0;
         }
 
         input[type=submit]:hover {
             background-color: #45a049;
         }
 
-        input[type=submit]:disabled {
-            background-color: #38633a;
-            cursor: default;
-        }
-
-        div {
+        #enterItemDiv {
             border-radius: 8px;
-            background-color: #f2f2f2;
+            background-color: #383f49;
             padding-right: 20px;
             padding-left: 20px;
             padding-top: 1px;
             padding-bottom: 10px;
+            margin: auto;
+            width: 250px;
+            height: 300px;
         }
 
-        .checkLabel {
-            cursor: pointer;
+        .formIcon {
+            width: 20px;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
     <script>
@@ -173,25 +237,10 @@
             divPrice = document.getElementById("divPrice");
             kmpl = document.getElementById("kmpl");
             lpkm = document.getElementById("lpkm");
-            setNowDate();
-            gapi.auth2.getAuthInstance().signIn();
-            document.addEventListener('keydown', function() {
-                if (window.event.keyCode == 13)
-                    btnSend();
-            });
-            window.addEventListener('resize', floatBtn, false);
+            renderNewItemPage();
+            //gapi.auth2.getAuthInstance().signIn();
         }
-
-        function floatBtn() {
-            if (window.innerHeight < 20000) {
-                inputSubmit.classList.remove('normalSize');
-                inputSubmit.classList.add('floatBtn');
-            } else {
-                inputSubmit.classList.remove('floatBtn');
-                inputSubmit.classList.add('normalSize');
-            }
-        }
-
+/*
         function initClient() {
             gapi.client.init({
                 'apiKey': API_KEY,
@@ -247,7 +296,7 @@
             var range = car.value + '!A1:I1';
             insertValues(range, values);
         }
-
+*/
         function setMinMileage() {
             readRange('Demio!B3:B', function(_value) {
                 lastMileageDemio = (_value == 0 ? 0 : parseInt(_value[_value.length - 1][0]));
@@ -287,7 +336,7 @@
             inputPrice.value = '';
             fullTank.checked = true;
         }
-
+/*
         function setNowDate() {
             var nowTime = new Date();
             var nowDate;
@@ -301,7 +350,7 @@
                 nowDate += "-" + nowTime.getDate();
             inputDate.value = nowDate;
         }
-
+*/
         function btnSend() {
             handleReInput();
             if (submitMode == 1) {
@@ -323,14 +372,12 @@
             if (inputMileage.value == "" || parseInt(inputMileage.value) <= (car.value == "Demio" ? lastMileageDemio : lastMileagePicanto)) {
                 inputSubmit.disabled = true;
                 mileageMode = 0;
-                inputMileage.classList.remove('begin-entryFont');
                 inputMileage.classList.remove('correct-entryFont');
                 wrongInput(inputMileage, divMileage);
             } else {
                 mileageMode = 1;
                 restoreSubmit();
                 inputMileage.classList.remove('wrong-entryFont');
-                inputMileage.classList.remove('begin-entryFont');
                 inputMileage.classList.add('correct-entryFont');
             }
         }
@@ -339,14 +386,12 @@
             if (inputLiter.value == "" || inputLiter.value == "0" || parseFloat(inputLiter.value) <= 0) {
                 inputSubmit.disabled = true;
                 literMode = 0;
-                inputLiter.classList.remove('begin-entryFont');
                 inputLiter.classList.remove('correct-entryFont');
                 wrongInput(inputLiter, divLiter);
             } else {
                 literMode = 1;
                 restoreSubmit();
                 inputLiter.classList.remove('wrong-entryFont');
-                inputLiter.classList.remove('begin-entryFont');
                 inputLiter.classList.add('correct-entryFont');
             }
         }
@@ -355,14 +400,12 @@
             if (inputPrice == "" || inputPrice == "0" || (parseFloat(inputPrice.value) <= (inputLiter.value * 5.0))) {
                 inputSubmit.disabled = true;
                 priceMode = 0;
-                inputPrice.classList.remove('begin-entryFont');
                 inputPrice.classList.remove('correct-entryFont');
                 wrongInput(inputPrice, divPrice);
             } else {
                 priceMode = 1;
                 restoreSubmit();
                 inputPrice.classList.remove('wrong-entryFont');
-                inputPrice.classList.remove('begin-entryFont');
                 inputPrice.classList.add('correct-entryFont');
             }
         }
@@ -391,43 +434,56 @@
 
         function reInput(element) {
             element.classList.remove('wrong-entryFont');
+            element.classList.add('cottect-entryFont');
         }
 
-        function sh() {
-            divPrice.classList.remove('wrong-entryBox');
-        }
-
-        function shh() {
-            divPrice.classList.add('wrong-entryBox');
+        function renderNewItemPage() {
+            var s = '';
+            s += '<div id="enterItemDiv">';
+            s += '<form action="javascript:btnSend();">';
+            s += '<div class="inFormDiv">';
+            s += '<img src="_images/date.png" class="formIcon" />';
+            s += '<input type="date" name="date" id="id_date" required />';
+            s += '<div id="divMileage">';
+            s += '<img src="_images/mileage.png" class="formIcon" />';
+            s += '<input type="tel" name="mileage" id="id_mileage" class="inputNum correct-entryFont" placeholder="קילומטראז\'" onblur="checkMileage()" onfocus="handleReInput(name)" min="1" required />';
+            s += '</div>';
+            s += '</div>';
+            s += '<div class="inFormDiv">';
+            s += '<div id="divLiter">';
+            s += '<img src="_images/fuel.png" class="formIcon" />';
+            s += '<input type="tel" name="liter" id="id_liter" class="inputNum correct-entryFont" placeholder="ליטר" onblur="checkLiter()" onfocus="handleReInput(name)" min="1" required />';
+            s += '</div>';
+            s += '<div id="divPrice">';
+            s += '<img src="_images/price.png" class="formIcon" />';
+            s += '<input type="tel" name="price" id="id_price" class="inputNum correct-entryFont" placeholder="מחיר" onblur="checkPrice()" onfocus="handleReInput(name)" min="1" required />';
+            s += '</div>';
+            s += '</div>';
+            s += '<div id="fullTankDiv">';
+            s += '<p>מיכל מלא</p>';
+            s += '<label class="switch">';
+            s += '<input type="checkbox" name="fulltank" id="check_fullTank" checked>';
+            s += '<span class="slider round"></span>';
+            s += '</label>';
+            s += '</div>';
+            s += '<input type="submit" value="הוסף" id="id_submit" />';
+            s += '</form>';
+            s += '</div>';
+            $(pageContainer).html(s);
+            //document.getElementById('pageContainer').innerHTML=s;
+            setNowDate();
         }
     </script>
 </head>
 
-<body id="id_body" onload="init()" align="center" style="direction:rtl;">
-    <div>
-        <h1>ליטר לקילומטר: <span id="lpkm"></span></h1>
-        <h1>קילומטר לליטר: <span id="kmpl"></span></h1>
-        <form action="javascript:btnSend();">
-            <select id="id_car" onchange="getAvgConsuption()">
-                <option value="Picanto">Picanto</option>
-    			<option value="Demio">Demio</option>
-            </select><br />
-            <input type="date" name="date" id="id_date" required /><br />
-            <div id="divMileage">
-                <input type="tel" name="mileage" id="id_mileage" class="inputNum begin-entryFont" placeholder="קילומטראז'" onblur="checkMileage()" oninput="handleReInput(name)" min="1" required /><br />
-            </div>
-            <div id="divLiter">
-                <input type="tel" name="liter" id="id_liter" class="inputNum begin-entryFont" placeholder="ליטר" onblur="checkLiter()" oninput="handleReInput(name)" min="1" required /><br />
-            </div>
-            <div id="divPrice">
-                <input type="tel" name="price" id="id_price" class="inputNum begin-entryFont" placeholder="מחיר" onblur="checkPrice()" oninput="handleReInput(name)" min="1" required /><br />
-            </div>
-            <input type="checkbox" name="fulltank" id="check_fullTank" checked />
-            <label onclick="checkFullTank()" class="checkLabel">מיכל מלא</label><br /><br />
-            <input type="submit" value="הוסף" id="id_submit" class="normalSize" />
-        </form>
-        <button onclick="shh()">add</button>
-        <button onclick="sh()">remove</button>
+<body id="id_body" onload="init()" align="center" style="direction:rtl;background-color:#1c2128;">
+    <select id="id_car" onchange="getAvgConsuption()">
+    <option value="Picanto">Picanto</option>
+    <option value="Demio">Demio</option>
+    </select>
+    <div id="pageContainer">
+
+
     </div>
 </body>
 
