@@ -296,7 +296,7 @@
             var range = car.value + '!A1:I1';
             insertValues(range, values);
         }
-*/
+
         function setMinMileage() {
             readRange('Demio!B3:B', function(_value) {
                 lastMileageDemio = (_value == 0 ? 0 : parseInt(_value[_value.length - 1][0]));
@@ -305,7 +305,7 @@
                 lastMileagePicanto = (_value == 0 ? 0 : parseInt(_value[_value.length - 1][0]));
             });
         }
-
+*/
         function printAvgConsuption() {
             if (!picantoKMPL || !picantoLPKM || !demioKMPL || !demioLPKM)
                 getAvgConsuption();

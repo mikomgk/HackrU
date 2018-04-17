@@ -1,8 +1,63 @@
+/*             loader icon             */
+
+.loader {
+    border: 3px solid #4CAF50;
+    border-radius: 50%;
+    border-top: 3px solid #3498db;
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+.loader1 {
+    border: 3px solid #4CAF50;
+    border-radius: 50%;
+    border-top: 3px solid #db9534;
+    width: 16px;
+    height: 16px;
+    -webkit-animation: spin 0.8s linear infinite reverse;
+    animation: spin 0.8s linear infinite reverse;
+}
+
+.loader2 {
+    border: 2px solid #4CAF50;
+    border-radius: 50%;
+    border-top: 2px solid #d83153;
+    width: 12px;
+    height: 12px;
+    -webkit-animation: spin 0.6s linear infinite;
+    animation: spin 0.6s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/*             loader icon             */
+
 #fullTankDiv {
-    width: 60%;
-    margin-right: 20%;
-    margin-left: 20%;
-    margin-top: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .switch {
@@ -18,6 +73,7 @@
     font-size: 14px;
     position: relative;
     bottom: 11px;
+    margin-left: 5px;
 }
 
 .switch input {
@@ -103,11 +159,13 @@ input:checked+.slider:before {
     }
 }
 
-input[type=date] {
+#dateInput {
     max-width: 200px;
-    width: 50%;
-    padding: 5px;
-    margin: 8px 0;
+    width: 75%;
+    padding: 2px 0px;
+    margin: 8px;
+    margin-right: 10px;
+    margin-left: 5px;
     border: none;
     border-bottom: 1px solid grey;
     background-color: inherit;
@@ -117,62 +175,123 @@ input[type=date] {
     color: white;
 }
 
-.inputSign{
+.inputSign {
     display: inline-grid;
     color: white;
     font-size: 12px;
     width: 10px;
+    margin-top: 8px;
+    margin-left: 15px;
+    float: left;
 }
 
-.divInput{
-    width: 100%;
-    height: 40px;
+.divInput {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    height: 25px;
     padding: 6px;
+    padding-right: 0px;
 }
 
-input[type=tel] {
+.inputNum {
     position: relative;
     max-width: 400px;
-    width: 30%;
+    width: 60%;
     padding: 2px 0px;
-    margin: 8px 15px;
+    margin: 8px;
+    margin-right: 10px;
+    margin-left: 5px;
     background-color: inherit;
     display: inline;
     outline: 0;
-    animation-name: shake;
-    animation-duration: 0.3s;
     color: white;
 }
 
-input[type=submit] {
+#submitButton {
     position: relative;
-    width: 40%;
+    width: 100%;
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
-    margin: 8px 15px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     outline: 0;
 }
 
-input[type=submit]:hover {
-    background-color: #45a049;
+.beforeSubmit {
+    margin-top: 8px;
+    font-size: 20px;
+    top: -7px;
+}
+
+.afterSubmit {
+    height: 274px;
+    top: -215px;
+    animation: afterSubmitAnim 1s;
+    margin: 0px;
+    font-size: 60px;
+}
+
+@keyframes afterSubmitAnim {
+    from {
+        height: 54px;
+        top: 0;
+    }
+    to {
+        height: 274px;
+        top: -215px;
+    }
+}
+
+@keyframes enterDiv {
+    0% {
+        right: -923px;
+        top:-90px;
+        height: 50px;
+        width: 100px;
+        background-color: black/*                     TODO:          */
+        ;
+    }
+    80% {
+        right: 0px;
+        top: -90px;
+        height: 50px;
+        width: 70vw;
+        background-color: #383f49/*                     TODO:          */
+        ;
+    }
+    100% {
+        right: 0px;
+        top: 0px;
+        height: 266px;
+        width: 70vw;
+        background-color: #383f49;
+    }
+}
+
+.afterInsert{
+    background-color: #4CAF50;
+    color: #4CAF50;
 }
 
 #insertNewItemDiv {
+    /*animation: enterDiv 1s linear;*/
+    position: relative;
     border-radius: 8px;
     background-color: #383f49;
-    padding: 10px;
     margin: auto;
-    margin-top: 10vh;
+    margin-top: 90px;
     width: 70vw;
-    height: 50vh;
+    height: 266px;
+    opacity: 1;
+    overflow: hidden;
 }
 
 .formIcon {
     width: 20px;
     height: 20px;
-    padding: 10px;
+    margin-top: 3px;
+    float: right;
 }

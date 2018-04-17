@@ -18,28 +18,56 @@ function initClient() {
 
 function updateSignInStatus(isSignedIn) {
     if (isSignedIn) {
-
-        // *****************         login page      *************************************************
+        getMinMileage();
+        getAvgConsuption();
+        setTimeout(renderNewItemPage,1000);
+        // *****************         login page                         // TODO:  ***********************************
     }
 }
 
 function handleClientLoad() {
     gapi.load('client:auth2', initClient);
 }
-
-function insertValues(_range, _values) {
+/*
+function listMajors() {
+    gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
+        range: 'Class Data!A2:E',
+    }).then(function(response) {
+        var range = response.result;
+        if (range.values.length > 0) {
+            appendPre('Name, Major:');
+            for (i = 0; i < range.values.length; i++) {
+                var row = range.values[i];
+                // Print columns A and E, which correspond to indices 0 and 4.
+                appendPre(row[0] + ', ' + row[4]);
+            }
+        } else {
+            appendPre('No data found.');
+        }
+    }, function(response) {
+        appendPre('Error: ' + response.result.error.message);
+    });
+}
+*/
+function insertValues(_range, _values, _callback) {
     gapi.client.sheets.spreadsheets.values.append({
         spreadsheetId: fileID,
         valueInputOption: 'USER_ENTERED',
         range: _range,
         values: _values
-    }).then((response) => {
-        var result = response.result;
-        console.log(`${result.updatedCells} cells updated.`);
+    }).then(function(response) {
+        var updatedCells = response.result.updates.updatedCells;
+        console.log(`${updatedCells} cells updated.`);
+        _callback(updatedCells);
+    }, function(response) {
+        var errorMessage = response.result.error.message;
+        console.log(errorMessage);
+        _callback(errorMessage);
     });
 }
 
-function readRange(_range, callback) {
+function readRange(_range, _callback) {
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: fileID,
         range: _range
@@ -47,14 +75,14 @@ function readRange(_range, callback) {
         var result = response.result;
         var numRows = result.values ? result.values.length : 0;
         console.log(`${numRows} rows retrieved.`);
-        callback(numRows == 0 ? 0 : result.values);
+        _callback(numRows == 0 ? 0 : result.values);
     });
 }
 
-function insertRow() {
+function insertRow(_callback) {
     var values = [
-        [inputDate.value, inputMileage.value, , inputLiter.value, inputPrice.value, , fullTank.checked == true ? '1' : '0', , ]
+        [$('#dateInput').val(), $('#mileageInput').val(), , $('#literInput').val(), $('#priceInput').val(), , $('#check_fullTank').prop('checked') == true ? 1 : 0, , ]
     ];
-    var range = car.value + '!A1:I1';
-    insertValues(range, values);
+    var range = $('#carSelect').val() + '!A1:I1';
+    insertValues(range, values, _callback);
 }
