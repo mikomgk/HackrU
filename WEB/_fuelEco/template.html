@@ -5,26 +5,31 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>123</title>
+	<link rel='stylesheet' href='http://serve.fontsproject.com/css?family=Nehama:400' type='text/css'>
 	<link rel="stylesheet" href="style.css" />
 	<style>
 		body {
 			direction: rtl;
 			background-color: #1c2128;
 			margin: 0;
+			transition: 0.5s;
 		}
 
 		#pageContainer {
+			padding-top: 44px;
 			overflow: hidden;
 			z-index: 1;
+			transition: 0.5s;
 		}
 
 		#headerDiv {
 			background-color: #38A3A0;
 			height: 44px;
-			position: sticky;
+			position: fixed;
+			width: 100%;
 			top: 0px;
 			opacity: 1;
-			z-index: 5;
+			z-index: 10;
 		}
 
 		.menuIcon {
@@ -74,18 +79,63 @@
 			font-size: 26px;
 			color: white;
 		}
+
+		#menuContainer {
+			height: 100%;
+			width: 0;
+			position: fixed;
+			z-index: 9;
+			top: 44px;
+			right: 0;
+			background-color: #111;
+			overflow-x: hidden;
+			padding-top: 15px;
+			transition: 0.5s;
+		}
+
+		#menuContainer a {
+			padding: 8px 8px 8px 32px;
+			text-align: right;
+			text-decoration: none;
+			font-size: 18px;
+			color: #818181;
+			display: block;
+			transition: 0.3s;
+			white-space: nowrap;
+		}
+
+		#menuContainer a:active {
+			color: #f1f1f1;
+		}
 	</style>
 	<script src="googleAPI.js"></script>
 	<script src="insertItemPage.js"></script>
+	<script src="landingPage.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
 	<script>
-		var page = 'insert';
+		var currentPage;
+		var menuStatus = 0;
 		var loader = '';
-		var demioMinMileage;
-		var picantoMinMileage;
+		var demioLastMileage;
+		var demioLastDeltaMileage;
+		var demioLastLiter;
+		var demioLastPrice;
+		var picantoLastMileage;
+		var picantoLastDeltaMileage;
+		var picantoLastLiter;
+		var picantoLastPrice;
+
+		var demioDeltaMileage;
+		var demioSumLiter;
+		var demioSumPrice;
+		var demioAvgCostLiter;
 		var demioKMPL;
 		var demioLPKM;
+		var picantoDeltaMileage;
+		var picantoSumLiter;
+		var picantoSumPrice;
+		var picantoAvgCostLiter;
 		var picantoKMPL;
 		var picantoLPKM;
 
@@ -95,44 +145,93 @@
 			loader = '<div class="loader">';
 			loader += '<div class="loader1">';
 			loader += '<div class="loader2"></div></div></div></div>';
-			renderNewItemPage();//                                                    TODO: delete
+			renderLandingPage(); //                                                    TODO: delete
 		}
 
-		function menuIconBtn(x) {
-			x.classList.toggle("changeMenu");
+		function handleMenuIconBtn() {
+			if (menuStatus == 0)
+				openMenu();
+			else
+				closeMenu();
 		}
 
-		function getMinMileage() {
-			readRange('Demio!B3:B', function(_value) {
-				demioMinMileage = (_value == 0 ? 0 : parseInt(_value[_value.length - 1][0]));
-			});
-			readRange('Picanto!B3:B', function(_value) {
-				picantoMinMileage = (_value == 0 ? 0 : parseInt(_value[_value.length - 1][0]));
-			});
-			setMinMileage();
+		function openMenu() {
+			$('#menuIcon').toggleClass("changeMenu");
+			$('#menuContainer').width('200');
+			$('body').css('background-color', 'rgba(0,0,0,0.6)')
+			$('#pageContainer').css('opacity', '0.2');
+			menuStatus = 1;
 		}
 
-		function getAvgConsuption() {
-			readRange('Demio!H2:I2', function(_value) {
-				demioKMPL = ((_value != 0 && _value[0][0]) ? parseFloat(_value[0][0]) : 0);
-				demioLPKM = ((_value != 0 && _value[0][1]) ? parseFloat(_value[0][1]) : 0);
+		function closeMenu(_x) {
+			$('#menuIcon').toggleClass("changeMenu");
+			$('#menuContainer').width('0');
+			$('body').css('background-color', '#1c2128')
+			$('#pageContainer').css('opacity', '1');
+			menuStatus = 0;
+		}
+
+		function getLastStats() {
+			readRange('Demio!L2:L10', function(_value) {
+				demioLastMileage = (_value == 0 ? 0 : parseInt(_value[1]));
+				demioLastDeltaMileage = (_value == 0 ? 0 : parseInt(_value[2]));
+				demioLastLiter = (_value == 0 ? 0 : parseInt(_value[3]));
+				demioLastPrice = (_value == 0 ? 0 : parseInt(_value[4]));
 			});
-			readRange('Picanto!H2:I2', function(_value) {
-				picantoKMPL = ((_value == 0 && _value[0][0]) ? parseFloat(_value[0][0]) : 0);
-				picantoLPKM = ((_value == 0 && _value[0][1]) ? parseFloat(_value[0][1]) : 0);
+			readRange('Picanto!L2:L10', function(_value) {
+				picantoLastMileage = (_value == 0 ? 0 : parseInt(_value[1]));
+				picantoLastDeltaMileage = (_value == 0 ? 0 : parseInt(_value[2]));
+				picantoLastLiter = (_value == 0 ? 0 : parseInt(_value[3]));
+				picantoLastPrice = (_value == 0 ? 0 : parseInt(_value[4]));
+			});
+			setLastMileage();
+		}
+
+		function getAvgStats() {
+			readRange('Demio!B2:I2', function(_value) {
+				demioDeltaMileage = ((_value != 0 && _value[1]) ? parseFloat(_value[1]) : 0);
+				demioSumLiter = ((_value != 0 && _value[2]) ? parseFloat(_value[2]) : 0);
+				demioSumPrice = ((_value != 0 && _value[3]) ? parseFloat(_value[3]) : 0);
+				demioAvgCostLiter = ((_value != 0 && _value[4]) ? parseFloat(_value[4]) : 0);
+				demioKMPL = ((_value != 0 && _value[6]) ? parseFloat(_value[6]) : 0);
+				demioLPKM = ((_value != 0 && _value[7]) ? parseFloat(_value[7]) : 0);
+			});
+			readRange('Picanto!B2:I2', function(_value) {
+				picantoDeltaMileage = ((_value != 0 && _value[1]) ? parseFloat(_value[1]) : 0);
+				picantoSumLiter = ((_value != 0 && _value[2]) ? parseFloat(_value[2]) : 0);
+				picantoSumPrice = ((_value != 0 && _value[3]) ? parseFloat(_value[3]) : 0);
+				picantoAvgCostLiter = ((_value != 0 && _value[4]) ? parseFloat(_value[4]) : 0);
+				picantoKMPL = ((_value == 0 && _value[6]) ? parseFloat(_value[6]) : 0);
+				picantoLPKM = ((_value == 0 && _value[7]) ? parseFloat(_value[7]) : 0);
 			});
 		}
 
 		function handleCarSelect() {
 			if (page == 'insert')
-				setMinMileage();
+				setLastMileage();
+		}
+
+		function changePage() {
+			// TODO:
+		}
+
+		function setLastMileage() {
+			lastMileage = $('#carSelect').val() == 'Picanto' ? picantoLastMileage : demioLastMileage;
+			switch (currentPage) {
+				case 'landingPage':
+					$('#mileageLogItem').html(lastMileage);
+					break;
+				case 'inserNewItemPage':
+					$('#mileageInput').attr('placeholder', lastMileage + '+');
+					break;
+			}
 		}
 	</script>
 </head>
 
 <body onload="init()" align="center">
 	<div id="headerDiv">
-		<div class="menuIcon" onclick="menuIconBtn(this)">
+		<div class="menuIcon" id="menuIcon" onclick="handleMenuIconBtn()">
 			<div class="menuBar1"></div>
 			<div class="menuBar2"></div>
 			<div class="menuBar3"></div>
@@ -143,6 +242,10 @@
 	    </select>
 	</div>
 	<div id="menuContainer">
+		<a href="javascript:void(0)" onclick="changePage()">נתונים כלליים</a>
+		<a href="javascript:void(0)" onclick="changePage()">היסטוריית תדלוקים</a>
+		<a href="javascript:void(0)" onclick="changePage()">מקומות על המפה</a>
+		<a href="javascript:void(0)" onclick="changePage()">סטטיסטיקות</a>
 	</div>
 	<div id="pageContainer">
 	</div>

@@ -1,3 +1,126 @@
+/*                              landingPage                 */
+
+#newItemBackground {
+    background-color: rgba(28,33,40, 0.7);
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+}
+
+#landingPageDiv {
+    padding-top: 20px;
+    z-index: 3;
+}
+
+.logRow {
+    height: 65px;
+}
+
+.logItem {
+    display: inline-block;
+    margin: 0px 20px;
+}
+
+.itemNumber {
+    color: white;
+    font-size: 40px;
+}
+
+.itemUnit {
+    color: salmon;
+    font-size: 10px;
+}
+
+.lineSeperatorVer {
+    position: relative;
+    bottom: 15px;
+    margin-bottom: 5px;
+    display: inline-block;
+    height: 30px;
+    width: 2px;
+    background-color: grey;
+    border: none;
+}
+
+.lineSeperatorHor {
+    position: relative;
+    bottom: 5px;
+    margin-left: 25px;
+    margin-right: 25px;
+    display: inline-block;
+    height: 2px;
+    width: 30px;
+    background-color: grey;
+    border: none;
+}
+
+#newItemBtn {
+    display: inline-block;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    background-color: #38A3A0;
+    padding: 14px;
+    padding-left: 16px;
+    border: none;
+    outline: 0;
+}
+
+#newItemBtn img {
+    width: 28px;
+    height: 28px;
+}
+
+.infoRow {
+    border-radius: 8px;
+    background-color: rgba(192, 192, 192, 0.2);
+    margin: 0px 20px;
+    margin-top: 40px;
+}
+
+.infoRow p {
+    color: white;
+    margin: 5px 0px;
+}
+
+.infoItem {
+    display: inline-block;
+    color: white;
+    margin: 5px 0px;
+}
+
+.infoItem img {
+    width: 20px;
+    height: 20px;
+    margin: 0px 5px;
+}
+
+.infoItem span {
+    color: white;
+    display: inline-block;
+    margin: 0px 5px;
+}
+
+.infoItem sub {
+    color: white;
+    display: inline-block;
+    color: salmon;
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+.smallLineSeperator {
+    display: inline-block;
+    border: 1px solid grey;
+    height: 10px;
+    margin: 0px 5px;
+}
+
+/*                              insertItemPage                 */
+
+
 /*             loader icon             */
 
 .loader {
@@ -130,6 +253,14 @@ input:checked+.slider:before {
 
 /*SLIDER/\*/
 
+#formBackButton{
+    display: block;
+    float: right;
+    padding: 10px;
+    width: 25px;
+    height: 25px;
+}
+
 .wrongInputFont {
     border: none;
     border-bottom: 1px solid salmon;
@@ -159,6 +290,10 @@ input:checked+.slider:before {
     }
 }
 
+#divDate{
+    margin-top: 10px;
+}
+
 #dateInput {
     max-width: 200px;
     width: 75%;
@@ -166,6 +301,7 @@ input:checked+.slider:before {
     margin: 8px;
     margin-right: 10px;
     margin-left: 5px;
+
     border: none;
     border-bottom: 1px solid grey;
     background-color: inherit;
@@ -223,7 +359,6 @@ input:checked+.slider:before {
 .beforeSubmit {
     margin-top: 8px;
     font-size: 20px;
-    top: -7px;
 }
 
 .afterSubmit {
@@ -248,7 +383,7 @@ input:checked+.slider:before {
 @keyframes enterDiv {
     0% {
         right: -923px;
-        top:-90px;
+        top: -90px;
         height: 50px;
         width: 100px;
         background-color: black/*                     TODO:          */
@@ -271,7 +406,7 @@ input:checked+.slider:before {
     }
 }
 
-.afterInsert{
+.afterInsert {
     background-color: #4CAF50;
     color: #4CAF50;
 }
@@ -284,7 +419,7 @@ input:checked+.slider:before {
     margin: auto;
     margin-top: 90px;
     width: 70vw;
-    height: 266px;
+    height: 280px;
     opacity: 1;
     overflow: hidden;
 }

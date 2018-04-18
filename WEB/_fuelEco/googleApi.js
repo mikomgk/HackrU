@@ -18,9 +18,9 @@ function initClient() {
 
 function updateSignInStatus(isSignedIn) {
     if (isSignedIn) {
-        getMinMileage();
-        getAvgConsuption();
-        setTimeout(renderNewItemPage,1000);
+        getLastStats();
+        getAvgStats();
+        setTimeout(renderLandingPage,1000);
         // *****************         login page                         // TODO:  ***********************************
     }
 }
@@ -28,28 +28,7 @@ function updateSignInStatus(isSignedIn) {
 function handleClientLoad() {
     gapi.load('client:auth2', initClient);
 }
-/*
-function listMajors() {
-    gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
-        range: 'Class Data!A2:E',
-    }).then(function(response) {
-        var range = response.result;
-        if (range.values.length > 0) {
-            appendPre('Name, Major:');
-            for (i = 0; i < range.values.length; i++) {
-                var row = range.values[i];
-                // Print columns A and E, which correspond to indices 0 and 4.
-                appendPre(row[0] + ', ' + row[4]);
-            }
-        } else {
-            appendPre('No data found.');
-        }
-    }, function(response) {
-        appendPre('Error: ' + response.result.error.message);
-    });
-}
-*/
+
 function insertValues(_range, _values, _callback) {
     gapi.client.sheets.spreadsheets.values.append({
         spreadsheetId: fileID,

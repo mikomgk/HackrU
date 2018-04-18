@@ -1,19 +1,22 @@
-var minMileage = 0;
+var lastMileage = 0;
 var v$ = '&#10004;';
 var x$ = '&#10008;';
 
 function renderNewItemPage() {
+    currentPage = 'inserNewItemPage';
     var s = '';
+    s += '<div id="newItemBackground" style="display:none;">';
     s += '<div id="insertNewItemDiv" style="display:none;">';
+    s += '<img src="_images/back.png" id="formBackButton" onclick="handleFormBackButton()" />';
     s += '<div id="formDiv">'
-    s += '<form action="javascript:handleSubmitButton();">';
+    s += '<form action="javascript:handleSubmitButton();" id="insertItemForm">';
     s += '<div id="divDate" class="divInput">';
     s += '<img src="_images/date.png" class="formIcon" />';
     s += '<input type="date" name="date" id="dateInput" required />';
     s += '</div>';
     s += '<div id="divMileage" class="divInput">';
-    s += '<img src="_images/mileage.png" class="formIcon" />';
-    s += '<input type="tel" name="mileage" id="mileageInput" class="inputNum correctInputFont" placeholder="' + minMileage + ' +" onblur="checkInputValid(id)" onfocus="handleReInput(id)" autocomplete="off" required />';
+    s += '<img src="_images/odometer.png" class="formIcon" />';
+    s += '<input type="tel" name="mileage" id="mileageInput" class="inputNum correctInputFont" placeholder="' + lastMileage + ' +" onblur="checkInputValid(id)" onfocus="handleReInput(id)" autocomplete="off" required />';
     s += '<div class="inputSign">ק\"מ</div>';
     s += '</div>';
     s += '<div id="divLiter" class="divInput">';
@@ -37,18 +40,14 @@ function renderNewItemPage() {
     s += '</form>';
     s += '</div>';
     s += '</div>';
-    $('#pageContainer').html(s);
+    document.getElementById('pageContainer').innerHTML += s;
     $('#mileageInput').attr('inputMode', false);
     $('#literInput').attr('inputMode', false);
     $('#priceInput').attr('inputMode', false);
+    $('#newItemBackground').toggle();
     $('#insertNewItemDiv').toggle(1000);
-    setMinMileage();
+    setLastMileage();
     setNowDate();
-}
-
-function setMinMileage() {
-    minMileage = $('#carSelect').val() == 'Picanto' ? picantoMinMileage : demioMinMileage;
-    $('#mileageInput').attr('placeholder', minMileage + '+');
 }
 
 function HandleCheckInputValid(_id) {
@@ -63,7 +62,7 @@ function checkInputValid(_id) {
     } else
         switch (_id) {
             case 'mileageInput':
-                if (x <= minMileage) {
+                if (x <= lastMileage) {
                     inputValidater(_id, false);
                     shakeInputDiv(_id);
                     changeInputMode(_id, false);
@@ -79,7 +78,7 @@ function checkInputValid(_id) {
                     changeInputMode(_id, true);
                 break;
             case 'priceInput':
-                if (x < $('#literInput').val()) {
+                if (x < 5 * Number($('#literInput').val())) {
                     inputValidater(_id, false);
                     shakeInputDiv(_id);
                     changeInputMode(_id, false);
@@ -131,7 +130,7 @@ function submit() {
     checkInputValid($('#mileageInput').attr('id'));
     checkInputValid($('#literInput').attr('id'));
     checkInputValid($('#priceInput').attr('id'));
-    if ($('#mileageInput').attr('inputMode') == $('#literInput').attr('inputMode') == $('#priceInput').attr('inputMode')) {
+    if ($('#mileageInput').attr('inputMode') == 'true' && $('#literInput').attr('inputMode') == 'true' && $('#priceInput').attr('inputMode') == 'true') {
         $('#submitButton').html(loader);
         insertRow(function(_result) {
             setTimeout(function() {
@@ -140,8 +139,8 @@ function submit() {
                     $('#submitButton').addClass('afterSubmit');
                     setTimeout(function() {
                         $('#insertNewItemDiv').css('background-color', '#4CAF50');
-                        $('.inputNum #dateInput').addClass('afterInsert');
-                        $('#insertNewItemDiv').toggle(1000);
+                        $('#dateInput').addClass('afterInsert');
+                        exitForm();
                     }, 1000);
                 } else {
                     $('#submitButton').html(x$);
@@ -149,8 +148,10 @@ function submit() {
                     $('#submitButton').addClass('afterSubmit');
                     setTimeout(function() {
                         alert(_result);
+                        $('#submitButton').html('הוסף');
+                        $('#submitButton').css('background-color', '#4CAF50');
+                        $('#submitButton').removeClass('afterSubmit');
                     }, 900);
-                    //$('#submitButton').css('background-color','#4CAF50');
                 }
             }, 2000);
         });
@@ -175,4 +176,18 @@ function setNowDate() {
     else
         nowDate += "-" + nowTime.getDate();
     $('#dateInput').val(nowDate);
+}
+
+function handleFormBackButton() {
+    exitForm();
+}
+
+function exitForm() {
+    $('#insertNewItemDiv').toggle(1000);
+    setTimeout(function() {
+        $('#newItemBackground').toggle();
+        $('#newItemBackground').remove();
+    }, 600);
+
+    currentPage = landingPage;
 }
