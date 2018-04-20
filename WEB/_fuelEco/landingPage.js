@@ -86,6 +86,8 @@ function renderLandingPage() {
     $('#landingPageDiv').toggle(1000);
     setLastMileage();
     setAvgStats();
+    $('#menuContainer a').css('background-color','#111');
+    $('#menuWelcomeLink').css('background-color','rgba(192, 192, 192, 0.2)');
 }
 
 function setAvgStats() {
@@ -116,5 +118,6 @@ function handleNewItemBtn(){
 }
 
 function openNewItemWindow(){
+    location.href='#newItem';
     renderNewItemPage();
 }

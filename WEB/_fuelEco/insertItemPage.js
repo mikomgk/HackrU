@@ -48,9 +48,12 @@ function renderNewItemPage() {
     $('#insertNewItemDiv').toggle(1000);
     setLastMileage();
     setNowDate();
+    $('#newItemBackground').on('click',function(){
+        exitForm();
+    });
 }
 
-function HandleCheckInputValid(_id) {
+function handleCheckInputValid(_id) {
     checkInputValid(_id);
 }
 
@@ -188,6 +191,5 @@ function exitForm() {
         $('#newItemBackground').toggle();
         $('#newItemBackground').remove();
     }, 600);
-
-    currentPage = landingPage;
+    currentPage = 'landingPage';
 }
