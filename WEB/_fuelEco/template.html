@@ -111,11 +111,11 @@
 			color: #f1f1f1;
 		}
 
-		#menuBodyCover{
+		#menuBodyCover {
 			position: absolute;
 			top: 0;
 			left: 0;
-			background-color: rgba(28,33,40,0.3);
+			background-color: rgba(28, 33, 40, 0.3);
 			width: 100%;
 			height: 100%;
 			z-index: 8;
@@ -124,6 +124,7 @@
 	<script src="googleAPI.js"></script>
 	<script src="insertItemPage.js"></script>
 	<script src="landingPage.js"></script>
+	<script src="logPage.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
 	<script>
@@ -160,7 +161,7 @@
 			loader = '<div class="loader">';
 			loader += '<div class="loader1">';
 			loader += '<div class="loader2"></div></div></div></div>';
-			renderLandingPage(); //                                                    TODO: delete
+			renderLogsPage(); //                                                    TODO: delete
 		}
 
 		function handleMenuIconBtn() {
@@ -177,7 +178,7 @@
 			$('#pageContainer').css('opacity', '0.2');
 			menuStatus = 1;
 			$('#menuBodyCover').on('click', function() {
-					closeMenu();
+				closeMenu();
 			});
 		}
 
@@ -244,6 +245,29 @@
 					break;
 			}
 		}
+
+		function changePage(_href) {
+			var page = _href.split('#')[1];
+			$('#menuContainer a').css('background-color', '#111');
+			$('#pageContainer').children().toggle(500).remove();
+			if (page == 'welcome') {
+				renderLandingPage();
+				$('#menuWelcomeLink').css('background-color', 'rgba(192, 192, 192, 0.2)');
+			} else if (page == 'log') {
+				renderLogsPage();
+				$('#menuLogLink').css('background-color', 'rgba(192, 192, 192, 0.2)');
+			} /*else if (page == 'onMap') {
+				renderMapPage();
+				$('#menuMapLink').css('background-color', 'rgba(192, 192, 192, 0.2)');
+			} else if (page == 'stats') {
+				renderStatsPage();
+				$('#menuStatsLink').css('background-color', 'rgba(192, 192, 192, 0.2)');
+			} else if (page == 'calculateDrive') {
+				renderCalcPage();
+				$('#menuCalcLink').css('background-color', 'rgba(192, 192, 192, 0.2)');
+			}*/
+			closeMenu();
+		}
 	</script>
 </head>
 
@@ -260,11 +284,11 @@
 	    </select>
 	</div>
 	<div id="menuContainer">
-		<a id="menuWelcomeLink" href="#welcome" onclick="changePage()">נתונים כלליים</a>
-		<a id="menuLogLink" href="#log" onclick="changePage()">היסטוריית תדלוקים</a>
-		<a id="menuMapLink" href="#onMap" onclick="changePage()">מקומות על המפה</a>
-		<a id="menuStatsLink" href="#stats" onclick="changePage()">סטטיסטיקות</a>
-		<a id="menuCalcLink" href="#calculateDrive" onclick="changePage()">חשב נסיעה</a>
+		<a id="menuWelcomeLink" href="#welcome" onclick="changePage(href)">נתונים כלליים</a>
+		<a id="menuLogLink" href="#log" onclick="changePage(href)">היסטוריית תדלוקים</a>
+		<a id="menuMapLink" href="#onMap" onclick="changePage(href)">מקומות על המפה</a>
+		<a id="menuStatsLink" href="#stats" onclick="changePage(href)">סטטיסטיקות</a>
+		<a id="menuCalcLink" href="#calculateDrive" onclick="changePage(href)">חשב נסיעה</a>
 	</div>
 	<div id='menuBodyCover' style="display:none;transition:0.5s;">
 	</div>

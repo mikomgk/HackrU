@@ -20,7 +20,7 @@ function updateSignInStatus(isSignedIn) {
     if (isSignedIn) {
         getLastStats();
         getAvgStats();
-        setTimeout(renderLandingPage,1000);
+        setTimeout(renderLogsPage,1000);
         // *****************         login page                         // TODO:  ***********************************
     }
 }

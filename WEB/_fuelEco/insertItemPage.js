@@ -188,8 +188,7 @@ function handleFormBackButton() {
 function exitForm() {
     $('#insertNewItemDiv').toggle(1000);
     setTimeout(function() {
-        $('#newItemBackground').toggle();
-        $('#newItemBackground').remove();
+        $('#newItemBackground').toggle().remove();
     }, 600);
     currentPage = 'landingPage';
 }

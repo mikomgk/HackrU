@@ -12,7 +12,7 @@ var lastPrice;
 function renderLandingPage() {
     currentPage = 'landingPage';
     var s = '';
-    s += '<div id="landingPageDiv"  style="display:none;">';
+    s += '<div id="landingPageDiv" class="inPageContainer"  style="display:none;">';
     s += '<div class="logRow">';
     s += '<div class="logItem right">';
     s += '<div id="KMPLLogItem" class="itemNumber">12.22';// + kmpl;
@@ -86,8 +86,6 @@ function renderLandingPage() {
     $('#landingPageDiv').toggle(1000);
     setLastMileage();
     setAvgStats();
-    $('#menuContainer a').css('background-color','#111');
-    $('#menuWelcomeLink').css('background-color','rgba(192, 192, 192, 0.2)');
 }
 
 function setAvgStats() {

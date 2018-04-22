@@ -1,3 +1,57 @@
+/*                              logPage                 */
+.logsRow{
+    border-radius: 8px;
+    margin: 0px 20px;
+    margin-top: 40px;
+    height: 100px;
+    background-color: #38A3A0;
+}
+.logsRow img{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0px 5px;
+}
+
+.logsInfo{
+    display: inline-block;
+    background-color: rgba(192, 192, 192, 0.2);
+}
+
+.logsRight{
+    display: inline-block;
+}
+
+.logsDate{
+
+}
+
+.logsLPKM{
+
+}
+
+.rightUnit{
+
+}
+
+.logsLeft{
+    display: inline-block;
+}
+.logsItem{
+    display: inline-block;
+    color: white;
+    margin: 5px 0px;
+}
+.logsRow sub{
+    color: white;
+    display: inline-block;
+    color: salmon;
+    font-size: 10px;
+    margin-left: 5px;
+}
+.fuelPercent{
+
+}
 /*                              landingPage                 */
 
 #newItemBackground {
@@ -9,7 +63,7 @@
     top: 0;
 }
 
-#landingPageDiv {
+.inPageContainer {
     padding-top: 20px;
     z-index: 3;
 }
