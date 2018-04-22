@@ -20,6 +20,7 @@ function updateSignInStatus(isSignedIn) {
     if (isSignedIn) {
         getLastStats();
         getAvgStats();
+        getLocation();
         setTimeout(renderLogsPage,1000);
         // *****************         login page                         // TODO:  ***********************************
     }
@@ -60,8 +61,8 @@ function readRange(_range, _callback) {
 
 function insertRow(_callback) {
     var values = [
-        [$('#dateInput').val(), $('#mileageInput').val(), , $('#literInput').val(), $('#priceInput').val(), , $('#check_fullTank').prop('checked') == true ? 1 : 0, , ]
+        [$('#dateInput').val(), $('#mileageInput').val(), , $('#literInput').val(), $('#priceInput').val(), , $('#check_fullTank').prop('checked') == true ? 1 : 0, , , posLongitude, posLatitude]
     ];
-    var range = $('#carSelect').val() + '!A1:I1';
+    var range = $('#carSelect').val() + '!A1:K1';
     insertValues(range, values, _callback);
 }

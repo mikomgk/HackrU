@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>123</title>
+	<!--<link rel="stylesheet" href="style.css"/>-->
+	<style>
+		#divChat {
+			width: 80%;
+			max-width: 600px;
+			height: 500px;
+			border: 1px solid grey;
+			margin: 0 auto;
+			overflow-y: auto;
+		}
+
+		#divMyMessage {
+			width: 80%;
+			max-width: 600px;
+			margin: 0 auto;
+			margin-top: 10px;
+			height: 100px;
+		}
+
+		#txtMyMessage {
+			width: 86%;
+			height: 65px;
+
+		}
+
+		#btnSend {
+			height: 70px;
+			width: 70px;
+		}
+
+		/* width */
+
+		::-webkit-scrollbar {
+			position: relative;
+			left: 10px;
+			width: 10px;
+		}
+
+		/* Track */
+
+		::-webkit-scrollbar-track {
+			background: #f1f1f1;
+			border-radius: 20px;
+		}
+
+		/* Handle */
+
+		::-webkit-scrollbar-thumb {
+			background: #888;
+			border-radius: 20px;
+		}
+
+		/* Handle on hover */
+
+		::-webkit-scrollbar-thumb:hover {
+			background: #555;
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		$(function() {
+			$('#btnSend').click(sendMessage);
+			$('#txtMyMessage').keydown(function(event) {
+				if (event.which == 13) {
+					sendMessage();
+				}
+			});
+		});
+
+		function sendMessage() {
+			var message = $('#txtMyMessage').val();
+			if (message.length == 0) {
+				alert('type');
+				return;
+			}
+			
+			$('#txtMyMessage').val('');
+		}
+	</script>
+</head>
+
+<body id="id_body" style="text-align: center;">
+	<h1>Chat</h1>
+	<div id="divChat">
+	</div>
+	<div id="divMyMessage">
+		<input type="text" id="txtMyMessage" />
+		<input type="submit" id="btnSend" value="send" />
+	</div>
+</body>
+
+</html>

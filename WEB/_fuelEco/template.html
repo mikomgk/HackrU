@@ -133,6 +133,10 @@
 		var loader = '';
 		var pageHistory = [];
 
+		var posLongitude;
+		var posLatitude;
+		var posError;
+
 		var demioLastMileage;
 		var demioLastDeltaMileage;
 		var demioLastLiter;
@@ -256,7 +260,8 @@
 			} else if (page == 'log') {
 				renderLogsPage();
 				$('#menuLogLink').css('background-color', 'rgba(192, 192, 192, 0.2)');
-			} /*else if (page == 'onMap') {
+			}
+			/*else if (page == 'onMap') {
 				renderMapPage();
 				$('#menuMapLink').css('background-color', 'rgba(192, 192, 192, 0.2)');
 			} else if (page == 'stats') {
@@ -268,6 +273,19 @@
 			}*/
 			closeMenu();
 		}
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(_position) {
+                    posLongitude = _position.coords.longitude;
+                    posLatitude = _position.coords.latitude;
+                }, function(_error){
+                    posError = _error.message;
+                });
+            } else {
+                divLocation.innerHTML = "your browser is too old";
+            }
+        }
 	</script>
 </head>
 
