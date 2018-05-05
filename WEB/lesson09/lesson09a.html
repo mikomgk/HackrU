@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>CSS</title>
+	<style>
+		#img2 {
+			opacity: 0.5;
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		var fadeInTimeOut;
+		var fadeOutTimeOut;
+		var fadeTime=500;
+
+		$(function() {
+
+		});
+
+		function fadeInBtn() {
+			fadeIn(fadeTime, 1, 'img1');
+		}
+
+		function fadeOutBtn() {
+			fadeOut(fadeTime, 0, 'img1');
+		}
+
+		function mouseOver() {
+			fadeIn(fadeTime/2, 1, 'img2');
+		}
+
+		function mouseOut() {
+			fadeOut(fadeTime/2, 0.5, 'img2');
+		}
+
+		function fadeIn(_x, _lim, _elem) {
+			clearTimeout(fadeOutTimeOut);
+			if ($('#' + _elem).css("opacity") >= _lim)
+				return;
+			$('#' + _elem).css("opacity", Number($('#' + _elem).css("opacity")) + 0.01);
+			fadeInTimeOut = setTimeout(function() {
+				fadeIn(_x, _lim, _elem);
+			}, _x / 100);
+		}
+
+		function fadeOut(_x, _lim, _elem) {
+			clearTimeout(fadeInTimeOut);
+			if ($('#' + _elem).css("opacity") <= _lim)
+				return;
+			$('#' + _elem).css("opacity", Number($('#' + _elem).css("opacity")) - 0.01);
+			fadeOutTimeOut = setTimeout(function() {
+				fadeOut(_x, _lim, _elem);
+			}, _x / 100);
+		}
+	</script>
+</head>
+
+<body align=center>
+	<button onclick="fadeInBtn()">Fade In</button>
+	<button onclick="fadeOutBtn()">Fade Out</button><br /><br />
+	<img id="img1" src="_images/123.jpg" /><br /><br />
+	<img id="img2" src="_images/123.jpg" onmouseover="mouseOver()" onmouseout="mouseOut()" />
+</body>
+
+</html>
