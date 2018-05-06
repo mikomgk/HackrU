@@ -169,8 +169,7 @@
     function cngPage(_next, _fadeOutTime, _fadeOutDelay) {
       _next ? currentSuggestionPage++ : currentSuggestionPage--;
       fadeTimeout = setTimeout(function() {
-        if (!click)
-          $('#shopGrid').fadeOut(_fadeOutTime, renderShop);
+        $('#shopGrid').fadeOut(_fadeOutTime, renderShop);
       }, _fadeOutDelay);
       /*if ((_next && shopItemsSuggestionHistory.length - 1 == currentSuggestionPage) || (!_next && currentSuggestionPage == 0)) {
         getNewItems();
