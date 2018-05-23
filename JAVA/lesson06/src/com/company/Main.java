@@ -5,17 +5,21 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) {
-        int arr[] = {750,825,73,118,82,893,832,733,537,896,877,757,850,769,421,926,847,22};
+        int arr[] = {-1,0,1,2,3,4,5,6,7,8,9,10};
         Random random = new Random();
-        for(int i=0;i<arr.length;i++)
-            arr[i]=random.nextInt(1000)+1;
+        /*for (int i = 0; i < arr.length; i++)
+            arr[i] = random.nextInt(10) + 1;*/
         print(arr);
-        System.out.println(arr[highNumber(arr)]);
-        System.out.println(highNumber(arr));
+        //System.out.println(arr[findPoint(arr)]);
+        System.out.println(findPoint(arr));
+    }
+
+    static int findPoint(int[] arr) {
+        return findPoint(arr, 0, arr.length-1);
     }
 
     static int highNumber(int[] arr) {
-        return highNumber(arr, 0, arr.length - 1);
+        return highNumber(arr, 0, arr.length - 1, arr.length - 1);
     }
 
     static void print(int arr[]) {
@@ -54,17 +58,23 @@ public class Main {
         return -1;
     }
 
-    static int highNumber(int[] arr, int l, int r) {
+    static int highNumber(int[] arr, int l, int r, int n) {
+        int m = l + (r - l) / 2;
+        if ((m == 0 || arr[m] >= arr[m - 1]) && (m == n - 1 || arr[m] >= arr[m + 1]))
+            return m;
+        if (m > 0 && arr[m - 1] >= arr[m])
+            return highNumber(arr, l, m, n);
+        return highNumber(arr, m, r, n);
+    }
+
+    static int findPoint(int[] arr, int l, int r) {
         if (r < l)
             return -1;
         int m = l + (r - l) / 2;
-        if (l == 0 || r == arr.length - 1)
-            if (arr[l] >= arr[l + 1] || arr[r] >= arr[r - 1])
-                return arr[l] >= arr[l + 1] ? l : r;
-        if (arr[m] >= arr[m - 1] && arr[m] >= arr[m + 1])
+        if (arr[m] == m)
             return m;
-        else if (arr[m] >= arr[m - 1])
-            return highNumber(arr, m, r);
-        return highNumber(arr, l, m);
+        else if (arr[m] > m)
+            return findPoint(arr, l, m - 1);
+        return findPoint(arr, m + 1, r);
     }
 }
