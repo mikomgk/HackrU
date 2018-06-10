@@ -77,4 +77,8 @@ public class RationalNumber extends Number {
             return a;
         return gcd(b,a%b);
     }
+
+    public int equals(RationalNumber r) {
+        
+    }
 }
