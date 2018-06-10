@@ -67,14 +67,14 @@ public class RationalNumber extends Number {
     }
 
     public void reduce() {
-        int gdc=gdc(numerator,denominator);
-        setNumerator(numerator/gdc);
-        setDenominator(denominator/gdc);
+        int gcd= gcd(numerator,denominator);
+        setNumerator(numerator/gcd);
+        setDenominator(denominator/gcd);
     }
 
-    public static int gdc(int a,int b){
+    public static int gcd(int a, int b){
         if(b==0)
             return a;
-        return gdc(b,a%b);
+        return gcd(b,a%b);
     }
 }
