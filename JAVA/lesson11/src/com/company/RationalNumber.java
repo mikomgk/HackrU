@@ -79,6 +79,6 @@ public class RationalNumber extends Number {
     }
 
     public int equals(RationalNumber r) {
-        
+
     }
 }
