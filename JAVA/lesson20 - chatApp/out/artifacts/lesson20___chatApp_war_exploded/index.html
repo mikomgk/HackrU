@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #chat {
+        height: 500px;
+        width: 500px;
+        margin: auto;
+        border: 2px solid #ccc;
+    }
+
+    #messagesBox {
+        height: 80%;
+        width: 100%;
+        border-bottom: 1px dashed #ccc;
+    }
+
+    #inputBox {
+        border-top: 1px dashed #ccc;
+        margin-top: 5px;
+    }
+
+    #textInput {
+        width: 78%;
+        height: 87px;
+        resize: none;
+        outline: -webkit-focus-ring-color auto 5px;
+    }
+
+    button {
+        float: right;
+        width: 20%;
+        height: 93px;
+    }
+</style>
+<script src="jquery.js"></script>
+<script>
+    var baseUrl = "http://localhost:8080/servlet?action=";
+    var messages = [];
+    var from;
+
+    $(function () {
+        from = 0;
+        pull();
+    });
+
+    function pull() {
+        $.post(baseUrl + "send&username=miko&password=miko&from=" + from, null, function (data) {
+            var temp = $.parseJSON(data);
+            for (var i = 0; i < temp.length; i++) {
+                var m = temp[i];
+                messages.push(new Message(m.sender, m.content));
+            }
+            printMessages();
+        }, "json");
+        setTimeout(pull, 500);
+    }
+
+    function printMessages() {
+        var messagesBox = $("#messagesBox");
+        for (var i = from; i < messages.length; i++) {
+            var m = messages[i];
+            messagesBox.html(messagesBox.html() + "<br>" + m.sender + ":  " + m.content);
+        }
+        from = messages.length;
+    }
+
+    function send() {
+        var input = $("#textInput");
+        var inputVal = input.val();
+        if ($.trim(inputVal).length > 0)
+            $.ajax({
+                type: "POST",
+                url: baseUrl + "send&username=miko&password=miko",
+                data: {message: inputVal},
+                success: function () {
+                    input.val("").focus();
+                },
+                processData: false
+            });
+    }
+
+    function Message(sender, content) {
+        this.sender = sender;
+        this.content = content;
+    }
+</script>
+<body>
+<div id="chat">
+    <div id="messagesBox"></div>
+    <div id="inputBox">
+        <textarea id="textInput" autofocus></textarea>
+        <button onclick="send()">SEND</button>
+    </div>
+</div>
+</body>
+</html>
