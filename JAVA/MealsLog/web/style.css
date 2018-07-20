@@ -22,6 +22,17 @@
     padding-top: 35px;
 }
 
+#closeNewMealDiv{
+    background: inherit;
+    border: none;
+    color: white;
+    font-size: 22px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    outline: 0;
+}
+
 #priceInput{
     background: inherit;
     border: none;
@@ -39,7 +50,7 @@
     border-bottom: 1px solid grey;
     color: #fff;
     margin-bottom: 65px;
-    width: 10px;
+    width: 60px;
     text-align: center;
     outline: 0;
 }
@@ -56,21 +67,87 @@
     padding: 8px 20px;
 }
 #logDiv{
-    z-index: 1;
-    position: relative;
-    top: -180px;
+    margin-top: 55px;
 }
 h2{
-
+    visibility: visible;
+    color: #fff;
+    background-color: #38A3A0;
+    position: fixed;
+    width: 100%;
+    top: 0;
 }
+
 #monthlyAmountSpan{
 
 }
+
 #logListDiv{
 
 }
-#newMealBtn{
 
+.logItem{
+    color: #fff;
+    border: 1px solid salmon;
+    border-radius: 8px;
+    position: relative;
+    margin-bottom: 6px;
+    height: 80px;
+}
+
+.restaurantImg{
+    width: 40px;
+    height: 40px;
+    position: relative;
+    top: 20px;
+    float: right;
+    margin-right: 15px;
+}
+
+.priceItem{
+    position: relative;
+    float: right;
+    margin-right: 16px;
+    margin-top: 28px;
+}
+
+.itemProp{
+    position: relative;
+    float: right;
+    margin-right: 45px;
+    margin-top: 10px;
+}
+
+.descriptionItem{
+    margin-bottom: 10px;
+}
+
+.dateItem{
+}
+
+.editImg{
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 20px;
+    float: left;
+    margin-left: 15px;
+}
+
+#newMealBtn{position: absolute;
+    bottom: 35px;
+    right: 35px;
+    border-radius: 75%;
+    border: none;
+    width: 50px;
+    height: 50px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 40px;
+    padding: 0;
+    line-height: 1;
+    z-index: 10;
+    outline: 0;
 }
 
 
