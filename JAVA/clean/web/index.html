@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clean Cache</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <style>
+        body {
+            padding: 15px;
+        }
+
+        h2, h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .center {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .fit-content {
+            width: fit-content;
+        }
+    </style>
+    <script>
+        var widCounter;
+        var webCounter;
+        var baseWidgetUrl1 = 'http://recs.engageya.com/rec-api/widget/cache/clean.json?';
+        var baseWidgetUrl2 = 'http://192.168.109.101:8080/rec-api/widget/cache/clean.json?';
+        var baseWebsiteUrl1 = 'http://10.0.15.33:8080/rec-api/cleanwebsitecache.json?';
+        var baseWebsiteUrl2 = 'http://192.168.109.101:8080/rec-api/cleanwebsitecache.json?';
+
+        $(function () {
+            widCounter = 0;
+            webCounter = 0;
+            createNewField(1);
+            createNewField(2);
+        });
+
+        function createNewField(_whereCode) {
+            var isWidget = _whereCode == 1;
+            var counter = isWidget ? widCounter : webCounter;
+            var place = isWidget ? $("#widgetDiv") : $("#websiteDiv");
+            var where = isWidget ? 'widget' : 'website';
+            var s = '';
+            s += '<div class="form-group row fit-content center">';
+            s += '<label for="' + _whereCode + '_' + counter + '" class="col-sm-4 col-form-label">website id:</label>';
+            s += '<div class="col-sm-6">';
+            s += '<input type="text" class="form-control" id="' + where + '_' + counter + '" onfocus="onInputFocus(id,' + _whereCode +
+                ')">';
+            s += '</div>';
+            s += '</div>';
+            place.append(s);
+            isWidget ? widCounter++ : webCounter++;
+        }
+
+        function onInputFocus(_id, _where) {
+            var counter = (_where == 1 ? widCounter : webCounter) - 1;
+            var index = _id.split('_')[1];
+            if (counter == index)
+                createNewField(_where);
+        }
+
+        function cleanBtn() {
+            var qStringWidget = '';
+            var qStringWebsite = '';
+            var widUrl1 = '';
+            var widUrl2 = '';
+            var webUrl1 = '';
+            var webUrl2 = '';
+            var tmp = '';
+
+            for (var i = 0; i < widCounter; i++) {
+                if ((tmp = $("#widget_" + i).val()).length > 0) {
+                    if (i > 0)
+                        qStringWidget += '&';
+                    qStringWidget += $.param({widid: tmp});
+                }
+            }
+            for (var i = 0; i < webCounter; i++) {
+                if ((tmp = $("#website_" + i).val()).length > 0) {
+                    if (i > 0)
+                        qStringWebsite += '&';
+                    qStringWebsite += $.param({webid: tmp});
+                }
+            }
+            widUrl1 = baseWidgetUrl1 + qStringWidget;
+            widUrl2 = baseWidgetUrl2 + qStringWidget;
+            webUrl1 = baseWebsiteUrl1 + qStringWebsite;
+            webUrl2 = baseWebsiteUrl2 + qStringWebsite;
+            if (qStringWidget.length > 0) {
+                $.get(widUrl1, function (response) {
+                    alert("g")
+                });
+                /*    .done(function () {
+                        $("#widStatus1").html("&#10004;");
+                    })
+                    .fail(function () {
+                        $("#widStatus1").html("&#10008;");
+                    });*/
+                $.ajax(widUrl2)
+                    .done(function () {
+                        $("#widStatus2").html("&#10004;");
+                    })
+                    .fail(function () {
+                        $("#widStatus2").html("&#10008;");
+                    });
+            }
+            if (qStringWebsite.length > 0) {
+                $.ajax(webUrl1)
+                    .done(function () {
+                        $("#webStatus1").html("&#10004;");
+                    })
+                    .fail(function () {
+                        $("#webStatus1").html("&#10008;");
+                    });
+                $.ajax(webUrl2)
+                    .done(function () {
+                        $("#webStatus2").html("&#10004;");
+                    })
+                    .fail(function () {
+                        $("#webStatus2").html("&#10008;");
+                    });
+            }
+        }
+    </script>
+</head>
+<body>
+<h2>Clean Cache</h2>
+<hr/>
+<div class="container fit-content mb-5">
+    <button class="btn btn-primary btn-lg" onclick="cleanBtn()">Clean</button>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col" id="widgetDiv">
+            <h3>Widget Clean <span id="widStatus1"></span> <span id="widStatus2"></span></h3>
+            <hr/>
+        </div>
+        <div class="col" id="websiteDiv">
+            <h3>Website Clean <span id="webStatus1"></span> <span id="webStatus2"></span></h3>
+            <hr/>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
