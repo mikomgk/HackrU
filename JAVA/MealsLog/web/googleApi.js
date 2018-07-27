@@ -1,6 +1,6 @@
-var fileID = '1KhFm1wksw_rMQzhcZir7bac1EioHOssSB_Kn6SPIZsI';
-var API_KEY = 'AIzaSyD9e-T-81qscSR9pW0olfucxhlWn1caU_g';
-var CLIENT_ID = '1018599316996-avst44ip93n283v5nti1i8u8ifk63vcj.apps.googleusercontent.com';
+var fileID = '';
+var API_KEY = '';
+var CLIENT_ID = '';
 var SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
 
