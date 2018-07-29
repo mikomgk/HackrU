@@ -25,7 +25,7 @@ public class MotionDetector {
             }
     }
 
-    public interface OnDetectionListener {
+    interface OnDetectionListener {
         void onDetection(int x, int y);
     }
 }
