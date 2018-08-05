@@ -11,7 +11,7 @@ public class SecondActivity extends Activity {
 
     private int num;
     TextView numText;
-    private final int TOP = 50;
+    private final int TOP = 10;
     private final int BOTTOM = 0;
 
     @Override
