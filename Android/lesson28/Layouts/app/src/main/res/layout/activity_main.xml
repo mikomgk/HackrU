@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@color/colorAccent">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="User Name"
+            android:layout_alignBottom="@id/userInput"
+            android:id="@+id/userText"/>
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/userText"
+            android:id="@+id/userInput"/>
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:layout_alignStart="@id/userText"
+            android:layout_alignBottom="@id/passInput"
+            android:id="@+id/passText"/>
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userInput"
+            android:layout_alignEnd="@id/userInput"
+            android:id="@+id/passInput"/>
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Log In"
+            android:layout_below="@id/passText"
+            android:layout_alignStart="@id/passText"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
