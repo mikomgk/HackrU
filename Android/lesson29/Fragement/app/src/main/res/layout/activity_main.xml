@@ -33,8 +33,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="25sp"
-            android:text="189"
-            />
+            android:id="@+id/lineLbl" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -46,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="fdsfdsf"
+                android:id="@+id/upperItemLbl"
                 android:gravity="center_vertical"/>
 
             <View
@@ -58,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="fsdfds"
+                android:id="@+id/lowerItemLbl"
                 android:gravity="center_vertical"/>
 
         </LinearLayout>
