@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity">
+
+<ListView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:id="@+id/listNum"
+    android:divider="@null"
+    android:visibility="gone"
+    android:scrollbars="none"/>
 
-    <ListView
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listNum"
-        android:divider="@null"
-        android:scrollbars="none"/>
+        android:layout_height="300dp"
+        android:src="@drawable/gb"
+        android:layout_alignParentTop="true"
+        android:id="@+id/bigImg"/>
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/gb"
+        android:layout_below="@+id/bigImg"
+        android:layout_marginTop="-50dp"
+        android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>
