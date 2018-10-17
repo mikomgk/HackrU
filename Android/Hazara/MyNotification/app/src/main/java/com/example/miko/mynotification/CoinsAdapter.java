@@ -20,9 +20,9 @@ public class CoinsAdapter extends RecyclerView.Adapter<CoinViewHolder> {
     private Coin[] coins;
 
     public CoinsAdapter(String coinsJsonString) {
-        List<Coin> coins=new ArrayList<>();
+        List<Coin> coins = new ArrayList<>();
         try {
-            JSONArray coinsJsonArr=(new JSONObject(coinsJsonString)).getJSONArray("data");
+            JSONArray coinsJsonArr = (new JSONObject(coinsJsonString)).getJSONArray("data");
             for (int i = 0; i < 100; i++) {
                 coins.add(new Coin(coinsJsonArr.getJSONObject(i)));
             }
@@ -36,14 +36,14 @@ public class CoinsAdapter extends RecyclerView.Adapter<CoinViewHolder> {
     @Override
 
     public CoinViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        LayoutInflater inflater=LayoutInflater.from(viewGroup.getContext());
-        View view=inflater.inflate(R.layout.coin_item,viewGroup,false);
+        LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+        View view = inflater.inflate(R.layout.coin_item, viewGroup, false);
         return new CoinViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CoinViewHolder coinViewHolder, int position) {
-        Coin current=coins[position];
+        Coin current = coins[position];
         coinViewHolder.id.setText(String.valueOf(current.id));
         coinViewHolder.name.setText(current.name);
         coinViewHolder.symbol.setText(current.symbol);
@@ -64,10 +64,10 @@ class CoinViewHolder extends RecyclerView.ViewHolder {
 
     public CoinViewHolder(@NonNull View itemView) {
         super(itemView);
-        id= itemView.findViewById(R.id.coinId);
-        name=itemView.findViewById(R.id.coinName);
-        symbol= itemView.findViewById(R.id.coinSymbol);
-        websiteSlug=itemView.findViewById(R.id.coinSlug);
+        id = itemView.findViewById(R.id.coinId);
+        name = itemView.findViewById(R.id.coinName);
+        symbol = itemView.findViewById(R.id.coinSymbol);
+        websiteSlug = itemView.findViewById(R.id.coinSlug);
     }
 }
 
