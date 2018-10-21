@@ -1,5 +1,8 @@
 package com.example.miko.lunchlog;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Fragment logFragment;
     private Fragment statsFragment;
     private int currentFragment;
+    private AlertDialog alertDialog;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -46,11 +51,17 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener((View view) -> {
-            AddFragment addFragment=new AddFragment();
-            addFragment.setTtl("Enter Lunch");
-            addFragment.setStyle(DialogFragment.STYLE_NORMAL,R.style.Theme_AppCompat_DayNight_Dialog);
-            addFragment.show(getSupportFragmentManager(),"");
+            alertDialog = new AlertDialog.Builder(this).create();
+            View dialogView = getLayoutInflater().inflate(R.layout.fragment_add, null, false);
+            alertDialog.setView(dialogView);
+            dialogView.findViewById(R.id.addBtn).setOnClickListener(view1 -> {
+                Toast.makeText(this, "New meal added!", Toast.LENGTH_LONG).show();
+                alertDialog.dismiss();
+            });
+            alertDialog.show();
         });
+
+        new Intent(Intent.ACTION_WEB_SEARCH).setClassName()
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

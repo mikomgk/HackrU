@@ -7,46 +7,63 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#e99042"
         android:gravity="center"
-        android:id="@+id/ttlLbl"
-        android:text="Enter your new meal"
-        android:textSize="20sp" />
+        android:paddingVertical="10dp"
+        android:text="Enter your meal"
+        android:textAllCaps="true"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingVertical="15dp">
 
         <EditText
-            android:layout_width="140dp"
+            android:id="@+id/descriptionInput"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/descTxt"
-            android:focusedByDefault="true"
-            android:hint="description" />
+            android:layout_weight="3"
+            android:hint="Description"
+            android:imeOptions="actionNext"
+            android:inputType="textAutoComplete"
+            android:nextFocusForward="@id/priceInput"
+            android:singleLine="true">
+
+            <requestFocus />
+        </EditText>
 
         <EditText
-            android:layout_width="60dp"
+            android:id="@+id/priceInput"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="$"
-            android:id="@+id/priceTxt"/>
+            android:layout_weight="1"
+            android:hint="@string/currency_sign"
+            android:imeOptions="actionDone"
+            android:inputType="number" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="cancel"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="3" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:id="@+id/addBtn"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="add"/>
-
+            android:layout_weight="2"
+            android:text="add" />
     </LinearLayout>
-
 </LinearLayout>
+
+

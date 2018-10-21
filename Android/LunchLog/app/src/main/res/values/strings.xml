@@ -5,4 +5,5 @@
     <string name="title_stats">Stats</string>
     <string name="this_month">This Month</string>
     <string name="meals_log">Meals Log</string>
+    <string name="currency_sign">$</string>
 </resources>
