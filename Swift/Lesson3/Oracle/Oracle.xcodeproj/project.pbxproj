@@ -1,0 +1,565 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		22E2142D2180A039002AB3D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2142C2180A039002AB3D8 /* AppDelegate.swift */; };
+		22E2142F2180A039002AB3D8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2142E2180A039002AB3D8 /* ViewController.swift */; };
+		22E214322180A039002AB3D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22E214302180A039002AB3D8 /* Main.storyboard */; };
+		22E214342180A039002AB3D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E214332180A039002AB3D8 /* Assets.xcassets */; };
+		22E214372180A039002AB3D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22E214352180A039002AB3D8 /* LaunchScreen.storyboard */; };
+		22E214422180A039002AB3D8 /* OracleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E214412180A039002AB3D8 /* OracleTests.swift */; };
+		22E2144D2180A039002AB3D8 /* OracleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2144C2180A039002AB3D8 /* OracleUITests.swift */; };
+		22E2145B2180A050002AB3D8 /* Answers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2145A2180A050002AB3D8 /* Answers.swift */; };
+		22E2145D2180A09C002AB3D8 /* Oracle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E2145C2180A09C002AB3D8 /* Oracle.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		22E2143E2180A039002AB3D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22E214212180A039002AB3D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22E214282180A039002AB3D8;
+			remoteInfo = Oracle;
+		};
+		22E214492180A039002AB3D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22E214212180A039002AB3D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22E214282180A039002AB3D8;
+			remoteInfo = Oracle;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		22E214292180A039002AB3D8 /* Oracle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Oracle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22E2142C2180A039002AB3D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		22E2142E2180A039002AB3D8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		22E214312180A039002AB3D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		22E214332180A039002AB3D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		22E214362180A039002AB3D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		22E214382180A039002AB3D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22E2143D2180A039002AB3D8 /* OracleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OracleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22E214412180A039002AB3D8 /* OracleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OracleTests.swift; sourceTree = "<group>"; };
+		22E214432180A039002AB3D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22E214482180A039002AB3D8 /* OracleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OracleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22E2144C2180A039002AB3D8 /* OracleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OracleUITests.swift; sourceTree = "<group>"; };
+		22E2144E2180A039002AB3D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22E2145A2180A050002AB3D8 /* Answers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answers.swift; sourceTree = "<group>"; };
+		22E2145C2180A09C002AB3D8 /* Oracle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Oracle.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		22E214262180A039002AB3D8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22E2143A2180A039002AB3D8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22E214452180A039002AB3D8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		22E214202180A039002AB3D8 = {
+			isa = PBXGroup;
+			children = (
+				22E2142B2180A039002AB3D8 /* Oracle */,
+				22E214402180A039002AB3D8 /* OracleTests */,
+				22E2144B2180A039002AB3D8 /* OracleUITests */,
+				22E2142A2180A039002AB3D8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		22E2142A2180A039002AB3D8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22E214292180A039002AB3D8 /* Oracle.app */,
+				22E2143D2180A039002AB3D8 /* OracleTests.xctest */,
+				22E214482180A039002AB3D8 /* OracleUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22E2142B2180A039002AB3D8 /* Oracle */ = {
+			isa = PBXGroup;
+			children = (
+				22E2142C2180A039002AB3D8 /* AppDelegate.swift */,
+				22E2142E2180A039002AB3D8 /* ViewController.swift */,
+				22E214302180A039002AB3D8 /* Main.storyboard */,
+				22E214332180A039002AB3D8 /* Assets.xcassets */,
+				22E214352180A039002AB3D8 /* LaunchScreen.storyboard */,
+				22E214382180A039002AB3D8 /* Info.plist */,
+				22E2145A2180A050002AB3D8 /* Answers.swift */,
+				22E2145C2180A09C002AB3D8 /* Oracle.swift */,
+			);
+			path = Oracle;
+			sourceTree = "<group>";
+		};
+		22E214402180A039002AB3D8 /* OracleTests */ = {
+			isa = PBXGroup;
+			children = (
+				22E214412180A039002AB3D8 /* OracleTests.swift */,
+				22E214432180A039002AB3D8 /* Info.plist */,
+			);
+			path = OracleTests;
+			sourceTree = "<group>";
+		};
+		22E2144B2180A039002AB3D8 /* OracleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				22E2144C2180A039002AB3D8 /* OracleUITests.swift */,
+				22E2144E2180A039002AB3D8 /* Info.plist */,
+			);
+			path = OracleUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		22E214282180A039002AB3D8 /* Oracle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22E214512180A039002AB3D8 /* Build configuration list for PBXNativeTarget "Oracle" */;
+			buildPhases = (
+				22E214252180A039002AB3D8 /* Sources */,
+				22E214262180A039002AB3D8 /* Frameworks */,
+				22E214272180A039002AB3D8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Oracle;
+			productName = Oracle;
+			productReference = 22E214292180A039002AB3D8 /* Oracle.app */;
+			productType = "com.apple.product-type.application";
+		};
+		22E2143C2180A039002AB3D8 /* OracleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22E214542180A039002AB3D8 /* Build configuration list for PBXNativeTarget "OracleTests" */;
+			buildPhases = (
+				22E214392180A039002AB3D8 /* Sources */,
+				22E2143A2180A039002AB3D8 /* Frameworks */,
+				22E2143B2180A039002AB3D8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22E2143F2180A039002AB3D8 /* PBXTargetDependency */,
+			);
+			name = OracleTests;
+			productName = OracleTests;
+			productReference = 22E2143D2180A039002AB3D8 /* OracleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		22E214472180A039002AB3D8 /* OracleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22E214572180A039002AB3D8 /* Build configuration list for PBXNativeTarget "OracleUITests" */;
+			buildPhases = (
+				22E214442180A039002AB3D8 /* Sources */,
+				22E214452180A039002AB3D8 /* Frameworks */,
+				22E214462180A039002AB3D8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22E2144A2180A039002AB3D8 /* PBXTargetDependency */,
+			);
+			name = OracleUITests;
+			productName = OracleUITests;
+			productReference = 22E214482180A039002AB3D8 /* OracleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		22E214212180A039002AB3D8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Miko Stern";
+				TargetAttributes = {
+					22E214282180A039002AB3D8 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					22E2143C2180A039002AB3D8 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 22E214282180A039002AB3D8;
+					};
+					22E214472180A039002AB3D8 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 22E214282180A039002AB3D8;
+					};
+				};
+			};
+			buildConfigurationList = 22E214242180A039002AB3D8 /* Build configuration list for PBXProject "Oracle" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 22E214202180A039002AB3D8;
+			productRefGroup = 22E2142A2180A039002AB3D8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				22E214282180A039002AB3D8 /* Oracle */,
+				22E2143C2180A039002AB3D8 /* OracleTests */,
+				22E214472180A039002AB3D8 /* OracleUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		22E214272180A039002AB3D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22E214372180A039002AB3D8 /* LaunchScreen.storyboard in Resources */,
+				22E214342180A039002AB3D8 /* Assets.xcassets in Resources */,
+				22E214322180A039002AB3D8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22E2143B2180A039002AB3D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22E214462180A039002AB3D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		22E214252180A039002AB3D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22E2142F2180A039002AB3D8 /* ViewController.swift in Sources */,
+				22E2145D2180A09C002AB3D8 /* Oracle.swift in Sources */,
+				22E2145B2180A050002AB3D8 /* Answers.swift in Sources */,
+				22E2142D2180A039002AB3D8 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22E214392180A039002AB3D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22E214422180A039002AB3D8 /* OracleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22E214442180A039002AB3D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22E2144D2180A039002AB3D8 /* OracleUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		22E2143F2180A039002AB3D8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22E214282180A039002AB3D8 /* Oracle */;
+			targetProxy = 22E2143E2180A039002AB3D8 /* PBXContainerItemProxy */;
+		};
+		22E2144A2180A039002AB3D8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22E214282180A039002AB3D8 /* Oracle */;
+			targetProxy = 22E214492180A039002AB3D8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		22E214302180A039002AB3D8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22E214312180A039002AB3D8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		22E214352180A039002AB3D8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22E214362180A039002AB3D8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		22E2144F2180A039002AB3D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		22E214502180A039002AB3D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		22E214522180A039002AB3D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Oracle/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = miko.Oracle;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		22E214532180A039002AB3D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Oracle/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = miko.Oracle;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		22E214552180A039002AB3D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = OracleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = miko.OracleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Oracle.app/Oracle";
+			};
+			name = Debug;
+		};
+		22E214562180A039002AB3D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = OracleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = miko.OracleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Oracle.app/Oracle";
+			};
+			name = Release;
+		};
+		22E214582180A039002AB3D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = OracleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = miko.OracleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Oracle;
+			};
+			name = Debug;
+		};
+		22E214592180A039002AB3D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = OracleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = miko.OracleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Oracle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		22E214242180A039002AB3D8 /* Build configuration list for PBXProject "Oracle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22E2144F2180A039002AB3D8 /* Debug */,
+				22E214502180A039002AB3D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22E214512180A039002AB3D8 /* Build configuration list for PBXNativeTarget "Oracle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22E214522180A039002AB3D8 /* Debug */,
+				22E214532180A039002AB3D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22E214542180A039002AB3D8 /* Build configuration list for PBXNativeTarget "OracleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22E214552180A039002AB3D8 /* Debug */,
+				22E214562180A039002AB3D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22E214572180A039002AB3D8 /* Build configuration list for PBXNativeTarget "OracleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22E214582180A039002AB3D8 /* Debug */,
+				22E214592180A039002AB3D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 22E214212180A039002AB3D8 /* Project object */;
+}

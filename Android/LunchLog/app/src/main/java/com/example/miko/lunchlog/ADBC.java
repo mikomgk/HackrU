@@ -11,7 +11,7 @@ public class ADBC extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS meals(meal_id INTEGER PRIMARY KEY, price INTEGER NOT NULL, description VARCHAR(10) NOT NULL, time VARCHAR(10) NOT NULL)");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS meals(meal_id INTEGER PRIMARY KEY, price INTEGER NOT NULL, description VARCHAR(10) NOT NULL, time INTEGER NOT NULL)");
     }
 
     @Override
