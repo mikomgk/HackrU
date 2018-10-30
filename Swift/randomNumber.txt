@@ -1,0 +1,7 @@
+func randomNumber(upperBound: Int) -> Int{
+	return Int(arc4random_uniform(UInt32(upperBound)))
+}
+
+func randomNumber(lowerBound: Int, upperBound: Int) -> Int{
+	return randomNumber(upperBound: upperBound-lowerBound) + lowerBound
+}
