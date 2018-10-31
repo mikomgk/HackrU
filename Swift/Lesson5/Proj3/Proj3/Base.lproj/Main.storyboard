@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Proj3" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOy-Nu-X3x">
+                                <rect key="frame" x="166.5" y="52" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7dW-fM-ro2">
+                                <rect key="frame" x="96.5" y="166" width="182" height="29"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                    <segment title="Third"/>
+                                </segments>
+                            </segmentedControl>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-100" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Hgl-Vm-bOM">
+                                <rect key="frame" x="140.5" y="105" width="94" height="29"/>
+                                <connections>
+                                    <action selector="cngNumber:" destination="BYZ-38-t0r" eventType="valueChanged" id="yoG-9e-Vnd"/>
+                                </connections>
+                            </stepper>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6L3-Wa-yqo">
+                                <rect key="frame" x="169.5" y="226" width="36" height="30"/>
+                                <state key="normal" title="Send"/>
+                                <connections>
+                                    <segue destination="Vae-EC-5xO" kind="show" id="ftp-Wv-65o"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6L3-Wa-yqo" firstAttribute="top" secondItem="7dW-fM-ro2" secondAttribute="bottom" constant="32" id="7U7-j8-x9K"/>
+                            <constraint firstItem="6L3-Wa-yqo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ABQ-tT-hKk"/>
+                            <constraint firstItem="7dW-fM-ro2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="G1d-an-gFR"/>
+                            <constraint firstItem="nOy-Nu-X3x" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="S1J-9r-ecb"/>
+                            <constraint firstItem="Hgl-Vm-bOM" firstAttribute="top" secondItem="nOy-Nu-X3x" secondAttribute="bottom" constant="32" id="eSN-6t-8G4"/>
+                            <constraint firstItem="Hgl-Vm-bOM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oJ2-fn-ME1"/>
+                            <constraint firstItem="nOy-Nu-X3x" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xC6-bF-rte"/>
+                            <constraint firstItem="7dW-fM-ro2" firstAttribute="top" secondItem="Hgl-Vm-bOM" secondAttribute="bottom" constant="32" id="yjF-FZ-xv4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="numberLbl" destination="nOy-Nu-X3x" id="p1u-jt-O1T"/>
+                        <outlet property="segment" destination="7dW-fM-ro2" id="KzJ-og-tPZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="GmN-7k-yZt">
+            <objects>
+                <viewController id="Vae-EC-5xO" customClass="MainViewController" customModule="Proj3" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hxu-Zp-lW7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5He-88-1Yb">
+                                <rect key="frame" x="166.5" y="52" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="X4p-V6-T8A">
+                                <rect key="frame" x="5" y="105" width="365" height="29"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                    <segment title="Third"/>
+                                    <segment title=""/>
+                                    <segment title=""/>
+                                    <segment title=""/>
+                                </segments>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="X4p-V6-T8A" firstAttribute="centerX" secondItem="hxu-Zp-lW7" secondAttribute="centerX" id="1nc-LF-mAF"/>
+                            <constraint firstItem="5He-88-1Yb" firstAttribute="top" secondItem="8b1-6w-N28" secondAttribute="top" constant="32" id="Js0-pM-n0p"/>
+                            <constraint firstItem="X4p-V6-T8A" firstAttribute="top" secondItem="5He-88-1Yb" secondAttribute="bottom" constant="32" id="uhz-96-nIT"/>
+                            <constraint firstItem="5He-88-1Yb" firstAttribute="centerX" secondItem="hxu-Zp-lW7" secondAttribute="centerX" id="xJh-Uj-g5e"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8b1-6w-N28"/>
+                    </view>
+                    <connections>
+                        <outlet property="number" destination="5He-88-1Yb" id="rny-j7-rez"/>
+                        <outlet property="segment" destination="X4p-V6-T8A" id="gKa-gs-G2o"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jIe-xa-em0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1102" y="33"/>
+        </scene>
+    </scenes>
+</document>

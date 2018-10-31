@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="oYC-zu-wCs">
+                                <rect key="frame" x="32" y="52" width="311" height="583"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="iwj-d5-3LY">
+                                        <rect key="frame" x="0.0" y="0.0" width="148" height="583"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGC-3E-tyy">
+                                                <rect key="frame" x="0.0" y="0.0" width="148" height="183.5"/>
+                                                <state key="normal" image="icons8-questions"/>
+                                                <state key="highlighted" image="icons8-apple"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MzL-vd-rIG">
+                                                <rect key="frame" x="0.0" y="199.5" width="148" height="184"/>
+                                                <state key="normal" image="icons8-questions"/>
+                                                <state key="highlighted" image="icons8-grapes"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UGQ-XN-INF">
+                                                <rect key="frame" x="0.0" y="399.5" width="148" height="183.5"/>
+                                                <state key="normal" image="icons8-questions"/>
+                                                <state key="highlighted" image="icons8-grapes"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="XiJ-5J-Zmm">
+                                        <rect key="frame" x="163" y="0.0" width="148" height="583"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k9x-iS-EXa">
+                                                <rect key="frame" x="0.0" y="0.0" width="148" height="183.5"/>
+                                                <state key="normal" image="icons8-questions"/>
+                                                <state key="highlighted" image="icons8-banana"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJh-Av-UVA">
+                                                <rect key="frame" x="0.0" y="199.5" width="148" height="184"/>
+                                                <state key="normal" image="icons8-questions"/>
+                                                <state key="highlighted" image="icons8-banana"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ca8-IK-8I8">
+                                                <rect key="frame" x="0.0" y="399.5" width="148" height="183.5"/>
+                                                <state key="normal" image="icons8-questions"/>
+                                                <state key="highlighted" image="icons8-apple"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="oYC-zu-wCs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="3Tx-Nf-sme"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="oYC-zu-wCs" secondAttribute="bottom" constant="32" id="Ke1-PK-rbX"/>
+                            <constraint firstItem="oYC-zu-wCs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RUS-9b-ofH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oYC-zu-wCs" secondAttribute="trailing" constant="32" id="csQ-vE-ycX"/>
+                            <constraint firstItem="oYC-zu-wCs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="lII-ZA-bqe"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icons8-apple" width="96" height="96"/>
+        <image name="icons8-banana" width="96" height="96"/>
+        <image name="icons8-grapes" width="96" height="96"/>
+        <image name="icons8-questions" width="100" height="100"/>
+    </resources>
+</document>
