@@ -29,8 +29,8 @@ public class LogFragment extends Fragment {
         logRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         List<Meal> meals=new ArrayList<>();
-        db = new ADBC(getContext(), LUNCH_LOG).getReadableDatabase();
-        Cursor mealsCursor = db.rawQuery("SELECT meal_id,price,description,time FROM meals",null);
+        db = new ADBC(getContext()).getReadableDatabase();
+        Cursor mealsCursor = db.rawQuery("SELECT * FROM meals",null);
 
         for(mealsCursor.moveToFirst();!mealsCursor.isAfterLast();mealsCursor.moveToNext()){
             meals.add(new Meal(

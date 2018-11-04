@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private Fragment logFragment;
     private Fragment statsFragment;
     private AlertDialog alertDialog;
+    private SQLiteDatabase db;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        db = new ADBC(this).getWritableDatabase();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener((View view) -> {
             alertDialog = new AlertDialog.Builder(this).create();
@@ -119,8 +121,10 @@ public class MainActivity extends AppCompatActivity {
 //        );
     }
 
-    private void addMeal(String description, int price, Long date) {
-
+    private void addMeal(String description, int price, Long time) {
+        String sql = "INSERT INTO meals (price,description,time) VALUES(?,?,?)";
+        db.rawQuery(sql, new String[]{String.valueOf(price), description, String.valueOf(time)});
+        //TODO:  send to db API
     }
 
     /*public void showInputMethod() {

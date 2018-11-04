@@ -2,15 +2,18 @@ import Foundation
 
 enum Card: Int{
 	
-	case 🇨🇦, 🏳️‍🌈, 🇦🇽, 🇦🇷, 🇦🇺, 🇪🇺, 🇪🇬, 🇪🇨, 🇮🇳, 🇯🇲, 🇯🇵, 🇵🇹, 🇺🇸, 🏴󠁧󠁢󠁷󠁬󠁳󠁿, 🏴󠁧󠁢󠁥󠁮󠁧󠁿, 🇬🇧, 🇿🇦, 🇰🇷
+	case 🇨🇦, 🏳️‍🌈, 🇦🇽, 🇦🇷, 🇦🇺, 🇪🇺, 🇪🇬, 🇪🇨, 🇮🇳, 🇯🇲, 🇯🇵, 🇵🇹, 🇺🇸, 🏴󠁧󠁢󠁷󠁬󠁳󠁿, 🏴󠁧󠁢󠁥󠁮󠁧󠁿, 🇲🇰, 🇿🇦, 🇰🇷
 	
-	static func getOrderedCardSet() -> [Card]{
+	static func getOrderedCardSet(numberOfPairs: Int) -> [Card]{
 		var cardsSet = [Card]()
-		for i in 0..<18{
-			cardsSet.append(Card(rawValue: i)!)
-			cardsSet.append(Card(rawValue: i)!)
+		var numberSet = [Int]()
+		for i in 0 ..< 18{
+			numberSet.append(i)
 		}
-		return cardsSet
+		for _ in 1 ... numberOfPairs{
+			cardsSet.append(Card(rawValue: numberSet.remove(at: randomNumber(upperBound: numberSet.count)))!)
+		}
+		return cardsSet + cardsSet
 	}
 	
 	func getCard() -> String{
@@ -45,8 +48,8 @@ enum Card: Int{
 			return "🏴󠁧󠁢󠁷󠁬󠁳󠁿"
 		case .🏴󠁧󠁢󠁥󠁮󠁧󠁿:
 			return "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
-		case .🇬🇧:
-			return "🇬🇧"
+		case .🇲🇰:
+			return "🇲🇰"
 		case .🇿🇦:
 			return "🇿🇦"
 		case .🇰🇷:

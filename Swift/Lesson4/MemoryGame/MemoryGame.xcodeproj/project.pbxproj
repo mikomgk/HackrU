@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		229ECD57218A2B2C00A4F288 /* WonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229ECD56218A2B2C00A4F288 /* WonViewController.swift */; };
 		22D910EF21885E5A0024A867 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D910EE21885E5A0024A867 /* AppDelegate.swift */; };
 		22D910F121885E5A0024A867 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D910F021885E5A0024A867 /* ViewController.swift */; };
 		22D910F421885E5A0024A867 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22D910F221885E5A0024A867 /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		229ECD56218A2B2C00A4F288 /* WonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WonViewController.swift; sourceTree = "<group>"; };
 		22D910EB21885E5A0024A867 /* MemoryGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoryGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D910EE21885E5A0024A867 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22D910F021885E5A0024A867 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				22D910EE21885E5A0024A867 /* AppDelegate.swift */,
 				22D910F021885E5A0024A867 /* ViewController.swift */,
+				229ECD56218A2B2C00A4F288 /* WonViewController.swift */,
 				22D910F221885E5A0024A867 /* Main.storyboard */,
 				22D910F521885E5B0024A867 /* Assets.xcassets */,
 				22D910F721885E5B0024A867 /* LaunchScreen.storyboard */,
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22D910F121885E5A0024A867 /* ViewController.swift in Sources */,
+				229ECD57218A2B2C00A4F288 /* WonViewController.swift in Sources */,
 				22D9111D2188665F0024A867 /* Card.swift in Sources */,
 				22D910EF21885E5A0024A867 /* AppDelegate.swift in Sources */,
 			);
