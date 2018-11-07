@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -28,7 +29,9 @@ import java.text.DateFormat;
 import java.text.FieldPosition;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,7 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private Fragment logFragment;
     private Fragment statsFragment;
     private AlertDialog alertDialog;
-    private SQLiteDatabase db;
+    public static SQLiteDatabase db;
+    public static List<Meal> meals;
+    public static LogAdapter adapter;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -98,6 +103,25 @@ public class MainActivity extends AppCompatActivity {
 
         replaceFragment(homeFragment);
     }
+//todo
+    public void getMealList() {
+        Cursor mealsCursor = MainActivity.db.rawQuery("SELECT * FROM meals", null);
+        for (mealsCursor.moveToFirst(); !mealsCursor.isAfterLast(); mealsCursor.moveToNext()) {
+            meals.add(new Meal(
+                    mealsCursor.getInt(0),
+                    mealsCursor.getInt(1),
+                    mealsCursor.getString(2),
+                    mealsCursor.getLong(3)
+            ));
+        }
+        mealsCursor.close();
+        meals.sort(new Comparator<Meal>() {
+            @Override
+            public int compare(Meal meal, Meal t1) {
+                return (int) (meal.getDate() - t1.getDate());
+            }
+        });
+    }
 
     private void replaceFragment(Fragment newFrag) {
         getSupportFragmentManager()
@@ -111,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
     private void addMealBtn(View view) {
         EditText description = view.findViewById(R.id.descriptionInput);
         EditText price = view.findViewById(R.id.priceInput);
-        addMeal(description.getText().toString(), Integer.valueOf(price.getText().toString()), System.currentTimeMillis());
+        addMeal(Integer.valueOf(price.getText().toString()), description.getText().toString(), System.currentTimeMillis());
         Toast.makeText(this, String.valueOf(System.currentTimeMillis()), Toast.LENGTH_LONG).show();
         alertDialog.dismiss();
         //closeKeyboard(view);
@@ -121,9 +145,14 @@ public class MainActivity extends AppCompatActivity {
 //        );
     }
 
-    private void addMeal(String description, int price, Long time) {
-        String sql = "INSERT INTO meals (price,description,time) VALUES(?,?,?)";
-        db.rawQuery(sql, new String[]{String.valueOf(price), description, String.valueOf(time)});
+    private void addMeal(int price, String description, Long time) {
+        String sql = "INSERT INTO meals (price,description,time) VALUES(" + String.valueOf(price) + ",'" + description + "'," + String.valueOf(time) + ")";
+        db.rawQuery(sql, null);//new String[]{String.valueOf(price), description, String.valueOf(time)});
+        if (adapter != null) {
+            Meal meal = new Meal(0, price, description, time);
+            meals.add(0, meal);
+            adapter.notifyItemInserted(0);
+        }
         //TODO:  send to db API
     }
 

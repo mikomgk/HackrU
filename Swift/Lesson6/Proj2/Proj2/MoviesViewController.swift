@@ -31,6 +31,10 @@ extension MoviesViewController: UITableViewDataSource{
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return 2
 	}
+	
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return "section \(section)"
+	}
 }
 
 extension MoviesViewController: UITableViewDelegate{
