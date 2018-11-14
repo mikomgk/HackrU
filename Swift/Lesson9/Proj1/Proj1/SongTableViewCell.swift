@@ -9,10 +9,13 @@
 import UIKit
 
 class SongTableViewCell: UITableViewCell {
+	let session = URLSession(configuration: .default)
+	
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+		
+		
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
