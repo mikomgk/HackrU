@@ -13,7 +13,6 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		appImage.image = app?.image
 		nameLbl.text = app?.name
 		artistLbl.text = app?.artistName
 		urlBtn.setTitle(app?.url, for: .normal)

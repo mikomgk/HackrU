@@ -23,23 +23,10 @@ class AppDataSource {
 				let name = result["name"] as! String
 				let artworkUrl100 = result["artworkUrl100"] as! String
 				let url = result["url"] as! String
-				apps.append(AppItem(artistName: artistName, name: name, artworkUrl100: artworkUrl100, image: UIImage(), url: url))
-				let imageUrl = URL(string: artworkUrl100)!
-				let t = session.downloadTask(with: imageUrl) { (loc, res, err) in
-					if let err = err {
-						print(err)
-						return
-					}
-					if let loc = loc {
-						if let data = try? Data(contentsOf: loc) {
-							apps[i].image = UIImage(data: data) ?? UIImage()
-						}
-					}
-					DispatchQueue.main.async {
-						self.delegate?.appsArrived(apps: apps)
-					}
-				}
-				t.resume()
+				apps.append(AppItem(artistName: artistName, name: name, artworkUrl100: artworkUrl100, url: url))
+			}
+			DispatchQueue.main.async {
+				self.delegate?.appsArrived(apps: apps)
 			}
 		}
 		task.resume()

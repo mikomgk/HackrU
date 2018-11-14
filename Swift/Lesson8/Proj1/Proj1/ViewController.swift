@@ -1,4 +1,5 @@
 import UIKit
+import SDWebImage
 
 class ViewController: UIViewController {
 	
@@ -33,7 +34,8 @@ extension ViewController: UICollectionViewDataSource{
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AppCell", for: indexPath) as! AppCollectionViewCell
 		cell.appName.text = myApps[row].name
 		cell.appArtist.text = myApps[row].artistName
-		cell.appImage.image = myApps[row].image
+		let imageUrl = URL(string: myApps[row].artworkUrl100)!
+		cell.appImage.sd_setImage(with: imageUrl)
 		cell.appImage.layer.cornerRadius = 15
 		cell.appImage.layer.masksToBounds = true
 		return cell
