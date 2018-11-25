@@ -35,7 +35,7 @@ extension ViewController: UICollectionViewDataSource{
 		cell.appName.text = myApps[row].name
 		cell.appArtist.text = myApps[row].artistName
 		let imageUrl = URL(string: myApps[row].artworkUrl100)!
-		cell.appImage.sd_setImage(with: imageUrl)
+		cell.appImage.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "placeholder"))
 		cell.appImage.layer.cornerRadius = 15
 		cell.appImage.layer.masksToBounds = true
 		return cell

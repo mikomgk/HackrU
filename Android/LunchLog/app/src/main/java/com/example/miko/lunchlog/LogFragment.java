@@ -1,5 +1,6 @@
 package com.example.miko.lunchlog;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
@@ -17,24 +18,64 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import static com.example.miko.lunchlog.MainActivity.*;
 
 public class LogFragment extends Fragment {
 
     public static final String LUNCH_LOG = "LunchLog";
+    public SQLiteDatabase db;
+    public List<Meal> meals;
+    public LogAdapter adapter;
+    private Context context;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_log, container, false);
 
+        db = new ADBC(context).getWritableDatabase();
         RecyclerView logRecyclerView = view.findViewById(R.id.logRecyclerView);
         logRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        meals = new ArrayList<>();
-        getMealList();
-        adapter = new LogAdapter(meals);
+        if (meals == null) {
+            meals = new ArrayList<>();
+            getMealList();
+        }
+        if (adapter == null)
+            adapter = new LogAdapter(meals);
         logRecyclerView.setAdapter(adapter);
+        ((MainActivity) getActivity()).setAdapter(adapter);
         return view;
+    }
+
+    public void getMealList() {
+        Cursor mealsCursor = db.rawQuery("SELECT * FROM meals ORDER BY time DESC", null);
+        for (mealsCursor.moveToFirst(); !mealsCursor.isAfterLast(); mealsCursor.moveToNext()) {
+            meals.add(new Meal(
+                    mealsCursor.getInt(0),
+                    mealsCursor.getInt(1),
+                    mealsCursor.getString(2),
+                    mealsCursor.getLong(3)
+            ));
+        }
+        mealsCursor.close();
+        /*meals.sort(new Comparator<Meal>() {
+            @Override
+            public int compare(Meal meal, Meal t1) {
+                return (int) (meal.getDate() - t1.getDate());
+            }
+        });*/
+        ((MainActivity) getActivity()).setMeals(meals);
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
+    }
+
+    public void setAdapter(LogAdapter adapter) {
+        this.adapter = adapter;
     }
 }
 

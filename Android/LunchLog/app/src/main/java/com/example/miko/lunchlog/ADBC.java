@@ -3,6 +3,7 @@ package com.example.miko.lunchlog;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class ADBC extends SQLiteOpenHelper {
 

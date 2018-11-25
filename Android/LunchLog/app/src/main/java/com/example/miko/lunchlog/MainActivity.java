@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private Fragment logFragment;
     private Fragment statsFragment;
     private AlertDialog alertDialog;
-    public static SQLiteDatabase db;
-    public static List<Meal> meals;
-    public static LogAdapter adapter;
+    public SQLiteDatabase db;
+    public List<Meal> meals = null;
+    public LogAdapter adapter = null;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -99,28 +99,10 @@ public class MainActivity extends AppCompatActivity {
 
         homeFragment = new HomeFragment();
         logFragment = new LogFragment();
+        ((LogFragment) logFragment).setContext(this);
         statsFragment = new StatsFragment();
 
         replaceFragment(homeFragment);
-    }
-//todo
-    public void getMealList() {
-        Cursor mealsCursor = MainActivity.db.rawQuery("SELECT * FROM meals", null);
-        for (mealsCursor.moveToFirst(); !mealsCursor.isAfterLast(); mealsCursor.moveToNext()) {
-            meals.add(new Meal(
-                    mealsCursor.getInt(0),
-                    mealsCursor.getInt(1),
-                    mealsCursor.getString(2),
-                    mealsCursor.getLong(3)
-            ));
-        }
-        mealsCursor.close();
-        meals.sort(new Comparator<Meal>() {
-            @Override
-            public int compare(Meal meal, Meal t1) {
-                return (int) (meal.getDate() - t1.getDate());
-            }
-        });
     }
 
     private void replaceFragment(Fragment newFrag) {
@@ -146,25 +128,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addMeal(int price, String description, Long time) {
-        String sql = "INSERT INTO meals (price,description,time) VALUES(" + String.valueOf(price) + ",'" + description + "'," + String.valueOf(time) + ")";
-        db.rawQuery(sql, null);//new String[]{String.valueOf(price), description, String.valueOf(time)});
+        String sql = "INSERT INTO meals (price,description,time) VALUES(?,?,?)";
+        db.execSQL(sql, new String[]{String.valueOf(price), description, String.valueOf(time)});
         if (adapter != null) {
             Meal meal = new Meal(0, price, description, time);
             meals.add(0, meal);
             adapter.notifyItemInserted(0);
         }
-        //TODO:  send to db API
+        //TODO:  send to server db
+
+    }
+
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
+    }
+
+    public void setAdapter(LogAdapter adapter) {
+        this.adapter = adapter;
     }
 
     /*public void showInputMethod() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-    }
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+        }
 
-    public static void hideKeyboardFrom(Context context, View view) {
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }*/
+        public static void hideKeyboardFrom(Context context, View view) {
+            InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }*/
     private void closeKeyboard(View view) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
