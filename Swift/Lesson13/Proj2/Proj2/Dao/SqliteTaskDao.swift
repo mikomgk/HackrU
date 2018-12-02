@@ -3,6 +3,7 @@ import SQLite3
 
 class SqliteTaskDao: TaskDao{
 	static var shared: TaskDao = SqliteTaskDao()
+	weak var delegate: TaskDaoDelegate?
 	private let db = openDatabase()
 	let isTableExistKey = "isTableExist"
 	lazy var userDefaults = UserDefaults.standard
@@ -40,11 +41,11 @@ class SqliteTaskDao: TaskDao{
 		let _ = exec(toggleString, withPreparedStatement: status, task.id)
 	}
 	
-	func getAllTasks() -> [[Task]] {
+	func getAllTasks(){
+		var uncheckedTasks = [Task]()
+		var checkedTasks = [Task]()
 		let selectString = "SELECT * FROM tasks"
 		let results = exec(selectString)
-		var checkedTasks = [Task]()
-		var uncheckedTasks = [Task]()
 		for r in results{
 			let id = r[0]
 			let desc = r[1]
@@ -59,7 +60,7 @@ class SqliteTaskDao: TaskDao{
 			}
 			print(task)
 		}
-		return [uncheckedTasks, checkedTasks]
+		delegate?.tasksArrived(tasks: (unchecked: uncheckedTasks, checked: checkedTasks))
 	}
 	
 	private func getLstTaskId() -> String{

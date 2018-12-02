@@ -13,6 +13,13 @@ class Task: CustomStringConvertible{
 		Task.countTasks.unchecked -= 1
 		return task
 	}()
+	var json: NSDictionary {
+		return [
+			"description": desc,
+			"status": status.rawValue,
+			"orderLocation": orderLocation
+		]
+	}
 	static var countTasks: (unchecked: Int, checked: Int) = (0, 0)
 	
 	init(_ desc: String) {

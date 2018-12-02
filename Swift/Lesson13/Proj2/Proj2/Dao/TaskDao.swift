@@ -9,10 +9,15 @@
 import UIKit
 
 protocol TaskDao{
-	static var shared: TaskDao{get}
+	static var shared: TaskDao {get}
+	var delegate: TaskDaoDelegate? {get set}
 	func addTask(_ task: Task) -> String
 	func deleteTask(_ task: Task)
 	func editTask(_ task: Task, withDescription description: String)
 	func toggleTask(_ task: Task)
-	func getAllTasks() -> [[Task]]
+	func getAllTasks()
+}
+
+protocol TaskDaoDelegate: class {
+	func tasksArrived(tasks: (unchecked: [Task], checked: [Task]))
 }

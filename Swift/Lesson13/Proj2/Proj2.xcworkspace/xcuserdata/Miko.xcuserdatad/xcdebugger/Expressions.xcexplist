@@ -19,6 +19,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "TodoTableViewController.insertNewTaskCell():TodoTableViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TodoTableViewController.viewDidAppear(_:):TodoTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Auth.auth().currentUser">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "TodoTableViewController.handleTap(sender:):TodoTableViewController.swift">
       </ContextState>
       <ContextState

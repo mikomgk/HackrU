@@ -10,10 +10,6 @@ import UIKit
 import Firebase
 
 class TodoTableViewController: UITableViewController {
-	
-	@IBAction func tapped(_ sender: UITapGestureRecognizer) {
-		print("tapped")
-	}
 	var dao: TaskDao?
 	var tasks = [[Task](), [Task]()]
 	lazy var userName: String = {
@@ -22,23 +18,15 @@ class TodoTableViewController: UITableViewController {
 		return String(mail.prefix(upTo: index ?? mail.endIndex))
 	}()
 	var isInsertCell = false
+	var editCell: Int? = nil
 	var insertCell: NewTaskTableViewCell?
 	var nonInsertCellTapped: UITapGestureRecognizer!
 	var addBarBtn: UIBarButtonItem!
 	var doneBarBtn: UIBarButtonItem!
-	var cellLineHeight: CGFloat = 0
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		//todo assign dao
-		let remembered = UserDefaults.standard.bool(forKey: LoginViewController.rememberDefaultsKey)
-		if Auth.auth().currentUser == nil || remembered{
-			performSegue(withIdentifier: "loginSegue", sender: nil)
-		}
-		self.navigationItem.title = userName.capitalizingFirstLetter()
-		dao = FireTaskDao.shared
-		tasks = dao?.getAllTasks() ?? [[Task](), [Task]()]
-		
 		// Uncomment the following line to preserve selection between presentations
 		// self.clearsSelectionOnViewWillAppear = false
 		nonInsertCellTapped = UITapGestureRecognizer(target: self, action: #selector(self.handleInsertion(sender:)))
@@ -46,7 +34,20 @@ class TodoTableViewController: UITableViewController {
 		addBarBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.insertBtnTapped(sender:)))
 		doneBarBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.handleInsertion(sender:)))
 		self.navigationItem.rightBarButtonItem = addBarBtn
+		self.navigationItem.rightBarButtonItem?.isEnabled = false
 		tableView.separatorStyle = .none
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		let remembered = UserDefaults.standard.bool(forKey: LoginViewController.rememberDefaultsKey)
+		if Auth.auth().currentUser == nil || !remembered{
+			performSegue(withIdentifier: "loginSegue", sender: nil)
+		}
+		self.navigationItem.title = userName.capitalizingFirstLetter()
+		dao = FireTaskDao.shared
+		dao?.delegate = self
+		dao?.getAllTasks()
+		//tableView.reloadData()
 	}
 	
 //	@objc func handleCheckedImgTapped(sender: UITapGestureRecognizer) {
@@ -130,6 +131,10 @@ class TodoTableViewController: UITableViewController {
 		cell.taskLabel?.text = tasks[section][row].desc
 		cell.checkedImg.image = section == 0 ? UIImage(named: "unchecked") : UIImage(named: "checked")
 		return cell
+	}
+	
+	override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+		<#code#>
 	}
 	
 	override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -228,6 +233,16 @@ class TodoTableViewController: UITableViewController {
 	}
 	*/
 	
+}
+
+extension TodoTableViewController: TaskDaoDelegate{
+	func tasksArrived(tasks: (unchecked: [Task], checked: [Task])) {
+		self.tasks = [tasks.unchecked, tasks.checked]
+		DispatchQueue.main.async {
+			self.navigationItem.rightBarButtonItem?.isEnabled = true
+			self.tableView.reloadData()
+		}
+	}
 }
 
 extension String{
