@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2251091821AF082200D75576 /* NewTaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2251091721AF082200D75576 /* NewTaskTableViewCell.swift */; };
+		2251091A21AF0AE800D75576 /* TaskDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2251091921AF0AE800D75576 /* TaskDao.swift */; };
+		2276532021B17A2D00F411C8 /* SqliteTaskDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2276531F21B17A2D00F411C8 /* SqliteTaskDao.swift */; };
+		2276532721B336BA00F411C8 /* FireTaskDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2276532621B336BA00F411C8 /* FireTaskDao.swift */; };
 		228E573921AED0E100146BF0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 228E573821AED0E100146BF0 /* GoogleService-Info.plist */; };
 		228E573B21AED94E00146BF0 /* TodoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E573A21AED94E00146BF0 /* TodoTableViewController.swift */; };
 		22A19DEC21AEC661001230B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A19DEB21AEC661001230B0 /* AppDelegate.swift */; };
@@ -15,10 +19,16 @@
 		22A19DF421AEC661001230B0 /* Proj2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22A19DF221AEC661001230B0 /* Proj2.xcdatamodeld */; };
 		22A19DF621AEC663001230B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A19DF521AEC663001230B0 /* Assets.xcassets */; };
 		22A19DF921AEC663001230B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A19DF721AEC663001230B0 /* LaunchScreen.storyboard */; };
+		22C260EF21B139180096F977 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C260EE21B139180096F977 /* Task.swift */; };
+		22C260F121B15A410096F977 /* taskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C260F021B15A410096F977 /* taskTableViewCell.swift */; };
 		71D36F197AFF797120DACBE1 /* Pods_Proj2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41D238A525FE794407F896EC /* Pods_Proj2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2251091721AF082200D75576 /* NewTaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskTableViewCell.swift; sourceTree = "<group>"; };
+		2251091921AF0AE800D75576 /* TaskDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDao.swift; sourceTree = "<group>"; };
+		2276531F21B17A2D00F411C8 /* SqliteTaskDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqliteTaskDao.swift; sourceTree = "<group>"; };
+		2276532621B336BA00F411C8 /* FireTaskDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireTaskDao.swift; sourceTree = "<group>"; };
 		228E573821AED0E100146BF0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		228E573A21AED94E00146BF0 /* TodoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewController.swift; sourceTree = "<group>"; };
 		22A19DE821AEC661001230B0 /* Proj2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Proj2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -29,6 +39,8 @@
 		22A19DF521AEC663001230B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22A19DF821AEC663001230B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22A19DFA21AEC663001230B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22C260EE21B139180096F977 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		22C260F021B15A410096F977 /* taskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = taskTableViewCell.swift; sourceTree = "<group>"; };
 		41D238A525FE794407F896EC /* Pods_Proj2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Proj2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AEC5D0B08B53788311603E9 /* Pods-Proj2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Proj2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Proj2/Pods-Proj2.debug.xcconfig"; sourceTree = "<group>"; };
 		AB6BAA32AEB9E8742B51F7D8 /* Pods-Proj2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Proj2.release.xcconfig"; path = "Pods/Target Support Files/Pods-Proj2/Pods-Proj2.release.xcconfig"; sourceTree = "<group>"; };
@@ -46,6 +58,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2276532121B17A3600F411C8 /* Dao */ = {
+			isa = PBXGroup;
+			children = (
+				2251091921AF0AE800D75576 /* TaskDao.swift */,
+				2276531F21B17A2D00F411C8 /* SqliteTaskDao.swift */,
+				2276532621B336BA00F411C8 /* FireTaskDao.swift */,
+				22A19DEB21AEC661001230B0 /* AppDelegate.swift */,
+			);
+			path = Dao;
+			sourceTree = "<group>";
+		};
+		2276532321B17A6900F411C8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				22A19DED21AEC661001230B0 /* LoginViewController.swift */,
+				228E573A21AED94E00146BF0 /* TodoTableViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2276532521B17AA100F411C8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				22C260F021B15A410096F977 /* taskTableViewCell.swift */,
+				2251091721AF082200D75576 /* NewTaskTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		22A19DDF21AEC661001230B0 = {
 			isa = PBXGroup;
 			children = (
@@ -68,14 +109,15 @@
 			isa = PBXGroup;
 			children = (
 				228E573821AED0E100146BF0 /* GoogleService-Info.plist */,
-				22A19DEB21AEC661001230B0 /* AppDelegate.swift */,
-				22A19DED21AEC661001230B0 /* LoginViewController.swift */,
+				22A19DFA21AEC663001230B0 /* Info.plist */,
+				2276532521B17AA100F411C8 /* Views */,
+				2276532121B17A3600F411C8 /* Dao */,
+				2276532321B17A6900F411C8 /* ViewController */,
 				22A19DEF21AEC661001230B0 /* Main.storyboard */,
 				22A19DF521AEC663001230B0 /* Assets.xcassets */,
 				22A19DF721AEC663001230B0 /* LaunchScreen.storyboard */,
-				22A19DFA21AEC663001230B0 /* Info.plist */,
 				22A19DF221AEC661001230B0 /* Proj2.xcdatamodeld */,
-				228E573A21AED94E00146BF0 /* TodoTableViewController.swift */,
+				22C260EE21B139180096F977 /* Task.swift */,
 			);
 			path = Proj2;
 			sourceTree = "<group>";
@@ -224,10 +266,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22C260F121B15A410096F977 /* taskTableViewCell.swift in Sources */,
+				2276532021B17A2D00F411C8 /* SqliteTaskDao.swift in Sources */,
 				22A19DF421AEC661001230B0 /* Proj2.xcdatamodeld in Sources */,
 				228E573B21AED94E00146BF0 /* TodoTableViewController.swift in Sources */,
 				22A19DEE21AEC661001230B0 /* LoginViewController.swift in Sources */,
+				2251091821AF082200D75576 /* NewTaskTableViewCell.swift in Sources */,
 				22A19DEC21AEC661001230B0 /* AppDelegate.swift in Sources */,
+				22C260EF21B139180096F977 /* Task.swift in Sources */,
+				2251091A21AF0AE800D75576 /* TaskDao.swift in Sources */,
+				2276532721B336BA00F411C8 /* FireTaskDao.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "TodoTableViewController.viewDidLoad():TodoTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Auth.auth().currentUser != nil">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TodoTableViewController.doneInsertion():TodoTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "!(taskDesc?.isEmpty ?? true)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TodoTableViewController.handleTap(sender:):TodoTableViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "SqliteTaskDao.exec(_:withPreparedStatement:):SqliteTaskDao.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "arg as? Int32">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TodoTableViewController.tableView(_:cellForRowAt:):TodoTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.newDescriptionTxt.frame.size.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Task.init(_:status:orderLocation:):Task.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Task.countTasks">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Task.toggleStatus():Task.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "countTasks">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

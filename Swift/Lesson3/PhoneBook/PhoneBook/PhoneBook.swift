@@ -8,7 +8,7 @@ class PhoneBook: CustomStringConvertible{
 			phoneBookDescription += "\(contact)\n"
 		}
 		return phoneBookDescription
-	}
+	} 
 	
 	init() {
 		self.contacts = []
