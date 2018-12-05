@@ -134,7 +134,7 @@ class TodoTableViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-		<#code#>
+		print(indexPath)
 	}
 	
 	override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
