@@ -86,4 +86,5 @@ extension MLocationManager: CLLocationManagerDelegate{
 @objc protocol MLocationManagerDelegate: class {
 	func location(_ location: [CLLocation])
 	@objc optional func doWork()
+	@objc optional func doMoreWork()
 }
