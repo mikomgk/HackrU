@@ -16,7 +16,8 @@ public class MainActivity extends WearableActivity {
         // Enables Always-on
         setAmbientEnabled();
 
-        Intent intent = new Intent(this, ScreenSlidePagerActivity.class);
+        Intent intent = new Intent(this, RecyclerActivity.class);
+        intent.putExtra("index", 1);
         startActivity(intent);
     }
 
