@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.zip.Inflater;
-
 public class RecyclerViewAdapter extends WearableRecyclerView.Adapter<ListViewHolder> {
     private String[] list;
 
@@ -17,7 +15,7 @@ public class RecyclerViewAdapter extends WearableRecyclerView.Adapter<ListViewHo
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.list_layout,viewGroup,false);
+        View view = inflater.inflate(R.layout.list_cell_layout,viewGroup,false);
         return new ListViewHolder(view);
     }
 
@@ -33,6 +31,14 @@ public class RecyclerViewAdapter extends WearableRecyclerView.Adapter<ListViewHo
     }
 
     public RecyclerViewAdapter(String[] list) {
+        this.list = list;
+    }
+
+    public String[] getList() {
+        return list;
+    }
+
+    public void setList(String[] list) {
         this.list = list;
     }
 }
