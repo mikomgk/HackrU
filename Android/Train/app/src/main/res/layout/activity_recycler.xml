@@ -15,7 +15,9 @@
         android:id="@+id/tagTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:fontFamily="casual"
         android:text="@string/from"
         android:textSize="50sp" />
 

@@ -6,4 +6,5 @@
     -->
     <string name="hello_world">Hello Square World!</string>
     <string name="from">FROM</string>
+    <string name="to">TO</string>
 </resources>

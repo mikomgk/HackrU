@@ -9,8 +9,13 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.wear.widget.WearableLinearLayoutManager;
 import android.support.wear.widget.WearableRecyclerView;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class RecyclerActivity extends Activity {
 
@@ -23,20 +28,17 @@ public class RecyclerActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_recycler);
 
         Intent intent = getIntent();
         index = intent.getIntExtra("index", 1);
         from = intent.getStringExtra("from");
         to = intent.getStringExtra("to");
-
-        setContentView(R.layout.activity_recycler);
-
-        String[] list = {"ads", "das", "ads", "das", "ads", "das", "ads", "das", "ads", "das", "ads", "das"};
-
-
         tag = findViewById(R.id.tagTxt);
         recyclerView = findViewById(R.id.from_recycler_view);
+        String[] list = {"ads", "das", "ads", "das", "ads", "das", "ads", "das", "ads", "das", "ads", "das"};
 
+        tag.setText(index == 1 ? R.string.from : R.string.to);
         CustomScrollingLayoutCallback customScrollingLayoutCallback = new CustomScrollingLayoutCallback();
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(list);
         recyclerView.setAdapter(adapter);
@@ -59,8 +61,9 @@ public class RecyclerActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+
         int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
-        float move = screenWidth / 3.5f;
+        float tagMove = screenWidth / 3.5f;
         int delay = 800;
         AnimatorSet animatorSet = new AnimatorSet();
         ValueAnimator fromFadeAnim = ObjectAnimator.ofFloat(recyclerView, "alpha", 0f, 1f);
@@ -69,7 +72,7 @@ public class RecyclerActivity extends Activity {
         ValueAnimator tagFadeAnim = ObjectAnimator.ofFloat(tag, "alpha", 1f, 0.8f);
         tagFadeAnim.setStartDelay(delay);
         tagFadeAnim.setDuration(800);
-        ValueAnimator moveAnim = ObjectAnimator.ofFloat(tag, "translationX", move);
+        ValueAnimator moveAnim = ObjectAnimator.ofFloat(tag, "translationX", tagMove);
         moveAnim.setStartDelay(delay);
         moveAnim.setDuration(800);
         ValueAnimator scaleXAnim = ObjectAnimator.ofFloat(tag, "scaleX", 0.5f);
@@ -80,6 +83,22 @@ public class RecyclerActivity extends Activity {
         scaleYAnim.setDuration(800);
         animatorSet.play(tagFadeAnim).with(moveAnim).with(scaleXAnim).with(scaleYAnim).with(fromFadeAnim);
         animatorSet.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Timer timer =new java.util.Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                recyclerView.setAlpha(0);
+                tag.setScaleX(1f);
+                tag.setScaleY(1f);
+                tag.setTranslationX(0f);
+                tag.setAlpha(1);
+            }
+        }, 1000);
     }
 
     private void onClickAction(String data) {
