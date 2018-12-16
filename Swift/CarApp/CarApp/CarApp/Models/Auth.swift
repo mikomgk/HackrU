@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CommonCrypto
 
 class Auth{
 	public static let shared = Auth()
