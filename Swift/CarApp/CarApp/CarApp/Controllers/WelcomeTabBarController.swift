@@ -10,13 +10,18 @@ import UIKit
 
 class WelcomeTabBarController: UITabBarController {
 
+	let auth = Auth.shared
+	var token: String?
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		token = auth.getToken()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
-		performSegue(withIdentifier: "auth", sender: nil)
+		if true{//token == nil{
+			performSegue(withIdentifier: "auth", sender: nil)
+		}
 	}
-
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "WelcomeTabBarController.viewDidLoad():WelcomeTabBarController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "RegisterViewController.viewDidAppear(_:):RegisterViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AuthViewController.viewWillAppear(_:):AuthViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AuthViewController.textFieldStarted(_:):AuthViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "txts.firstIndex(of: sender)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
