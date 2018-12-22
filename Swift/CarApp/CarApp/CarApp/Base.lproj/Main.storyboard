@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HX7-a8-r5w">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="o0x-Gk-OqP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,21 +10,31 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--יומן-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LogViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5LS-8C-3KG">
+                                <rect key="frame" x="164" y="160" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="ta:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vB3-RC-Mel"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="XLb-9y-KJ5"/>
+                    <tabBarItem key="tabBarItem" title="יומן" image="log" selectedImage="log" id="XLb-9y-KJ5"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="133.5832083958021"/>
+            <point key="canvasLocation" x="1014" y="-1246"/>
         </scene>
         <!--Auth View Controller-->
         <scene sceneID="AFQ-HD-KwF">
@@ -156,7 +166,7 @@
                                         <rect key="frame" x="32" y="93" width="311" height="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="next" textContentType="name"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="name"/>
                                         <connections>
                                             <action selector="textFieldChanged:" destination="EeL-dn-zBF" eventType="editingChanged" id="V7j-5v-POj"/>
                                             <action selector="textFieldEnded:" destination="EeL-dn-zBF" eventType="editingDidEnd" id="6Kj-cn-mLD"/>
@@ -173,7 +183,7 @@
                                         <rect key="frame" x="32" y="150" width="311" height="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="next" textContentType="name"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="name"/>
                                         <connections>
                                             <action selector="textFieldChanged:" destination="EeL-dn-zBF" eventType="editingChanged" id="oKB-1a-d78"/>
                                             <action selector="textFieldEnded:" destination="EeL-dn-zBF" eventType="editingDidEnd" id="fue-gG-xgY"/>
@@ -217,7 +227,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="סיסמה" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LYr-ew-cf1">
                                         <rect key="frame" x="38" y="264" width="44.5" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" white="0.67000000000000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cp2-LJ-Z9L">
@@ -376,7 +386,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RS9-Zk-cmO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-631" y="134"/>
+            <point key="canvasLocation" x="-1551" y="134"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ney-JO-FhC">
+            <objects>
+                <viewController id="o0x-Gk-OqP" customClass="ViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Sta-jD-anY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="rri-uD-sDs"/>
+                    </view>
+                    <connections>
+                        <segue destination="EeL-dn-zBF" kind="show" identifier="auth" id="mBM-mO-sbv"/>
+                        <segue destination="HX7-a8-r5w" kind="show" identifier="app" id="49I-jy-esj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lzV-E0-0xU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-674" y="134"/>
         </scene>
         <!--Welcome Tab Bar Controller-->
         <scene sceneID="UwZ-Lg-YIp">
@@ -390,15 +419,86 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="eAX-nF-BWJ"/>
-                        <segue destination="EeL-dn-zBF" kind="show" identifier="auth" id="mg1-JA-uL4"/>
+                        <segue destination="ZIO-r5-I6Z" kind="relationship" relationship="viewControllers" id="bCG-VH-6P6"/>
+                        <segue destination="XiF-pg-rCM" kind="relationship" relationship="viewControllers" id="NdO-yr-ON2"/>
+                        <segue destination="yIx-9G-Elx" kind="relationship" relationship="viewControllers" id="aem-ha-ewe"/>
+                        <segue destination="Uo2-sU-255" kind="relationship" relationship="viewControllers" id="a74-wQ-8QY"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kga-Fm-ECv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
+        <!--מפה-->
+        <scene sceneID="YL2-Dp-srZ">
+            <objects>
+                <viewController id="ZIO-r5-I6Z" customClass="MapViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hl8-Aq-pOa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="1V8-5I-ArE"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="מפה" image="map" selectedImage="map" id="W5d-B5-VtO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OZF-b3-6hf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1014" y="-560"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="rvz-S5-s19">
+            <objects>
+                <viewController id="XiF-pg-rCM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sGY-cF-WpA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="BWj-YO-vBm"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" id="PLI-LI-crL"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dEA-AB-jG8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1014" y="134"/>
+        </scene>
+        <!--דוחות-->
+        <scene sceneID="Wgs-ZH-Bnj">
+            <objects>
+                <viewController id="yIx-9G-Elx" customClass="ReportViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HhB-z7-eL3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="xAR-yz-cOt"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="דוחות" image="report" selectedImage="report" id="7Gt-QF-zX0"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kqu-Yd-aXP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1014" y="847"/>
+        </scene>
+        <!--נתונים-->
+        <scene sceneID="FUD-F4-8XY">
+            <objects>
+                <viewController id="Uo2-sU-255" customClass="GraphsViewController" customModule="CarApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z3j-fb-uwd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="i2m-nw-4yO"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="נתונים" image="graph" selectedImage="graph" id="zt7-Nv-0ng"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rhO-kI-S8X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1014" y="1529"/>
+        </scene>
     </scenes>
     <resources>
         <image name="background" width="259" height="194"/>
+        <image name="graph" width="60" height="60"/>
+        <image name="log" width="60" height="60"/>
+        <image name="map" width="60" height="60"/>
+        <image name="report" width="60" height="60"/>
     </resources>
 </document>

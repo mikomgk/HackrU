@@ -41,27 +41,30 @@ class Auth{
 			}else if let data = data{
 				let token = String(data: data, encoding: .utf8)
 				if token == nil || token!.isEmpty{
+					print(self.wrongCertificateMessage)
 					err = self.wrongCertificateMessage
 				}else{
+					print(token!)
 					self.saveToken(token!)
 					success = true
 				}
 			}
+			print("going to update screen")
 			DispatchQueue.main.async {
+				print("updating....")
 				self.delegate?.onLogin(success: success, withError: err)
 			}
+			print("update sent")
 		}
 	}
 	
-	func register(){
-		
-	}
-	
-	private func saveToken(_ token: String){
+	private func saveToken(_ token: String) -> Bool{
 		do{
 			try keyChainToken.savePassword(token)
+			return true
 		}catch{
-			fatalError("Error Saving to keychain \(error)")
+			print("Error Saving to keychain \(error)")
+			return false
 		}
 	}
 	
@@ -71,6 +74,19 @@ class Auth{
 		}catch{
 			return nil
 		}
+	}
+	
+	func deleteToken() -> Bool{
+		do{
+			try keyChainToken.deleteItem()
+			return true
+		}catch{
+			return false
+		}
+	}
+	
+	func updateToken(_ token: String) -> Bool{
+		return saveToken(token)
 	}
 	
 	private func sha256(string: String) -> Data? {

@@ -30,8 +30,10 @@ class AuthDal{
 		request.httpMethod = "POST"
 		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 		request.httpBody = userJson
+		print("user is going to be send")
 		URLSession.shared.dataTask(with: request) { (data, res, err) in
 			callback(data, err)
 		}.resume()
+		print("user sent")
 	}
 }

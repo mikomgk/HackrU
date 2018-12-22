@@ -170,15 +170,18 @@ class AuthViewController: UIViewController {
 		}else{
 			user = LoginUser(email: email, password: password)
 		}
+		print("user to send:\n\(user)")
 		auth.loginSignup(withUser: user)
 	}
 	
 	@IBAction func semiBtnTapped(_ sender: UIButton) {
+		print(semiBtnTapped)
 		toogleView()
 	}
 	
 	@IBAction func actionBtnTapped(_ sender: UIButton) {
 		view.endEditing(true)
+		print(actionBtnTapped)
 		loginSignup()
 	}
 	
@@ -357,68 +360,43 @@ extension UITextField {
 
 extension UIViewController {
 	func hideKeyboardWhenTappedAround() {
-		let backgroundTapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.hideKeyboard))
-		backgroundTapRecognizer.cancelsTouchesInView = false
-		view.addGestureRecognizer(backgroundTapRecognizer)
+		let keyboardBackgroundTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+		keyboardBackgroundTapRecognizer.cancelsTouchesInView = false
+		view.addGestureRecognizer(keyboardBackgroundTapRecognizer)
 	}
 	
 	@objc func hideKeyboard() {
 		view.endEditing(true)
 	}
+	
+	var deviceModel: Model{
+		return UIDevice().type
+	}
+	
+	var isXDevice: Bool{
+		return deviceModel.rawValue.contains("X")
+	}
 }
 
 extension String{
 	var isValidName: Bool{
-		return !isEmpty && count >= 2
+		let nameRegex = "^[\\p{L}\\s'’׳.]{2,25}$"
+		return !isEmpty && matches(regex: nameRegex)
 	}
 	
 	var isValidEmail: Bool{
 		let emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}$"
-		return !isEmpty && matches(emailRegex)
+		return !isEmpty && matches(regex: emailRegex)
 	}
 	
 	var isValidPassword: Bool{
 		let passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{8,})"
-		return !isEmpty && matches(passwordRegex)
-//		if isEmpty || count < 8 { return false }
-//		var upper = false
-//		var lower = false
-//		var digit = false
-//		var symbol = false
-//		for c in self{
-//			if c.isUppercase{
-//				upper = true
-//			}else if c.isLowercase{
-//				lower = true
-//			}else if c.isDigit{
-//				digit = true
-//			}else if c.isSymbol{
-//				symbol = true
-//			}
-//		}
-//		return upper && lower && digit && symbol
+		return !isEmpty && matches(regex: passwordRegex)
+		
 	}
 	
-	func matches(_ regex: String) -> Bool{
+	func matches(regex: String) -> Bool{
 		return range(of: regex, options: .regularExpression) != nil
-	}
-}
-
-extension Character{
-	var isUppercase: Bool{
-		return "A"..."Z" ~= self
-	}
-	
-	var isLowercase: Bool{
-		return "a"..."z" ~= self
-	}
-	
-	var isDigit: Bool{
-		return "0"..."9" ~= self
-	}
-	
-	var isSymbol: Bool{
-		return self == "!" || "#"..."&" ~= self || self == "@"
 	}
 }
 

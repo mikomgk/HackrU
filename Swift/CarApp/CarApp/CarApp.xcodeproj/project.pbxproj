@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		2298512121CAD09700A555D0 /* AuthDal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298512021CAD09700A555D0 /* AuthDal.swift */; };
+		22FDB45421CD99D80043E54A /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FDB45321CD99D80043E54A /* LogViewController.swift */; };
+		22FDB45621CD99EA0043E54A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FDB45521CD99EA0043E54A /* MapViewController.swift */; };
+		22FDB45821CD99F40043E54A /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FDB45721CD99F40043E54A /* ReportViewController.swift */; };
+		22FDB45A21CD9A0E0043E54A /* GraphsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FDB45921CD9A0E0043E54A /* GraphsViewController.swift */; };
+		22FDB45C21CDA06D0043E54A /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FDB45B21CDA06D0043E54A /* DeviceModel.swift */; };
 		22FFF3D821C649C300E55F2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FFF3D721C649C300E55F2D /* AppDelegate.swift */; };
 		22FFF3DA21C649C300E55F2D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FFF3D921C649C300E55F2D /* ViewController.swift */; };
 		22FFF3DD21C649C300E55F2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22FFF3DB21C649C300E55F2D /* Main.storyboard */; };
@@ -22,6 +27,11 @@
 
 /* Begin PBXFileReference section */
 		2298512021CAD09700A555D0 /* AuthDal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDal.swift; sourceTree = "<group>"; };
+		22FDB45321CD99D80043E54A /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		22FDB45521CD99EA0043E54A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		22FDB45721CD99F40043E54A /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		22FDB45921CD9A0E0043E54A /* GraphsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphsViewController.swift; sourceTree = "<group>"; };
+		22FDB45B21CDA06D0043E54A /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
 		22FFF3D421C649C300E55F2D /* CarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22FFF3D721C649C300E55F2D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22FFF3D921C649C300E55F2D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +97,10 @@
 				22FFF3D921C649C300E55F2D /* ViewController.swift */,
 				22FFF3F221C64AD700E55F2D /* WelcomeTabBarController.swift */,
 				22FFF3F021C64AB500E55F2D /* AuthViewController.swift */,
+				22FDB45321CD99D80043E54A /* LogViewController.swift */,
+				22FDB45521CD99EA0043E54A /* MapViewController.swift */,
+				22FDB45721CD99F40043E54A /* ReportViewController.swift */,
+				22FDB45921CD9A0E0043E54A /* GraphsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -102,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				22FFF3F421C64B1200E55F2D /* Auth.swift */,
+				22FDB45B21CDA06D0043E54A /* DeviceModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -186,8 +201,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				22FFF3F121C64AB500E55F2D /* AuthViewController.swift in Sources */,
+				22FDB45C21CDA06D0043E54A /* DeviceModel.swift in Sources */,
+				22FDB45A21CD9A0E0043E54A /* GraphsViewController.swift in Sources */,
 				22FFF3F321C64AD700E55F2D /* WelcomeTabBarController.swift in Sources */,
 				22FFF3E021C649C300E55F2D /* CarApp.xcdatamodeld in Sources */,
+				22FDB45621CD99EA0043E54A /* MapViewController.swift in Sources */,
+				22FDB45821CD99F40043E54A /* ReportViewController.swift in Sources */,
+				22FDB45421CD99D80043E54A /* LogViewController.swift in Sources */,
 				2298512121CAD09700A555D0 /* AuthDal.swift in Sources */,
 				22FFF3FD21C69BBF00E55F2D /* KeychainPasswordItem.swift in Sources */,
 				22FFF3DA21C649C300E55F2D /* ViewController.swift in Sources */,

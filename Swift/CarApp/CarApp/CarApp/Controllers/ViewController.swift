@@ -10,11 +10,22 @@ import UIKit
 
 class ViewController: UIViewController {
 
+	let auth = Auth.shared
+	var token: String?
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+		//auth.deleteToken()
 	}
-
-
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		token = auth.getToken()
+		if token == nil{//TODO: check if logic
+			performSegue(withIdentifier: "auth", sender: nil)
+		}else{
+			performSegue(withIdentifier: "app", sender: nil)
+		}
+	}
 }
 
