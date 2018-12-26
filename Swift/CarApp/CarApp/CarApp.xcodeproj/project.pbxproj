@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2263548B21D20DEB0010BC2E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2263548A21D20DEB0010BC2E /* LocationManager.swift */; };
 		2298512121CAD09700A555D0 /* AuthDal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298512021CAD09700A555D0 /* AuthDal.swift */; };
 		22FDB45421CD99D80043E54A /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FDB45321CD99D80043E54A /* LogViewController.swift */; };
 		22FDB45621CD99EA0043E54A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FDB45521CD99EA0043E54A /* MapViewController.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2263548A21D20DEB0010BC2E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		2298512021CAD09700A555D0 /* AuthDal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDal.swift; sourceTree = "<group>"; };
 		22FDB45321CD99D80043E54A /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		22FDB45521CD99EA0043E54A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			children = (
 				22FFF3F421C64B1200E55F2D /* Auth.swift */,
 				22FDB45B21CDA06D0043E54A /* DeviceModel.swift */,
+				2263548A21D20DEB0010BC2E /* LocationManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				22FDB45421CD99D80043E54A /* LogViewController.swift in Sources */,
 				2298512121CAD09700A555D0 /* AuthDal.swift in Sources */,
 				22FFF3FD21C69BBF00E55F2D /* KeychainPasswordItem.swift in Sources */,
+				2263548B21D20DEB0010BC2E /* LocationManager.swift in Sources */,
 				22FFF3DA21C649C300E55F2D /* ViewController.swift in Sources */,
 				22FFF3D821C649C300E55F2D /* AppDelegate.swift in Sources */,
 				22FFF3F521C64B1200E55F2D /* Auth.swift in Sources */,

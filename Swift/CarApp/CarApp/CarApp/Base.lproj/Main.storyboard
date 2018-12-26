@@ -17,16 +17,6 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5LS-8C-3KG">
-                                <rect key="frame" x="164" y="160" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="ta:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vB3-RC-Mel"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -436,14 +426,59 @@
                     <view key="view" contentMode="scaleToFill" id="hl8-Aq-pOa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCe-OU-rf4">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                            </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="W62-dx-fUS">
+                                <rect key="frame" x="16" y="36" width="146" height="29"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <segments>
+                                    <segment title="מפה"/>
+                                    <segment title="לווין"/>
+                                    <segment title="משולב"/>
+                                </segments>
+                                <connections>
+                                    <action selector="mapSwitched:" destination="ZIO-r5-I6Z" eventType="valueChanged" id="eqp-50-HJY"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7f-aP-LWX">
+                                <rect key="frame" x="309" y="552" width="50" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="0.8203660102739726" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="Bqu-JN-7gc"/>
+                                    <constraint firstAttribute="height" constant="50" id="dbG-zT-CvP"/>
+                                </constraints>
+                                <state key="normal" image="myLocation"/>
+                                <connections>
+                                    <action selector="centerUserLocationTapped:" destination="ZIO-r5-I6Z" eventType="touchUpInside" id="lSk-mi-aCB"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1V8-5I-ArE" firstAttribute="trailing" secondItem="J7f-aP-LWX" secondAttribute="trailing" constant="16" id="9CM-li-FFz"/>
+                            <constraint firstItem="1V8-5I-ArE" firstAttribute="bottom" secondItem="J7f-aP-LWX" secondAttribute="bottom" constant="16" id="Bcl-MC-OQA"/>
+                            <constraint firstItem="W62-dx-fUS" firstAttribute="top" secondItem="1V8-5I-ArE" secondAttribute="top" constant="16" id="Mh9-OK-db0"/>
+                            <constraint firstItem="nCe-OU-rf4" firstAttribute="leading" secondItem="1V8-5I-ArE" secondAttribute="leading" id="QUu-eQ-fnY"/>
+                            <constraint firstItem="1V8-5I-ArE" firstAttribute="bottom" secondItem="nCe-OU-rf4" secondAttribute="bottom" id="WOC-wB-YFT"/>
+                            <constraint firstItem="1V8-5I-ArE" firstAttribute="trailing" secondItem="nCe-OU-rf4" secondAttribute="trailing" id="d61-AT-bf9"/>
+                            <constraint firstItem="W62-dx-fUS" firstAttribute="leading" secondItem="1V8-5I-ArE" secondAttribute="leading" constant="16" id="ebN-vH-Kzp"/>
+                            <constraint firstItem="1V8-5I-ArE" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="W62-dx-fUS" secondAttribute="trailing" symbolic="YES" id="kKW-dl-qvb"/>
+                            <constraint firstItem="nCe-OU-rf4" firstAttribute="top" secondItem="hl8-Aq-pOa" secondAttribute="top" id="tSj-O0-OPd"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="1V8-5I-ArE"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="מפה" image="map" selectedImage="map" id="W5d-B5-VtO"/>
+                    <connections>
+                        <outlet property="centerUserLocationBtn" destination="J7f-aP-LWX" id="gF8-od-w5Y"/>
+                        <outlet property="mapSwitch" destination="W62-dx-fUS" id="98l-oQ-r7k"/>
+                        <outlet property="mapView" destination="nCe-OU-rf4" id="PRC-EA-Gpc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OZF-b3-6hf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1014" y="-560"/>
+            <point key="canvasLocation" x="1013.6" y="-560.86956521739137"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="rvz-S5-s19">
@@ -499,6 +534,7 @@
         <image name="graph" width="60" height="60"/>
         <image name="log" width="60" height="60"/>
         <image name="map" width="60" height="60"/>
+        <image name="myLocation" width="50" height="50"/>
         <image name="report" width="60" height="60"/>
     </resources>
 </document>
