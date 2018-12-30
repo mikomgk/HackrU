@@ -8,7 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		2263548B21D20DEB0010BC2E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2263548A21D20DEB0010BC2E /* LocationManager.swift */; };
+		2263549421D3BF700010BC2E /* EntitiesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2263549321D3BF700010BC2E /* EntitiesEnum.swift */; };
+		2263549621D3C3A00010BC2E /* CoreEntitiesDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2263549521D3C3A00010BC2E /* CoreEntitiesDao.swift */; };
+		2263549821D3E1120010BC2E /* ServerEntitiesDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2263549721D3E1120010BC2E /* ServerEntitiesDao.swift */; };
 		2298512121CAD09700A555D0 /* AuthDal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298512021CAD09700A555D0 /* AuthDal.swift */; };
+		22B7BE4821D641640080A9E2 /* Refuel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7BE3A21D641640080A9E2 /* Refuel+CoreDataClass.swift */; };
+		22B7BE4921D641640080A9E2 /* Refuel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7BE3B21D641640080A9E2 /* Refuel+CoreDataProperties.swift */; };
+		22B7BE4A21D641640080A9E2 /* Entity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7BE3C21D641640080A9E2 /* Entity+CoreDataClass.swift */; };
+		22B7BE4B21D641640080A9E2 /* Entity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7BE3D21D641640080A9E2 /* Entity+CoreDataProperties.swift */; };
+		22B7BE4C21D641640080A9E2 /* ServiceType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7BE3E21D641640080A9E2 /* ServiceType+CoreDataClass.swift */; };
+		22B7BE4D21D641640080A9E2 /* ServiceType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7BE3F21D641640080A9E2 /* ServiceType+CoreDataProperties.swift */; };
+		22B7BE4E21D641640080A9E2 /* Car+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7BE4021D641640080A9E2 /* Car+CoreDataClass.swift */; };
+		22B7BE4F21D641640080A9E2 /* Car+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7BE4121D641640080A9E2 /* Car+CoreDataProperties.swift */; };
+		22B7BE5021D641640080A9E2 /* Garage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7BE4221D641640080A9E2 /* Garage+CoreDataClass.swift */; };
+		22B7BE5121D641640080A9E2 /* Garage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7BE4321D641640080A9E2 /* Garage+CoreDataProperties.swift */; };
+		22B7BE5221D641640080A9E2 /* Expense+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7BE4421D641640080A9E2 /* Expense+CoreDataClass.swift */; };
+		22B7BE5321D641640080A9E2 /* Expense+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7BE4521D641640080A9E2 /* Expense+CoreDataProperties.swift */; };
+		22B7BE5421D641640080A9E2 /* Service+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7BE4621D641640080A9E2 /* Service+CoreDataClass.swift */; };
+		22B7BE5521D641650080A9E2 /* Service+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7BE4721D641640080A9E2 /* Service+CoreDataProperties.swift */; };
 		22FDB45421CD99D80043E54A /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FDB45321CD99D80043E54A /* LogViewController.swift */; };
 		22FDB45621CD99EA0043E54A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FDB45521CD99EA0043E54A /* MapViewController.swift */; };
 		22FDB45821CD99F40043E54A /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FDB45721CD99F40043E54A /* ReportViewController.swift */; };
@@ -28,7 +45,24 @@
 
 /* Begin PBXFileReference section */
 		2263548A21D20DEB0010BC2E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		2263549321D3BF700010BC2E /* EntitiesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesEnum.swift; sourceTree = "<group>"; };
+		2263549521D3C3A00010BC2E /* CoreEntitiesDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreEntitiesDao.swift; sourceTree = "<group>"; };
+		2263549721D3E1120010BC2E /* ServerEntitiesDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerEntitiesDao.swift; sourceTree = "<group>"; };
 		2298512021CAD09700A555D0 /* AuthDal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDal.swift; sourceTree = "<group>"; };
+		22B7BE3A21D641640080A9E2 /* Refuel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Refuel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		22B7BE3B21D641640080A9E2 /* Refuel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Refuel+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		22B7BE3C21D641640080A9E2 /* Entity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		22B7BE3D21D641640080A9E2 /* Entity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		22B7BE3E21D641640080A9E2 /* ServiceType+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ServiceType+CoreDataClass.swift"; sourceTree = "<group>"; };
+		22B7BE3F21D641640080A9E2 /* ServiceType+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ServiceType+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		22B7BE4021D641640080A9E2 /* Car+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataClass.swift"; sourceTree = "<group>"; };
+		22B7BE4121D641640080A9E2 /* Car+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		22B7BE4221D641640080A9E2 /* Garage+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Garage+CoreDataClass.swift"; sourceTree = "<group>"; };
+		22B7BE4321D641640080A9E2 /* Garage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Garage+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		22B7BE4421D641640080A9E2 /* Expense+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Expense+CoreDataClass.swift"; sourceTree = "<group>"; };
+		22B7BE4521D641640080A9E2 /* Expense+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Expense+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		22B7BE4621D641640080A9E2 /* Service+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+CoreDataClass.swift"; sourceTree = "<group>"; };
+		22B7BE4721D641640080A9E2 /* Service+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Service+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		22FDB45321CD99D80043E54A /* LogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		22FDB45521CD99EA0043E54A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		22FDB45721CD99F40043E54A /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +96,20 @@
 		22FFF3CB21C649C300E55F2D = {
 			isa = PBXGroup;
 			children = (
+				22B7BE3A21D641640080A9E2 /* Refuel+CoreDataClass.swift */,
+				22B7BE3B21D641640080A9E2 /* Refuel+CoreDataProperties.swift */,
+				22B7BE3C21D641640080A9E2 /* Entity+CoreDataClass.swift */,
+				22B7BE3D21D641640080A9E2 /* Entity+CoreDataProperties.swift */,
+				22B7BE3E21D641640080A9E2 /* ServiceType+CoreDataClass.swift */,
+				22B7BE3F21D641640080A9E2 /* ServiceType+CoreDataProperties.swift */,
+				22B7BE4021D641640080A9E2 /* Car+CoreDataClass.swift */,
+				22B7BE4121D641640080A9E2 /* Car+CoreDataProperties.swift */,
+				22B7BE4221D641640080A9E2 /* Garage+CoreDataClass.swift */,
+				22B7BE4321D641640080A9E2 /* Garage+CoreDataProperties.swift */,
+				22B7BE4421D641640080A9E2 /* Expense+CoreDataClass.swift */,
+				22B7BE4521D641640080A9E2 /* Expense+CoreDataProperties.swift */,
+				22B7BE4621D641640080A9E2 /* Service+CoreDataClass.swift */,
+				22B7BE4721D641640080A9E2 /* Service+CoreDataProperties.swift */,
 				22FFF3D621C649C300E55F2D /* CarApp */,
 				22FFF3D521C649C300E55F2D /* Products */,
 			);
@@ -120,6 +168,7 @@
 				22FFF3F421C64B1200E55F2D /* Auth.swift */,
 				22FDB45B21CDA06D0043E54A /* DeviceModel.swift */,
 				2263548A21D20DEB0010BC2E /* LocationManager.swift */,
+				2263549321D3BF700010BC2E /* EntitiesEnum.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -128,6 +177,8 @@
 			isa = PBXGroup;
 			children = (
 				2298512021CAD09700A555D0 /* AuthDal.swift */,
+				2263549721D3E1120010BC2E /* ServerEntitiesDao.swift */,
+				2263549521D3C3A00010BC2E /* CoreEntitiesDao.swift */,
 			);
 			path = Dal;
 			sourceTree = "<group>";
@@ -203,20 +254,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22B7BE4C21D641640080A9E2 /* ServiceType+CoreDataClass.swift in Sources */,
+				22B7BE4921D641640080A9E2 /* Refuel+CoreDataProperties.swift in Sources */,
 				22FFF3F121C64AB500E55F2D /* AuthViewController.swift in Sources */,
+				22B7BE4E21D641640080A9E2 /* Car+CoreDataClass.swift in Sources */,
 				22FDB45C21CDA06D0043E54A /* DeviceModel.swift in Sources */,
 				22FDB45A21CD9A0E0043E54A /* GraphsViewController.swift in Sources */,
+				22B7BE4D21D641640080A9E2 /* ServiceType+CoreDataProperties.swift in Sources */,
+				22B7BE4B21D641640080A9E2 /* Entity+CoreDataProperties.swift in Sources */,
+				22B7BE5121D641640080A9E2 /* Garage+CoreDataProperties.swift in Sources */,
 				22FFF3F321C64AD700E55F2D /* WelcomeTabBarController.swift in Sources */,
+				22B7BE4A21D641640080A9E2 /* Entity+CoreDataClass.swift in Sources */,
+				22B7BE5421D641640080A9E2 /* Service+CoreDataClass.swift in Sources */,
+				2263549421D3BF700010BC2E /* EntitiesEnum.swift in Sources */,
 				22FFF3E021C649C300E55F2D /* CarApp.xcdatamodeld in Sources */,
+				22B7BE5521D641650080A9E2 /* Service+CoreDataProperties.swift in Sources */,
 				22FDB45621CD99EA0043E54A /* MapViewController.swift in Sources */,
 				22FDB45821CD99F40043E54A /* ReportViewController.swift in Sources */,
+				22B7BE4F21D641640080A9E2 /* Car+CoreDataProperties.swift in Sources */,
 				22FDB45421CD99D80043E54A /* LogViewController.swift in Sources */,
+				2263549821D3E1120010BC2E /* ServerEntitiesDao.swift in Sources */,
 				2298512121CAD09700A555D0 /* AuthDal.swift in Sources */,
+				22B7BE5221D641640080A9E2 /* Expense+CoreDataClass.swift in Sources */,
+				22B7BE5021D641640080A9E2 /* Garage+CoreDataClass.swift in Sources */,
 				22FFF3FD21C69BBF00E55F2D /* KeychainPasswordItem.swift in Sources */,
 				2263548B21D20DEB0010BC2E /* LocationManager.swift in Sources */,
 				22FFF3DA21C649C300E55F2D /* ViewController.swift in Sources */,
 				22FFF3D821C649C300E55F2D /* AppDelegate.swift in Sources */,
+				22B7BE5321D641640080A9E2 /* Expense+CoreDataProperties.swift in Sources */,
+				22B7BE4821D641640080A9E2 /* Refuel+CoreDataClass.swift in Sources */,
 				22FFF3F521C64B1200E55F2D /* Auth.swift in Sources */,
+				2263549621D3C3A00010BC2E /* CoreEntitiesDao.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

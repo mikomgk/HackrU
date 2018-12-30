@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CarApp/Models/Auth.swift"
-            timestampString = "567182453.947571"
+            timestampString = "567534161.547063"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "93"
@@ -47,8 +47,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "302"
             endingLineNumber = "302"
-            landmarkName = "onLogin(success:withError:)"
-            landmarkType = "7">
+            landmarkName = "AuthViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CarApp/Models/Auth.swift"
-            timestampString = "567182453.948413"
+            timestampString = "567534161.547254"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "41"

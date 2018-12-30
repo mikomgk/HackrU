@@ -42,6 +42,3 @@ class LogViewController: UIViewController {
     */
 
 }
-
-typealias JSONObject = [String: Any]
-typealias JSONArray = [JSONObject]

@@ -16,7 +16,6 @@ class AuthViewController: UIViewController {
 	@IBOutlet var views: [UIView]!
 	@IBOutlet weak var registerTitleLbl: UILabel!
 	
-	
 	@IBOutlet var errorLbl: [UILabel]!
 	@IBOutlet var actionBtn: [UIButton]!
 	@IBOutlet var semiBtn: [UIButton]!
@@ -24,7 +23,6 @@ class AuthViewController: UIViewController {
 	@IBOutlet var actionBtnRightConstraint: [NSLayoutConstraint]!
 	@IBOutlet var actionBtnBottomConstraint: [NSLayoutConstraint]!
 	@IBOutlet var semiBtnBottomConstraint: [NSLayoutConstraint]!
-	
 	
 	@IBOutlet weak var loginEmailTxt: UITextField!
 	@IBOutlet weak var loginPasswordTxt: UITextField!
@@ -108,6 +106,10 @@ class AuthViewController: UIViewController {
 		
 		self.hideKeyboardWhenTappedAround()
 		auth.delegate = self
+	}
+	
+	deinit {
+		NotificationCenter.default.removeObserver(self)
 	}
 	
 	func validationChanged(){

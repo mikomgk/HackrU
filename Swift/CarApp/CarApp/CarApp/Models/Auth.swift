@@ -20,7 +20,7 @@ class Auth{
 	let wrongCertificateMessage = "שם משתמש או סיסמה שגויים"
 	let basicErrorMessage = "קרתה שגיאה אנא נסה שוב מאוחר יותר"
 	lazy var keyChainToken: KeychainPasswordItem = {
-		return KeychainPasswordItem(service: SERVICE_NAME, account: TOKEN)
+		return KeychainPasswordItem(service: SERVICE_NAME, account: TOKEN)//TODO: change 'token' to user_id
 	}()
 	
 	private init (){}

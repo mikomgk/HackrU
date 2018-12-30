@@ -17,7 +17,6 @@ class ViewController: UIViewController {
 		super.viewDidLoad()
 		//auth.deleteToken()
 		
-		
 //		let i = UIImage(named: "plus")
 //		let d: Data = i!.pngData()!
 //		let b = d.base64EncodedString()
@@ -25,8 +24,8 @@ class ViewController: UIViewController {
 //		print(b)
 //		var body = "key=".data(using: .utf8)!
 //		body.append(d)
-//		
-//		
+//
+//
 //		var url = URLComponents(string: "https://carlogapp.herokuapp.com/image")!
 //		url.queryItems = [URLQueryItem(name: "image", value: "save")]
 //		print(url.string!)
