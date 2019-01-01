@@ -2,8 +2,8 @@
 //  Expense+CoreDataProperties.swift
 //  CarApp
 //
-//  Created by Miko Stern on 12/30/18.
-//  Copyright © 2018 Miko Stern. All rights reserved.
+//  Created by Miko Stern on 1/1/19.
+//  Copyright © 2019 Miko Stern. All rights reserved.
 //
 //
 

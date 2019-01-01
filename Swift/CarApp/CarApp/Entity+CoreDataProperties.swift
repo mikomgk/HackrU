@@ -2,8 +2,8 @@
 //  Entity+CoreDataProperties.swift
 //  CarApp
 //
-//  Created by Miko Stern on 12/30/18.
-//  Copyright © 2018 Miko Stern. All rights reserved.
+//  Created by Miko Stern on 1/1/19.
+//  Copyright © 2019 Miko Stern. All rights reserved.
 //
 //
 
@@ -18,8 +18,9 @@ extension Entity {
     }
 
     @NSManaged public var id: Int32
-    @NSManaged public var sync_status: Int32
     @NSManaged public var is_deleted: Bool
     @NSManaged public var is_uuid: Bool
+    @NSManaged public var last_modified: NSDate?
+    @NSManaged public var sync_status: Int32
 
 }

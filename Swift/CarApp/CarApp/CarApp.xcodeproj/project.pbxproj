@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2251360821DADDC400C4EF0F /* Station+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2251360421DADDC400C4EF0F /* Station+CoreDataClass.swift */; };
+		2251360921DADDC400C4EF0F /* Station+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2251360521DADDC400C4EF0F /* Station+CoreDataProperties.swift */; };
+		2251360A21DADDC400C4EF0F /* StationCompany+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2251360621DADDC400C4EF0F /* StationCompany+CoreDataClass.swift */; };
+		2251360B21DADDC400C4EF0F /* StationCompany+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2251360721DADDC400C4EF0F /* StationCompany+CoreDataProperties.swift */; };
 		2263548B21D20DEB0010BC2E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2263548A21D20DEB0010BC2E /* LocationManager.swift */; };
 		2263549421D3BF700010BC2E /* EntitiesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2263549321D3BF700010BC2E /* EntitiesEnum.swift */; };
 		2263549621D3C3A00010BC2E /* CoreEntitiesDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2263549521D3C3A00010BC2E /* CoreEntitiesDao.swift */; };
@@ -44,6 +48,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2251360421DADDC400C4EF0F /* Station+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Station+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2251360521DADDC400C4EF0F /* Station+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Station+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2251360621DADDC400C4EF0F /* StationCompany+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StationCompany+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2251360721DADDC400C4EF0F /* StationCompany+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StationCompany+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2263548A21D20DEB0010BC2E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		2263549321D3BF700010BC2E /* EntitiesEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesEnum.swift; sourceTree = "<group>"; };
 		2263549521D3C3A00010BC2E /* CoreEntitiesDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreEntitiesDao.swift; sourceTree = "<group>"; };
@@ -96,6 +104,10 @@
 		22FFF3CB21C649C300E55F2D = {
 			isa = PBXGroup;
 			children = (
+				2251360421DADDC400C4EF0F /* Station+CoreDataClass.swift */,
+				2251360521DADDC400C4EF0F /* Station+CoreDataProperties.swift */,
+				2251360621DADDC400C4EF0F /* StationCompany+CoreDataClass.swift */,
+				2251360721DADDC400C4EF0F /* StationCompany+CoreDataProperties.swift */,
 				22B7BE3A21D641640080A9E2 /* Refuel+CoreDataClass.swift */,
 				22B7BE3B21D641640080A9E2 /* Refuel+CoreDataProperties.swift */,
 				22B7BE3C21D641640080A9E2 /* Entity+CoreDataClass.swift */,
@@ -256,6 +268,7 @@
 			files = (
 				22B7BE4C21D641640080A9E2 /* ServiceType+CoreDataClass.swift in Sources */,
 				22B7BE4921D641640080A9E2 /* Refuel+CoreDataProperties.swift in Sources */,
+				2251360B21DADDC400C4EF0F /* StationCompany+CoreDataProperties.swift in Sources */,
 				22FFF3F121C64AB500E55F2D /* AuthViewController.swift in Sources */,
 				22B7BE4E21D641640080A9E2 /* Car+CoreDataClass.swift in Sources */,
 				22FDB45C21CDA06D0043E54A /* DeviceModel.swift in Sources */,
@@ -268,6 +281,7 @@
 				22B7BE5421D641640080A9E2 /* Service+CoreDataClass.swift in Sources */,
 				2263549421D3BF700010BC2E /* EntitiesEnum.swift in Sources */,
 				22FFF3E021C649C300E55F2D /* CarApp.xcdatamodeld in Sources */,
+				2251360921DADDC400C4EF0F /* Station+CoreDataProperties.swift in Sources */,
 				22B7BE5521D641650080A9E2 /* Service+CoreDataProperties.swift in Sources */,
 				22FDB45621CD99EA0043E54A /* MapViewController.swift in Sources */,
 				22FDB45821CD99F40043E54A /* ReportViewController.swift in Sources */,
@@ -279,9 +293,11 @@
 				22B7BE5021D641640080A9E2 /* Garage+CoreDataClass.swift in Sources */,
 				22FFF3FD21C69BBF00E55F2D /* KeychainPasswordItem.swift in Sources */,
 				2263548B21D20DEB0010BC2E /* LocationManager.swift in Sources */,
+				2251360A21DADDC400C4EF0F /* StationCompany+CoreDataClass.swift in Sources */,
 				22FFF3DA21C649C300E55F2D /* ViewController.swift in Sources */,
 				22FFF3D821C649C300E55F2D /* AppDelegate.swift in Sources */,
 				22B7BE5321D641640080A9E2 /* Expense+CoreDataProperties.swift in Sources */,
+				2251360821DADDC400C4EF0F /* Station+CoreDataClass.swift in Sources */,
 				22B7BE4821D641640080A9E2 /* Refuel+CoreDataClass.swift in Sources */,
 				22FFF3F521C64B1200E55F2D /* Auth.swift in Sources */,
 				2263549621D3C3A00010BC2E /* CoreEntitiesDao.swift in Sources */,

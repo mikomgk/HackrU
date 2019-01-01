@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import Contacts
 
 class LocationManager: NSObject{
 	public static let shared = LocationManager()
@@ -30,6 +31,24 @@ class LocationManager: NSObject{
 	func requestLocationUpdates(){
 		lm.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
 		lm.startUpdatingLocation()
+	}
+	
+	private func address(of location: CLLocation, with locale: Locale = Locale(identifier: "en"), do callback: @escaping (CLPlacemark) -> ()){
+		geoCoder.reverseGeocodeLocation(location, preferredLocale: locale) { (places, err) in
+			if let err = err{
+				print(err.localizedDescription)
+				return
+			}
+			guard let place = places?.first else { return }
+			print(place)
+			callback(place)
+		}
+	}
+	
+	func address(latitude: Double, longitude: Double, with locale: Locale = Locale(identifier: "en"), do callback: @escaping (CLPlacemark) -> ()){
+		address(of: CLLocation(latitude: latitude, longitude: longitude), with: locale) { place in
+			callback(place)
+		}
 	}
 }
 

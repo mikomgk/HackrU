@@ -15,6 +15,7 @@
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="is_deleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="is_uuid" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="last_modified" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="sync_status" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="Expense" representedClassName="Expense" parentEntity="Entity" syncable="YES">
@@ -33,11 +34,11 @@
         <attribute name="filled_liter" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="is_full_tank" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="miliege" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="station_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="total_price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="x" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="y" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="car_id" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Car" syncable="YES"/>
+        <relationship name="station_id" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Station" syncable="YES"/>
     </entity>
     <entity name="Service" representedClassName="Service" parentEntity="Entity" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -52,13 +53,33 @@
         <attribute name="service_type_en" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="service_type_he" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Station" representedClassName="Station" parentEntity="Entity" syncable="YES">
+        <attribute name="address_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="address_he" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="city_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="city_he" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_he" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="station_num" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="telephone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="x" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="y" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="station_company_id" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StationCompany" syncable="YES"/>
+    </entity>
+    <entity name="StationCompany" representedClassName="StationCompany" parentEntity="Entity" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name_he" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Car" positionX="-613.25" positionY="-519.84765625" width="128" height="178"/>
-        <element name="Entity" positionX="-250.2265625" positionY="-197.73828125" width="128" height="105"/>
-        <element name="Expense" positionX="-27.62109375" positionY="-502.59375" width="128" height="105"/>
+        <element name="Entity" positionX="-250.2265625" positionY="-197.73828125" width="128" height="118"/>
+        <element name="Expense" positionX="-239.05859375" positionY="-502.7109375" width="128" height="105"/>
         <element name="Garage" positionX="53.703125" positionY="-198.41015625" width="128" height="90"/>
-        <element name="Refuel" positionX="-448.20703125" positionY="-102.26171875" width="128" height="180"/>
+        <element name="Refuel" positionX="-448.20703125" positionY="-102.26171875" width="128" height="178"/>
         <element name="Service" positionX="-228.2109375" positionY="82.08984375" width="128" height="150"/>
         <element name="ServiceType" positionX="146.94140625" positionY="-1.0390625" width="128" height="75"/>
+        <element name="StationCompany" positionX="-59.58203125" positionY="-489.7734375" width="128" height="88"/>
+        <element name="Station" positionX="201.74609375" positionY="-505.5078125" width="128" height="208"/>
     </elements>
 </model>

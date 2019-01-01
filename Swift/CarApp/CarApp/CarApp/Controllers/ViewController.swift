@@ -16,6 +16,18 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		//auth.deleteToken()
+		let g = CoreEntitiesDao.shared.newGarage(name: "C", x: 7, y: 7)
+		print(g)
+		g.name = "e"
+		CoreEntitiesDao.shared.saveUpdates(for: g)
+		print(g)
+		let u = LoginUser(email: "fdsf", password: "fds")
+		let gJSON = try! JSONEncoder().encode(g)
+		let s = String(data: gJSON, encoding: .utf8)!
+		print(s)
+		LocationManager.shared.address(latitude: 32.2550624, longitude: 34.8748058) { place in
+			print(place)
+		}
 		
 //		let i = UIImage(named: "plus")
 //		let d: Data = i!.pngData()!

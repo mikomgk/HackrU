@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CarApp/Dal/AuthDal.swift"
-            timestampString = "567182453.947958"
+            timestampString = "568049637.712021"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
@@ -48,7 +48,7 @@
             startingLineNumber = "302"
             endingLineNumber = "302"
             landmarkName = "AuthViewController"
-            landmarkType = "3">
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CarApp/Dal/AuthDal.swift"
-            timestampString = "567182453.948482"
+            timestampString = "568049637.712159"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "35"
