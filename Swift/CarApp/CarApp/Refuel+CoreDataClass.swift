@@ -13,7 +13,7 @@ import CoreData
 @objc(Refuel)
 public class Refuel: Entity {
 	private enum CodingKeys: String, CodingKey {
-		case date, filled_liter, is_full_tank, miliege, station_id, total_price, x, y, car_id
+		case date, filled_liter, is_full_tank, miliege, station_id, total_price, x, y, car_id, notes
 	}
 
 	public override func encode(to encoder: Encoder) throws {
@@ -28,5 +28,6 @@ public class Refuel: Entity {
 		try container.encode(x, forKey: .x)
 		try container.encode(y, forKey: .y)
 		try container.encode(car_id?.id, forKey: .car_id)
+		try container.encode(notes, forKey: .notes)
 	}
 }

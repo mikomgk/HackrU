@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class MapViewController: UIViewController {
-
+	
 	@IBOutlet weak var mapSwitch: UISegmentedControl!
 	@IBOutlet weak var mapView: MKMapView!
 	@IBOutlet weak var centerUserLocationBtn: UIButton!
@@ -32,6 +32,10 @@ class MapViewController: UIViewController {
 		super.viewWillAppear(animated)
 		mapView.showsUserLocation = true
 		mapView.showsCompass = true
+	}
+	
+	@IBAction func centerUserLocationTapped(_ sender: UIButton){
+		
 	}
     
 	@IBAction func mapSwitched(_ sender: UISegmentedControl) {

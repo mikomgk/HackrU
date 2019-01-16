@@ -2,7 +2,7 @@
 //  Refuel+CoreDataProperties.swift
 //  CarApp
 //
-//  Created by Miko Stern on 1/1/19.
+//  Created by Miko Stern on 1/15/19.
 //  Copyright © 2019 Miko Stern. All rights reserved.
 //
 //
@@ -24,6 +24,7 @@ extension Refuel {
     @NSManaged public var total_price: Double
     @NSManaged public var x: Double
     @NSManaged public var y: Double
+    @NSManaged public var notes: String?
     @NSManaged public var car_id: Car?
     @NSManaged public var station_id: Station?
 

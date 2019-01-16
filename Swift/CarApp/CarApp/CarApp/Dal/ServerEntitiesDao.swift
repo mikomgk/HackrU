@@ -11,8 +11,13 @@ import CoreData
 
 class ServerEntitiesDao{
 	public static let shared = ServerEntitiesDao()
+	var syncObject = SyncObject.shared
 	let coreEntitiesDao = CoreEntitiesDao.shared
 	let baseEntityUrl = "https://carlogapp.herokuapp.com/entity"
+	let entitiesNames = ["cars", "garages", "refuels", "services", "expenses"]
+	let onlyRecieveEntitiesNames = ["serviceTypes", "stationCompany", "stations"]
+	var sendEntitiesNamesFunnctions: [(name: String, type: Entity.Type, midufyFunction: (JSONObject) -> ())]!
+	var receiveEntitiesNamesFunnctions: [(name: String, type: Entity.Type, midufyFunction: (JSONObject) -> ())]!
 	var userDefaults: UserDefaults{
 		return UserDefaults.standard
 	}
@@ -20,73 +25,86 @@ class ServerEntitiesDao{
 		return UIApplication.shared.delegate as! AppDelegate
 	}()
 	
-	private init() {}
+	private init() {
+		sendEntitiesNamesFunnctions = [
+			("Car", Car.self, modifyCar),
+			("Garage", Garage.self, modifyGarage),
+			("Refuel", Refuel.self, modifyRefueling),
+			("Service", Service.self, modifyService),
+			("Expense", Expense.self, modifyExpense)
+		]
+		
+		receiveEntitiesNamesFunnctions = [
+			("ServiceType", ServiceType.self, modifyServiceType),
+			("StationCompany", StationCompany.self, modifyStationCompany),
+			("Station", Station.self, modifyStation)
+			] + sendEntitiesNamesFunnctions
+	}
 	
 	func sync(){
-		let unsyncedCars = coreEntitiesDao.getUnsynced(entityType: Car.self)
-		let unsyncedRefuels = coreEntitiesDao.getUnsynced(entityType: Refuel.self)
-		let unsyncedServices = coreEntitiesDao.getUnsynced(entityType: Service.self)
-		let unsyncedGarages = coreEntitiesDao.getUnsynced(entityType: Garage.self)
-		let unsyncedExpenses = coreEntitiesDao.getUnsynced(entityType: Expense.self)
-		var unsyncEntitiesCollection: [[Entity]] = [unsyncedCars, unsyncedRefuels, unsyncedServices, unsyncedGarages, unsyncedExpenses]
+		for (_, type, _) in sendEntitiesNamesFunnctions{
+			syncObject.set(property: coreEntitiesDao.getUnsynced(entityType: type))
+		}
+		let syncObjectJSON = try! JSONEncoder().encode(syncObject)
 		
-		let unsyncedCarsJSON = try! JSONEncoder().encode(unsyncedCars)
-		let unsyncedRefuelsJSON = try! JSONEncoder().encode(unsyncedRefuels)
-		let unsyncedServicesJSON = try! JSONEncoder().encode(unsyncedServices)
-		let unsyncedGaragesJSON = try! JSONEncoder().encode(unsyncedGarages)
-		let unsyncedExpensesJSON = try! JSONEncoder().encode(unsyncedExpenses)
-		let changedEntities = [unsyncedCarsJSON, unsyncedRefuelsJSON, unsyncedServicesJSON, unsyncedGaragesJSON, unsyncedExpensesJSON]
-		let changedEntitiesJSON = try! JSONEncoder().encode(changedEntities)
-		
-		var url = URLComponents(string: baseEntityUrl)!
-		let userIsParameter = URLQueryItem(name: "userId", value: userDefaults.integer(forKey: "userId").description)
-		let lastSyncParameter = URLQueryItem(name: "lastSync", value: userDefaults.double(forKey: "lastSync").description)
-		url.queryItems = [userIsParameter, lastSyncParameter]
-		print(url.string!)
-		var request = URLRequest(url: url.url!)
+		let url = URL(string: baseEntityUrl)!
+		var request = URLRequest(url: url)
 		request.httpMethod = "POST"
 		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-		request.httpBody = changedEntitiesJSON
-		print("changedEntitiesJSON is going to be send")
+		request.setValue("", forHTTPHeaderField: "Authentication")//TODO: add JWT
+		request.httpBody = syncObjectJSON
+		print("starting sync")
 		URLSession.shared.dataTask(with: request) { (data, res, err) in
 			if let err = err { print(err) }//TODO: handle errors
 			guard let data = data else { return print("no data") }
 			guard let resData = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONObject else { return print("data error") }
-			guard var unsyncedEntities = resData?["err"] as? [[Int]] else { return print("data error") }
-			guard var newIds = resData?["newIds"] as? [Int32] else { return print("data error")}
-			for (i, collectionIndexes) in unsyncedEntities.enumerated(){
-				for index in collectionIndexes{
-					unsyncEntitiesCollection[i].remove(at: index)
-				}
-			}
-			for (i, collection) in unsyncEntitiesCollection.enumerated(){
-				for (j, entity) in collection.enumerated(){
-					if j == unsyncedEntities[i].first{
-						unsyncedEntities[i].removeFirst()
-						continue
+			guard var newIds = resData?["newIds"] as? JSONObject else { return print("data error")}
+			guard var unsyncedEntities = resData?["errors"] as? JSONObject else { return print("data error") }
+			guard let newEntities = resData?["newEntities"] as? JSONObject else { return print("data error") }
+			let syncTime = resData?["syncTime"] as! Double
+			for (name, type, _) in self.sendEntitiesNamesFunnctions{
+				let unsynced = unsyncedEntities[name] as! [Int32]
+				let newId = newIds[name] as! JSONArray
+				let entities = self.syncObject.get(type: type)
+				entities.forEach{ entity in
+					if unsynced.contains(entity.id){ return }
+					if entity.is_deleted{
+						self.coreEntitiesDao.delete(entity: entity)
+						return
 					}
-					entity.sync_status = SyncStatus.noChanges.rawValue
-					if entity.is_deleted { self.coreEntitiesDao.delete(entity: entity) }
-					if entity.is_uuid {
-						entity.id = newIds.removeFirst()
+					if entity.is_uuid{
+						guard let id = (newId.first{ $0["old"] as! Int32 == entity.id }) else { return }
+						entity.id = id["new"] as! Int32
 						entity.is_uuid = false
+						self.coreEntitiesDao.saveUpdates(for: entity, syncStatus: .noChanges, lastModified: entity.last_modified!)
 					}
 				}
 			}
-			let entitiesNamesFunnctions = [
-				("Car", self.modifyCar),
-				("Expense", self.modifyExpense),
-				("Refuel", self.modifyRefueling),
-				("Garage", self.modifyGarage),
-				("ServiceType", self.modifyServiceType),
-				("Service", self.modifyService),
-				("StationCompany", self.modifyStationCompany),
-				("Station", self.modifyStation)
-			]
-			for (name, modifyFunc) in entitiesNamesFunnctions{
-				guard let modifiedCollection = resData?["modified\(name)"] as? JSONArray else { return print("data error") }
-				modifiedCollection.forEach({ modifyFunc($0) })
+			for (name, _, modifyFunc) in self.receiveEntitiesNamesFunnctions{
+				guard let newCollection = newEntities[name] as? JSONArray else { return print("data error") }
+				newCollection.forEach({ modifyFunc($0) })
 			}
+			self.userDefaults.set(syncTime, forKey: "lastSync")
+//
+//			for (i, collectionIndexes) in unsyncedEntities.enumerated(){
+//				for index in collectionIndexes{
+//					unsyncEntitiesCollection[i].remove(at: index)
+//				}
+//			}
+//			for (i, collection) in unsyncEntitiesCollection.enumerated(){//TODO: API changed
+//				for (j, entity) in collection.enumerated(){
+//					if j == unsyncedEntities[i].first{
+//						unsyncedEntities[i].removeFirst()
+//						continue
+//					}
+//					entity.sync_status = SyncStatus.noChanges.rawValue
+//					if entity.is_deleted { self.coreEntitiesDao.delete(entity: entity) }
+//					if entity.is_uuid {
+//						entity.id = newIds.removeFirst()
+//						entity.is_uuid = false
+//					}
+//				}
+//			}
 		}.resume()
 	}
 	
@@ -110,6 +128,7 @@ class ServerEntitiesDao{
 		let y = refulJSON["y"] as! Double
 		let car = coreEntitiesDao.get(entityId: carId, of: Car.self)!
 		let station = coreEntitiesDao.get(entityId: stationId, of: Station.self)!
+		let notes = refulJSON["notes"] as! String
 		
 		if let refuel = refuel{
 			refuel.car_id = car
@@ -121,9 +140,10 @@ class ServerEntitiesDao{
 			refuel.station_id = station
 			refuel.x = x
 			refuel.y = y
+			refuel.notes = notes
 			coreEntitiesDao.saveUpdates(for: refuel, syncStatus: .noChanges, lastModified: last_modified)
 		}else{
-			let newRefuel = coreEntitiesDao.newRefuel(car: car, filledLiter: filledLiter, totalPrice: totalPrice, miliege: miliege, isFullTank: isFullTank, station: station, x: x, y: y, date: date)
+			let newRefuel = coreEntitiesDao.newRefuel(car: car, filledLiter: filledLiter, totalPrice: totalPrice, miliege: miliege, isFullTank: isFullTank, station: station, x: x, y: y, date: date, notes: notes)
 			newRefuel.id = id
 			newRefuel.is_uuid = false
 			coreEntitiesDao.saveUpdates(for: newRefuel, syncStatus: .noChanges, lastModified: last_modified)
@@ -354,6 +374,67 @@ class ServerEntitiesDao{
 	}
 }
 
+class SyncObject: Encodable{
+	public static var shared = SyncObject()
+	var cars: [Car]!
+	var refuels: [Refuel]!
+	var services: [Service]!
+	var garages: [Garage]!
+	var expenses: [Expense]!
+	var lastSync: Double!
+	
+	private init(){}
+	
+	func set<T: Entity>(property: [T]){
+		switch T.self{
+		case is Car.Type:
+			self.cars = property as? [Car]
+		case is Garage.Type:
+			self.garages = property as? [Garage]
+		case is Refuel.Type:
+			self.refuels = property as? [Refuel]
+		case is Service.Type:
+			self.services = property as? [Service]
+		case is Expense.Type:
+			self.expenses = property as? [Expense]
+		default:
+			fatalError("wrong class")
+		}
+	}
+	
+	func get<T: Entity>(type: T.Type) -> [T]{
+		switch type{
+		case is Car.Type:
+			return cars as! [T]
+		case is Garage.Type:
+			return garages as! [T]
+		case is Refuel.Type:
+			return refuels as! [T]
+		case is Service.Type:
+			return services as! [T]
+		case is Expense.Type:
+			return expenses as! [T]
+		default:
+			fatalError("wrong class")
+		}
+	}
+	
+	private enum CodingKeys: String, CodingKey {
+		case cars, refuels, services, garages, expenses, lastSync
+	}
+	
+	public func encode(to encoder: Encoder) throws {
+		self.lastSync = NSDate().timeIntervalSince1970
+		var container = encoder.container(keyedBy: CodingKeys.self)
+		try container.encode(cars, forKey: .cars)
+		try container.encode(refuels, forKey: .refuels)
+		try container.encode(services, forKey: .services)
+		try container.encode(garages, forKey: .garages)
+		try container.encode(expenses, forKey: .expenses)
+		try container.encode(lastSync, forKey: .lastSync)
+	}
+}
+
 extension ServerEntitiesDao{
 	enum SyncStatus: Int32{
 		case noChanges, queuedToSync, ignore
@@ -362,157 +443,3 @@ extension ServerEntitiesDao{
 
 typealias JSONObject = [String: Any]
 typealias JSONArray = [JSONObject]
-
-	
-//	func getAll(entityType: EntityType, callback: @escaping (JSONArray?, Error?) -> ()){
-//		let params = [
-//			"mode":"get",
-//			"type":entityType.rawValue
-//		]
-//		let url = generateURL(with: params)
-//		URLSession.shared.dataTask(with: url) { (data, res, err) in
-//			guard let data = data else { return callback(nil, err) }
-//			guard let dataJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONArray else{ return callback(nil, err)}
-//			callback(dataJSON, err)
-//		}
-//	}
-//
-//	func get(entityId: Int, of type: EntityType, callback: @escaping (JSONObject?, Error?) -> ()){
-//		let params = [
-//			"mode":"get",
-//			"type":type.rawValue,
-//			"id":entityId.description
-//		]
-//		let url = generateURL(with: params)
-//		URLSession.shared.dataTask(with: url) { (data, res, err) in
-//			guard let data = data else { return callback(nil, err) }
-//			guard let dataJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONArray else{ return callback(nil, err)}
-//			callback(dataJSON?[0], err)
-//		}
-//	}
-//
-//	func new(entity: Entity, of type: EntityType, callback: @escaping (Int32?, Error?) -> ()){
-//		var params = [
-//			"mode":"new",
-//			"type":type.rawValue
-//		]
-//		switch type {
-//		case .car:
-//			guard let car = entity as? Car else { break }
-//			let p = [
-//				"company":car.company!,
-//				"dateAdded":car.date_added!.description,
-//				"model":car.model ?? "",
-//				"name":car.name ?? "",
-//				"nextCareDate":car.next_care_date?.description ?? "",
-//				"nextCareMiliege":car.next_care_miliege.description,
-//				"nextTest":car.next_test?.description ?? "",
-//				"startingMiliege":car.starting_miliege.description,
-//				"year":car.year.description
-//			]
-//			params.merge(p) { (_, new) -> String in new}
-//		case .refuel:
-//			guard let refuel = entity as? Refuel else { break }
-//			let p = [
-//				"date":refuel.date?.description ?? "",
-//				"filledLiter":refuel.filled_liter.description,
-//				"isFullTank":refuel.is_full_tank.description,
-//				"miliege":refuel.miliege.description,
-//				"stationId":refuel.station_id.description,
-//				"totalPrice":refuel.total_price.description,
-//				"x":refuel.x.description,
-//				"y":refuel.y.description,
-//				"carId":refuel.car_id?.id.description ?? ""
-//			]
-//			params.merge(p) { (_, new) -> String in new}
-//		case .service:
-//			guard let service = entity as? Service else { break }
-//			let p = [
-//				"date":service.date?.description ?? "",
-//				"miliege":service.miliege.description,
-//				"notes":service.notes ?? "",
-//				"totalCost":service.total_cost.description,
-//				"carId":service.car_id?.id.description ?? "",
-//				"garageId":service.garage_id?.id.description ?? "",
-//				"serviceTypeId":service.service_type_id?.description ?? "3"
-//			]
-//			params.merge(p) { (_, new) -> String in new}
-//		case .expense:
-//			guard let expense = entity as? Expense else { break }
-//			let p = [
-//				"date":expense.date?.description ?? "",
-//				"notes":expense.notes ?? "",
-//				"totalCost":expense.total_cost.description,
-//				"carId":expense.car_id?.id.description ?? ""
-//			]
-//			params.merge(p) { (_, new) -> String in new}
-//		case .serviceType://TODO: handle error
-//			return callback(nil, nil)
-//		case .garage:
-//			guard let garage = entity as? Garage else { break }
-//			let p = [
-//				"name":garage.name ?? "",
-//				"x":garage.x.description,
-//				"y":garage.y.description
-//			]
-//			params.merge(p) { (_, new) -> String in new}
-//		}
-//		let url = generateURL(with: params)
-//		URLSession.shared.dataTask(with: url) { (data, res, err) in
-//			guard let data = data else { return callback(nil, err) }
-//			guard let dataJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONObject else { return callback(nil, err) }
-//			guard let id = dataJSON?["id"] as? Int32 else { return callback(nil, err) }
-//			callback(id, err)
-//		}
-//	}
-//
-//	func edit(entity: Entity, of type: EntityType, change property: EntityProperties, to newVal: String, callback: @escaping (Bool, Error?) -> ()){
-//		edit(entityId: entity.id, of: type, change: property, to: newVal, callback: callback)
-//	}
-//
-//	func edit(entityId: Int32, of type: EntityType, change property: EntityProperties, to newVal: String, callback: @escaping (Bool, Error?) -> ()){
-//		if type == .garage || type == .serviceType { return callback(false, nil) }//TODO: handle error
-//		let p = property.rawValue
-//		let params = [
-//			"mode":"edit",
-//			"type":type.rawValue,
-//			"id":entityId.description,
-//			p.suffix(from: p.index(after: (p.firstIndex(of: "_")!))).description:newVal
-//		]
-//		let url = generateURL(with: params)
-//		URLSession.shared.dataTask(with: url) { (data, res, err) in
-//			guard let data = data else { return callback(false, err) }
-//			guard let dataJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONObject else { return callback(false, err) }
-//			guard let result = dataJSON?["result"] as? Bool else { return callback(false, err) }
-//			callback(result, err)
-//		}
-//	}
-//
-//	func delete(entity: Entity, of type: EntityType, callback: @escaping (Bool, Error?) -> ()){
-//		delete(entityId: entity.id, of: type, callback: callback)
-//	}
-//
-//	func delete(entityId: Int32, of type: EntityType, callback: @escaping (Bool, Error?) -> ()){
-//		if type == .garage || type == .serviceType { return callback(false, nil) }//TODO: handle error
-//		let params = [
-//			"mode":"delete",
-//			"type":type.rawValue,
-//			"id":entityId.description,
-//		]
-//		let url = generateURL(with: params)
-//		URLSession.shared.dataTask(with: url) { (data, res, err) in
-//			guard let data = data else { return callback(false, err) }
-//			guard let dataJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? JSONObject else { return callback(false, err) }
-//			guard let result = dataJSON?["result"] as? Bool else { return callback(false, err) }
-//			callback(result, err)
-//		}
-//	}
-//
-//	func generateURL(with params: [String: String]) -> URL{
-//		var url = URLComponents(string: baseEntityUrl)!
-//		for param in params{
-//			url.queryItems?.append(URLQueryItem(name: param.key, value: param.value))
-//		}
-//		print(url.string!)
-//		return url.url!
-//	}

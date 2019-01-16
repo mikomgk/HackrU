@@ -13,12 +13,13 @@ import CoreData
 @objc(Car)
 public class Car: Entity {
 	private enum CodingKeys: String, CodingKey {
-		case company, date_added, model, name, next_care_date, next_care_miliege, next_test, starting_miliege, year
+		case user_id, company, date_added, model, name, next_care_date, next_care_miliege, next_test, starting_miliege, year
 	}
 	
 	public override func encode(to encoder: Encoder) throws {
 		try super.encode(to: encoder)
 		var container = encoder.container(keyedBy: CodingKeys.self)
+		try container.encode(UserDefaults.standard.integer(forKey: "userId"), forKey: .user_id)
 		try container.encode(company, forKey: .company)
 		try container.encode(date_added?.timeIntervalSince1970, forKey: .date_added)
 		try container.encode(model, forKey: .model)

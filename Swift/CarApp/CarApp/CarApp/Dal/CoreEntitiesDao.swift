@@ -105,7 +105,7 @@ class CoreEntitiesDao{
 		return garage
 	}
 	
-	func newRefuel(car: Car, filledLiter: Double, totalPrice: Double, miliege: Double, isFullTank: Bool, station: Station? = nil, x: Double? = nil, y: Double? = nil, date: NSDate = NSDate()) -> Refuel{
+	func newRefuel(car: Car, filledLiter: Double, totalPrice: Double, miliege: Double, isFullTank: Bool, station: Station? = nil, x: Double? = nil, y: Double? = nil, date: NSDate = NSDate(), notes: String) -> Refuel{
 		let description = NSEntityDescription.entity(forEntityName: "Refuel", in: context)!
 		let refuel = Refuel(entity: description, insertInto: context)
 		refuel.id = Int32(UUID().hashValue)
@@ -123,6 +123,7 @@ class CoreEntitiesDao{
 		refuel.station_id = station //TODO: add new station if needed
 		refuel.x = station == nil && x != nil ? x! : 0
 		refuel.y = station == nil && y != nil ? y! : 0
+		refuel.notes = notes
 		saveContext()
 		return refuel
 	}
